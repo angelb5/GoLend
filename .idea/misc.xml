@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/button_primary.xml" value="0.126" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/button_secondary.xml" value="0.126" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_background.xml" value="0.1655" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_btn.xml" value="0.1765" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_btn_pressed.xml" value="0.126" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1655" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/solid_btnsec.xml" value="0.126" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/solid_btnsec_pressed.xml" value="0.126" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/font-v26/montserrat.xml" value="0.28512820512820514" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/font/montserrat.xml" value="0.28958333333333336" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout-v28/activity_main.xml" value="0.17980072463768115" />
-        <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_main.xml" value="0.128" />
       </map>
     </option>
   </component>
