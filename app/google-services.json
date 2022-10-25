@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "836438647308",
+    "project_id": "golend-e961f",
+    "storage_bucket": "golend-e961f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836438647308:android:31b009c0cfef32e5e10429",
+        "android_client_info": {
+          "package_name": "pe.du.pucp.golend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "836438647308-hup1pk6s9ubmruv3fmlca0iat65g9b95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAblLUvpdWzqWlwgAnzkmdJjsXENCxB4i0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "836438647308-hup1pk6s9ubmruv3fmlca0iat65g9b95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

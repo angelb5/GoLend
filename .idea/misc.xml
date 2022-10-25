@@ -9,12 +9,21 @@
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_btn.xml" value="0.1765" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_btn_pressed.xml" value="0.126" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1655" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_lock_focused.xml" value="0.1" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_mail.xml" value="0.10400000000000001" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_mail__design_rip_.xml" value="0.127" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_mail_focused.xml" value="0.1" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/input_grey.xml" value="0.126" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/inputicon_lock.xml" value="0.1" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/inputicon_mail.xml" value="0.126" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/solid_btnsec.xml" value="0.126" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/solid_btnsec_pressed.xml" value="0.126" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/font-v26/montserrat.xml" value="0.28512820512820514" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/font/montserrat.xml" value="0.28958333333333336" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout-v28/activity_main.xml" value="0.17980072463768115" />
-        <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_main.xml" value="0.128" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_onboarding.xml" value="0.4" />
       </map>
     </option>
   </component>
