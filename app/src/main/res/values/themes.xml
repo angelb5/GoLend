@@ -12,8 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
         <!-- Customize your theme here. -->
-        <item name="fontFamily">@font/montserrat</item>
         <item name="android:windowBackground">@drawable/gradient_background</item>
 
+    </style>
+
+    <!-- Splash screen theme -->
+    <style name="Theme.Golend.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="android:windowBackground">@drawable/splashscreen_background</item>
+        <!-- Eliminar este luego -->
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Theme.GoLend</item>
     </style>
 </resources>
