@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GoLend</string>
+    <string name="onboarding_welcome">¡Solicitar equipos de PUCP nunca fue tan fácil!</string>
+    <string name="onboarding_devices">Reserva todos los equipos que necesites de forma sencilla</string>
+    <string name="onboarding_hand">Gestiona las solicitudes de reserva de equipos desde tu teléfono</string>
+    <string name="onboarding_ourusers">¡Nuestros usuarios nos recomiendan! ¿Te animas?</string>
+    <string name="onboarding_start">Comenzar</string>
+
 </resources>
