@@ -8,6 +8,8 @@
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_background.xml" value="0.1655" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_btn.xml" value="0.1765" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/gradient_btn_pressed.xml" value="0.126" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_eye_disabled.xml" value="0.1715" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_eye_open.xml" value="0.1715" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1655" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/drawable/ic_lock_focused.xml" value="0.1" />
@@ -23,7 +25,7 @@
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/font/montserrat.xml" value="0.28958333333333336" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout-v28/activity_main.xml" value="0.17980072463768115" />
         <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_main.xml" value="0.12" />
-        <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_onboarding.xml" value="0.4" />
+        <entry key="..\:/20222/AS/GoLend/app/src/main/res/layout/activity_onboarding.xml" value="0.264" />
       </map>
     </option>
   </component>
