@@ -4,17 +4,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Anonymus.RegisterActivity">
+    tools:context=".Anonymus.LoginActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".Anonymus.RegisterActivity">
+        tools:context=".Anonymus.LoginActivity">
 
         <LinearLayout
-            android:id="@+id/llRegisterTitle"
+            android:id="@+id/llLoginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="112dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,88 +36,41 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvRegisterCreate"
+            android:id="@+id/tvLoginIngresa"
             style="@style/WhiteBoldTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Crea una cuenta"
+            android:text="Ingresa a tu cuenta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llRegisterTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/llLoginTitle" />
 
-        <TextView
-            style="@style/WhiteSemiBoldSubtitle"
-            android:id="@+id/tvRegisterQueRol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="¿Qué rol desempeñas?"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRegisterCreate" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRegisterImageSelector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRegisterQueRol"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_image_selector" />
 
         <EditText
-            android:id="@+id/etRegisterNombre"
+            android:id="@+id/etLoginCorreo"
             style="@style/InputGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:drawableStart="@drawable/inputicon_name"
-            android:hint="Nombre"
+            android:hint="Correo o código"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvRegisterImageSelector" />
-
-        <EditText
-            android:id="@+id/etRegisterCorreo"
-            style="@style/InputGrey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:drawableStart="@drawable/inputicon_mail"
-            android:hint="Correo"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etRegisterNombre" />
-
-        <EditText
-            android:id="@+id/etRegisterCodigo"
-            style="@style/InputGrey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:drawableStart="@drawable/inputicon_student_card"
-            android:hint="Código"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etRegisterCorreo" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLoginIngresa" />
 
         <FrameLayout
-            android:id="@+id/flRegisterContrasena"
+            android:id="@+id/flLoginContrasena"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etRegisterCodigo"
+            app:layout_constraintTop_toBottomOf="@id/etLoginCorreo"
             android:layout_marginTop="32dp">
 
             <EditText
-                android:id="@+id/etRegisterContrasena"
+                android:id="@+id/etLoginContrasena"
                 style="@style/InputGrey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,39 +91,52 @@
         </FrameLayout>
 
         <Button
-            android:id="@+id/btnRegisterRegistrar"
+            android:id="@+id/btnLoginIngresar"
             style="@style/BtnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="136dp"
-            android:text="Registrar"
+            android:text="Ingresar"
             android:textSize="16sp"
             android:onClick="registrarUsuario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/flRegisterContrasena"
+            app:layout_constraintTop_toBottomOf="@id/flLoginContrasena"
             android:layout_marginTop="32dp"/>
 
-        <TextView
-            style="@style/WhiteMedium16"
-            android:id="@+id/tvRegisterYaTienes"
+        <Button
+            android:id="@+id/btnLoginForgotPassword"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:textColor="@color/green_main"
+            android:fontFamily="@font/montserrat_semibold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="¿Ya tienes una cuenta?"
+            android:layout_marginTop="24dp"
+            android:text="¿Olvidaste tu contraseña?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnRegisterRegistrar" />
+            app:layout_constraintTop_toBottomOf="@id/btnLoginIngresar" />
+
+        <TextView
+            android:id="@+id/tvRegisterYaTienes"
+            style="@style/WhiteMedium16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="112dp"
+            android:text="¿No tienes una cuenta?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLoginForgotPassword" />
 
         <Button
-            android:onClick="goToLoginActivity"
+            android:onClick="goToRegisterActivity"
             android:id="@+id/btnRegisterGoToLogin"
             style="@style/BtnSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="24dp"
-            android:text="Iniciar Sesión"
+            android:text="Regístrate"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -179,7 +145,7 @@
             app:layout_goneMarginBottom="24dp" />
 
         <ProgressBar
-            android:id="@+id/pbRegister"
+            android:id="@+id/pbLogin"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -6,4 +6,7 @@
     <string name="onboarding_ourusers">¡Nuestros usuarios nos recomiendan! ¿Te animas?</string>
     <string name="onboarding_start">Comenzar</string>
 
+    <string name="role_student">Estudiante</string>
+    <string name="role_administrator">Administrativ@</string>
+    <string name="role_teacher">Docente</string>
 </resources>

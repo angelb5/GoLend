@@ -38,6 +38,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:30.5.0')
+    //Fireauth
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
+    //Firestore
+    implementation 'com.google.firebase:firebase-firestore'
 }

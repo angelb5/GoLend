@@ -14,11 +14,19 @@
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
         <activity
-            android:name=".Anonymus.RegisterActivity"
+            android:name=".Anonymus.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Anonymus.OnboardingActivity"
+            android:name=".ScreenMessageActivity"
             android:exported="false" />
+        <activity
+            android:name=".Anonymus.RegisterActivity"
+            android:exported="false"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".Anonymus.OnboardingActivity"
+            android:exported="false"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

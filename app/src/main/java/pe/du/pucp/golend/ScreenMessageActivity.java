@@ -1,0 +1,44 @@
+package pe.du.pucp.golend;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ScreenMessageActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_screen_message);
+
+        ImageView ivTop = findViewById(R.id.ivScreenmessageTop);
+        ImageView ivBottom = findViewById(R.id.ivScreenmessageBottom);
+        TextView tvTitle = findViewById(R.id.tvScreenmessageTitle);
+        TextView tvContent = findViewById(R.id.tvScreenmessageContent);
+        Button btn = findViewById(R.id.btnScreenmessage);
+
+        Intent intent = getIntent();
+        ScreenMessage screenMessage = (ScreenMessage) intent.getSerializableExtra("screenMessage");
+        ivTop.setImageResource(screenMessage.getTopDrawable());
+        ivBottom.setImageResource(screenMessage.getBottomImage());
+        tvTitle.setText(screenMessage.getTitleText());
+        tvContent.setText(screenMessage.getMessageText());
+        btn.setText(screenMessage.getBtnText());
+        if(screenMessage.isBtnSecondary()){
+            btn.setTextColor(getColor(R.color.green_main));
+            btn.setBackground(AppCompatResources.getDrawable(this, R.drawable.button_secondary));
+        }
+
+        btn.setOnClickListener(view -> {
+            Intent btnIntent = new Intent(ScreenMessageActivity.this, screenMessage.getNextActivity());
+            startActivity(btnIntent);
+            finish();
+        });
+    }
+}
