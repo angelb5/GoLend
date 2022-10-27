@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -52,6 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etCodigo;
     EditText etContrasena;
     ProgressBar progressBar;
+    Button btnLogin;
+    Button btnRegistrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +78,14 @@ public class RegisterActivity extends AppCompatActivity {
         roleSelector.setLayoutManager(layoutManager);
         roleSelector.setAdapter(selectorAdapter);
         roleSelector.addItemDecoration(imageSelectorMargin);
-        //Setea los EditText y ProgressBar
+        //Setea los EditText, ProgressBar y Button
         etNombre = findViewById(R.id.etRegisterNombre);
         etCorreo = findViewById(R.id.etRegisterCorreo);
         etCodigo = findViewById(R.id.etRegisterCodigo);
         etContrasena = findViewById(R.id.etRegisterContrasena);
         progressBar = findViewById(R.id.pbRegister);
+        btnLogin = findViewById(R.id.btnRegisterGoToLogin);
+        btnRegistrar = findViewById(R.id.btnRegisterRegistrar);
         //Setea Firestore
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -135,43 +142,88 @@ public class RegisterActivity extends AppCompatActivity {
         if(isInvalid) return;
 
         Log.i("msg","El rol es "+rol);
-        progressBar.setVisibility(View.VISIBLE);
-        CollectionReference usersRef = FirebaseFirestore.getInstance().collection("Users");
-        firebaseAuth.createUserWithEmailAndPassword(correo,contrasena).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
+        crearUsuario(user, contrasena);
+    }
+
+    public void crearUsuario(User user, String contrasena){
+        mostrarCargando();
+        firebaseAuth.createUserWithEmailAndPassword(user.getCorreo(),contrasena).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                progressBar.setVisibility(View.GONE);
-                User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
-                usersRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        ScreenMessage screenMessage = new ScreenMessage(R.drawable.circle_tick, R.drawable.screenmessage_successful,
-                                "Te has registrado en GoLend",
-                                "Verifica tu correo para poder usar la aplicación",
-                                "Iniciar Sesión",
-                                false,LoginActivity.class);
-                        Intent successIntent = new Intent(RegisterActivity.this, ScreenMessageActivity.class);
-                        successIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        successIntent.putExtra("screenMessage", screenMessage);
-                        startActivity(successIntent);
-                        ActivityCompat.finishAffinity(RegisterActivity.this);
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterActivity.this, "No se pudo completar el registro", Toast.LENGTH_LONG).show();
-                    }
-                });
-
+                actualizarPerfilFireauth(authResult, user);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(RegisterActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
-            }
+        }).addOnFailureListener(e -> {
+            ocultarCargando();
+            Toast.makeText(RegisterActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
         });
+    };
+
+    public void actualizarPerfilFireauth(AuthResult authResult, User user){
+        assert authResult.getUser()!=null;
+        UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                .setDisplayName(user.getNombre()).setPhotoUri(Uri.parse(user.getAvatarUrl())).build();
+        authResult.getUser().updateProfile(userProfileChangeRequest).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                anadirUsuarioFirestore(user);
+            }
+        }).addOnFailureListener(e -> {
+            ocultarCargando();
+            Toast.makeText(RegisterActivity.this, "Ocurrió un error al crear el perfil", Toast.LENGTH_LONG).show();
+        });
+    }
+
+    public void anadirUsuarioFirestore(User user){
+        CollectionReference usersRef = FirebaseFirestore.getInstance().collection("Users");
+        usersRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                enviarCorreoVerificacion();
+            }
+        }).addOnFailureListener(e -> {
+            ocultarCargando();
+            Toast.makeText(RegisterActivity.this, "No se pudo completar el registro", Toast.LENGTH_LONG).show();
+        });
+
+    }
+
+    public void enviarCorreoVerificacion(){
+        assert firebaseAuth.getCurrentUser() !=null;
+        firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                firebaseAuth.signOut();
+                progressBar.setVisibility(View.GONE);
+                ScreenMessage screenMessage = new ScreenMessage(R.drawable.circle_tick, R.drawable.screenmessage_successful,
+                        "Te has registrado en GoLend",
+                        "Verifica tu correo para poder usar la aplicación",
+                        "Iniciar Sesión",
+                        false,LoginActivity.class);
+                Intent successIntent = new Intent(RegisterActivity.this, ScreenMessageActivity.class);
+                successIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                successIntent.putExtra("screenMessage", screenMessage);
+                startActivity(successIntent);
+                ActivityCompat.finishAffinity(RegisterActivity.this);
+                finish();
+            }
+        }).addOnFailureListener(e -> {
+            ocultarCargando();
+            Toast.makeText(RegisterActivity.this, "No pudimos enviar el correo de confirmación", Toast.LENGTH_LONG).show();
+        });
+
+    };
+
+    public void mostrarCargando(){
+        progressBar.setVisibility(View.VISIBLE);
+        btnLogin.setClickable(false);
+        btnRegistrar.setClickable(false);
+    }
+
+    public void ocultarCargando(){
+        progressBar.setVisibility(View.GONE);
+        btnLogin.setClickable(true);
+        btnRegistrar.setClickable(true);
     }
 
     public void goToLoginActivity(View view){
