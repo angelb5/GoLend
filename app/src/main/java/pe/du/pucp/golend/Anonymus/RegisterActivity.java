@@ -69,8 +69,11 @@ public class RegisterActivity extends AppCompatActivity {
         selectorAdapter.setOnItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectorAdapter.setSelectedItem(roleSelector.getChildAdapterPosition(view));
-                selectorAdapter.notifyDataSetChanged();
+                int position = roleSelector.getChildAdapterPosition(view);
+                if (position>=0 && position<ROLE_IMAGES.size()){
+                    selectorAdapter.setSelectedItem(position);
+                    selectorAdapter.notifyDataSetChanged();
+                }
             }
         });
         ImageSelectorMargin imageSelectorMargin = new ImageSelectorMargin(IMAGE_SELECTOR_COLUMNS,IMAGE_SELECTOR_MARGIN);
@@ -141,7 +144,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(isInvalid) return;
 
-        Log.i("msg","El rol es "+rol);
         User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
         crearUsuario(user, contrasena);
     }
@@ -218,12 +220,14 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         btnLogin.setClickable(false);
         btnRegistrar.setClickable(false);
+        roleSelector.setClickable(false);
     }
 
     public void ocultarCargando(){
         progressBar.setVisibility(View.GONE);
         btnLogin.setClickable(true);
         btnRegistrar.setClickable(true);
+        roleSelector.setClickable(true);
     }
 
     public void goToLoginActivity(View view){
