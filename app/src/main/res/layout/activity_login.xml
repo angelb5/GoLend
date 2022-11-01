@@ -98,7 +98,7 @@
             android:layout_marginBottom="136dp"
             android:text="Ingresar"
             android:textSize="16sp"
-            android:onClick="registrarUsuario"
+            android:onClick="ingresar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/flLoginContrasena"
@@ -130,7 +130,7 @@
 
         <Button
             android:onClick="goToRegisterActivity"
-            android:id="@+id/btnRegisterGoToLogin"
+            android:id="@+id/btnLoginGoToRegister"
             style="@style/BtnSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

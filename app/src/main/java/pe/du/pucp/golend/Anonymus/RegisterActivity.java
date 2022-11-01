@@ -14,6 +14,8 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -70,9 +72,23 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_register);
         //Setea el selector de roles
         roleSelector = findViewById(R.id.rvRegisterImageSelector);
+        //Setea los EditText, ProgressBar y Button
+        etNombre = findViewById(R.id.etRegisterNombre);
+        etCorreo = findViewById(R.id.etRegisterCorreo);
+        etCodigo = findViewById(R.id.etRegisterCodigo);
+        etContrasena = findViewById(R.id.etRegisterContrasena);
+        progressBar = findViewById(R.id.pbRegister);
+        btnLogin = findViewById(R.id.btnRegisterGoToLogin);
+        btnRegistrar = findViewById(R.id.btnRegisterRegistrar);
+
+
+        //Selector de roles
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         ImageSelectorAdapter selectorAdapter = new ImageSelectorAdapter(this, ROLE_IMAGES, ROLE_TEXTS);
         selectorAdapter.setOnItemClickListener(new View.OnClickListener() {
@@ -90,14 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
         roleSelector.setLayoutManager(layoutManager);
         roleSelector.setAdapter(selectorAdapter);
         roleSelector.addItemDecoration(imageSelectorMargin);
-        //Setea los EditText, ProgressBar y Button
-        etNombre = findViewById(R.id.etRegisterNombre);
-        etCorreo = findViewById(R.id.etRegisterCorreo);
-        etCodigo = findViewById(R.id.etRegisterCodigo);
-        etContrasena = findViewById(R.id.etRegisterContrasena);
-        progressBar = findViewById(R.id.pbRegister);
-        btnLogin = findViewById(R.id.btnRegisterGoToLogin);
-        btnRegistrar = findViewById(R.id.btnRegisterRegistrar);
+
         //Setea Firestore
         firebaseAuth = FirebaseAuth.getInstance();
         usersRef = FirebaseFirestore.getInstance().collection("Users");
@@ -212,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
         assert firebaseAuth.getCurrentUser() !=null;
         firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(unused -> {
             firebaseAuth.signOut();
-            progressBar.setVisibility(View.GONE);
+            ocultarCargando();
             ScreenMessage screenMessage = new ScreenMessage(R.drawable.circle_tick, R.drawable.screenmessage_successful,
                     "Te has registrado en GoLend",
                     "Verifica tu correo para poder usar la aplicación",

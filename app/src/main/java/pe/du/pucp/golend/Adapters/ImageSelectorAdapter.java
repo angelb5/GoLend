@@ -57,7 +57,7 @@ implements View.OnClickListener {
             holder.tvDesc.setTypeface(context.getResources().getFont(R.font.montserrat_medium));
         }
 
-        Glide.with(context).load(images.get(position)).into(holder.ivImage);
+        holder.ivImage.setImageResource(images.get(position));
         holder.tvDesc.setText(texts.get(position));
     }
 
