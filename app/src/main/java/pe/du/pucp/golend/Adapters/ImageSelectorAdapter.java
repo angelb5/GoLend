@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import pe.du.pucp.golend.R;
@@ -55,7 +57,7 @@ implements View.OnClickListener {
             holder.tvDesc.setTypeface(context.getResources().getFont(R.font.montserrat_medium));
         }
 
-        holder.ivImage.setImageResource(images.get(position));
+        Glide.with(context).load(images.get(position)).into(holder.ivImage);
         holder.tvDesc.setText(texts.get(position));
     }
 

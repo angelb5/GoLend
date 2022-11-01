@@ -1,6 +1,6 @@
 package pe.du.pucp.golend.Anonymus;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,15 +22,23 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.AggregateQuery;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import pe.du.pucp.golend.Adapters.ImageSelectorAdapter;
 import pe.du.pucp.golend.Decorations.ImageSelectorMargin;
@@ -50,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
             "https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_teacher.png?alt=media&token=77923516-fe28-4835-a0e0-676f73f1c0ef");
     RecyclerView roleSelector;
     FirebaseAuth firebaseAuth;
+    CollectionReference usersRef;
     EditText etNombre;
     EditText etCorreo;
     EditText etCodigo;
@@ -91,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.btnRegisterRegistrar);
         //Setea Firestore
         firebaseAuth = FirebaseAuth.getInstance();
+        usersRef = FirebaseFirestore.getInstance().collection("Users");
     }
 
     public void showHidePass(View view){
@@ -139,25 +149,39 @@ public class RegisterActivity extends AppCompatActivity {
             etContrasena.requestFocus();
             isInvalid = true;
         }
-
-        //TODO: Verificar que el correo o codigo no tengan cuentas asociadas
-
         if(isInvalid) return;
 
-        User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
-        crearUsuario(user, contrasena);
+        //Verifica que el codigo y correo sean únicos
+        mostrarCargando();
+        usersRef.whereEqualTo("codigo",codigo).count().get(AggregateSource.SERVER).addOnSuccessListener(aggregateQuerySnapshot -> {
+            if (aggregateQuerySnapshot.getCount()>0){
+                ocultarCargando();
+                etCodigo.setError("Ya existe una cuenta con este código");
+                etCodigo.requestFocus();
+                return;
+            }
+            firebaseAuth.fetchSignInMethodsForEmail(correo).addOnCompleteListener(signInMethodQueryResult -> {
+                if(!Objects.requireNonNull(signInMethodQueryResult.getResult().getSignInMethods()).isEmpty()){
+                    ocultarCargando();
+                    etCorreo.setError("Ya existe una cuenta con este correo");
+                    etCorreo.requestFocus();
+                    return;
+                };
+                User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
+                crearUsuario(user, contrasena);
+            });
+        }).addOnFailureListener(e -> ocultarCargando());
+
+
     }
 
     public void crearUsuario(User user, String contrasena){
-        mostrarCargando();
-        firebaseAuth.createUserWithEmailAndPassword(user.getCorreo(),contrasena).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                actualizarPerfilFireauth(authResult, user);
-            }
-        }).addOnFailureListener(e -> {
-            ocultarCargando();
-            Toast.makeText(RegisterActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
+        firebaseAuth.createUserWithEmailAndPassword(user.getCorreo(),contrasena)
+                .addOnSuccessListener(authResult -> actualizarPerfilFireauth(authResult, user))
+                .addOnFailureListener(e -> {
+                    ocultarCargando();
+                    Log.d("msg",e.getMessage());
+                    Toast.makeText(RegisterActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
         });
     };
 
@@ -165,50 +189,41 @@ public class RegisterActivity extends AppCompatActivity {
         assert authResult.getUser()!=null;
         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
                 .setDisplayName(user.getNombre()).setPhotoUri(Uri.parse(user.getAvatarUrl())).build();
-        authResult.getUser().updateProfile(userProfileChangeRequest).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                anadirUsuarioFirestore(user);
-            }
-        }).addOnFailureListener(e -> {
-            ocultarCargando();
-            Toast.makeText(RegisterActivity.this, "Ocurrió un error al crear el perfil", Toast.LENGTH_LONG).show();
+
+        authResult.getUser().updateProfile(userProfileChangeRequest)
+                .addOnSuccessListener(unused -> anadirUsuarioFirestore(user))
+                .addOnFailureListener(e -> {
+                    ocultarCargando();
+                    Toast.makeText(RegisterActivity.this, "Ocurrió un error al crear el perfil", Toast.LENGTH_LONG).show();
         });
     }
 
     public void anadirUsuarioFirestore(User user){
-        CollectionReference usersRef = FirebaseFirestore.getInstance().collection("Users");
-        usersRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                enviarCorreoVerificacion();
-            }
-        }).addOnFailureListener(e -> {
-            ocultarCargando();
-            Toast.makeText(RegisterActivity.this, "No se pudo completar el registro", Toast.LENGTH_LONG).show();
+        usersRef.add(user)
+                .addOnSuccessListener(documentReference -> enviarCorreoVerificacion())
+                .addOnFailureListener(e -> {
+                    ocultarCargando();
+                    Toast.makeText(RegisterActivity.this, "No se pudo completar el registro", Toast.LENGTH_LONG).show();
         });
 
     }
 
     public void enviarCorreoVerificacion(){
         assert firebaseAuth.getCurrentUser() !=null;
-        firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                firebaseAuth.signOut();
-                progressBar.setVisibility(View.GONE);
-                ScreenMessage screenMessage = new ScreenMessage(R.drawable.circle_tick, R.drawable.screenmessage_successful,
-                        "Te has registrado en GoLend",
-                        "Verifica tu correo para poder usar la aplicación",
-                        "Iniciar Sesión",
-                        false,LoginActivity.class);
-                Intent successIntent = new Intent(RegisterActivity.this, ScreenMessageActivity.class);
-                successIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                successIntent.putExtra("screenMessage", screenMessage);
-                startActivity(successIntent);
-                ActivityCompat.finishAffinity(RegisterActivity.this);
-                finish();
-            }
+        firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(unused -> {
+            firebaseAuth.signOut();
+            progressBar.setVisibility(View.GONE);
+            ScreenMessage screenMessage = new ScreenMessage(R.drawable.circle_tick, R.drawable.screenmessage_successful,
+                    "Te has registrado en GoLend",
+                    "Verifica tu correo para poder usar la aplicación",
+                    "Iniciar Sesión",
+                    false,LoginActivity.class);
+            Intent successIntent = new Intent(RegisterActivity.this, ScreenMessageActivity.class);
+            successIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            successIntent.putExtra("screenMessage", screenMessage);
+            startActivity(successIntent);
+            ActivityCompat.finishAffinity(RegisterActivity.this);
+            finish();
         }).addOnFailureListener(e -> {
             ocultarCargando();
             Toast.makeText(RegisterActivity.this, "No pudimos enviar el correo de confirmación", Toast.LENGTH_LONG).show();
