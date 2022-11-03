@@ -17,10 +17,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import pe.du.pucp.golend.R;
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnLoginGoToRegister);
         //Setea Firestore
         firebaseAuth = FirebaseAuth.getInstance();
-        usersRef = FirebaseFirestore.getInstance().collection("Users");
+        usersRef = FirebaseFirestore.getInstance().collection("users");
     }
 
     public void ingresar(View view){
@@ -87,8 +90,23 @@ public class LoginActivity extends AppCompatActivity {
             assert authResult.getUser()!=null;
             if(authResult.getUser().isEmailVerified()){
                 //TODO: Ingresar a la respectiva pagina
-                Toast.makeText(LoginActivity.this, "Hola "+authResult.getUser().getDisplayName(), Toast.LENGTH_SHORT).show();
-                Log.d("msg","Deben verificarse los permisos");
+                usersRef.document(authResult.getUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
+                            case "Cliente":
+                                Toast.makeText(LoginActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "Admin":
+                                Toast.makeText(LoginActivity.this, "Hola Admin", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "TI":
+                                Toast.makeText(LoginActivity.this, "Hola TI", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+
+                    }
+                });
                 firebaseAuth.signOut(); //Borrar luego
             }else{
                 Intent intentNoVerificado = new Intent(LoginActivity.this, NonVerifiedActivity.class);

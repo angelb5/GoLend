@@ -72,9 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_register);
         //Setea el selector de roles
         roleSelector = findViewById(R.id.rvRegisterImageSelector);
@@ -109,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Setea Firestore
         firebaseAuth = FirebaseAuth.getInstance();
-        usersRef = FirebaseFirestore.getInstance().collection("Users");
+        usersRef = FirebaseFirestore.getInstance().collection("users");
     }
 
     public void showHidePass(View view){
@@ -200,15 +197,15 @@ public class RegisterActivity extends AppCompatActivity {
                 .setDisplayName(user.getNombre()).setPhotoUri(Uri.parse(user.getAvatarUrl())).build();
 
         authResult.getUser().updateProfile(userProfileChangeRequest)
-                .addOnSuccessListener(unused -> anadirUsuarioFirestore(user))
+                .addOnSuccessListener(unused -> anadirUsuarioFirestore(authResult.getUser().getUid(),user))
                 .addOnFailureListener(e -> {
                     ocultarCargando();
                     Toast.makeText(RegisterActivity.this, "Ocurrió un error al crear el perfil", Toast.LENGTH_LONG).show();
         });
     }
 
-    public void anadirUsuarioFirestore(User user){
-        usersRef.add(user)
+    public void anadirUsuarioFirestore(String uid, User user){
+        usersRef.document(uid).set(user)
                 .addOnSuccessListener(documentReference -> enviarCorreoVerificacion())
                 .addOnFailureListener(e -> {
                     ocultarCargando();
