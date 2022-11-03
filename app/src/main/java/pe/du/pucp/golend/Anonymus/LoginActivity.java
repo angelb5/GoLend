@@ -75,23 +75,8 @@ public class LoginActivity extends AppCompatActivity {
             correo = correoOCodigo;
             mostrarCargando();
             firebaseSignIn(correo, contrasena);
-        }else if(Patterns.PHONE.matcher(correoOCodigo).matches() && correoOCodigo.length()==8){
-            mostrarCargando();
-            usersRef.whereEqualTo("codigo",correoOCodigo).get().addOnSuccessListener(queryDocumentSnapshots -> {
-                if(queryDocumentSnapshots.isEmpty()){
-                    ocultarCargando();
-                    etCorreo.setError("No existe una cuenta con este código");
-                    etCorreo.requestFocus();
-                    return;
-                }
-                String correoL = queryDocumentSnapshots.getDocuments().get(0).getString("correo");
-                firebaseSignIn(correoL, contrasena);
-            }).addOnFailureListener(e -> {
-                ocultarCargando();
-                Log.d("msg", "Error", e);
-            });
         }else{
-            etCorreo.setError("No es un correo o código válido");
+            etCorreo.setError("No es un correo válido");
             etCorreo.requestFocus();
         }
     }
