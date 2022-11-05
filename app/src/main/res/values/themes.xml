@@ -98,6 +98,17 @@
         <item name="android:textColor">@color/grey_image_unselected</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <!-- Tamaño 10 -->
+    <style name="UncheckedRegular10">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/unfocused</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="WhiteMedium10">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/unfocused</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 
     <!-- Estilos btn -->
     <style name="BtnPrimary" parent="Widget.Material3.Button.ElevatedButton">
@@ -133,5 +144,20 @@
         <item name="android:paddingVertical">8dp</item>
         <item name="android:paddingHorizontal">16dp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- BottomNav -->
+    <style name="Golend.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">#27FFFFFF</item>
+    </style>
+    <style name="BottomNav">
+        <item name="android:background">@color/blue_dark</item>
+        <item name="itemPaddingTop">8dp</item>
+        <item name="itemPaddingBottom">12dp</item>
+        <item name="itemIconSize">22dp</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemTextAppearanceInactive">@style/UncheckedRegular10</item>
+        <item name="itemTextAppearanceActive">@style/WhiteMedium10</item>
+        <item name="itemActiveIndicatorStyle">@style/Golend.Custom.Indicator</item>
     </style>
 </resources>

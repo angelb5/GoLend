@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,9 +21,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 import pe.du.pucp.golend.R;
+import pe.du.pucp.golend.TI.TIHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
@@ -93,21 +90,25 @@ public class LoginActivity extends AppCompatActivity {
                 usersRef.document(authResult.getUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Intent intentPermisos;
                         switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
                             case "Cliente":
                                 Toast.makeText(LoginActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();
+                                firebaseAuth.signOut(); //Borrar luego
                                 break;
                             case "Admin":
                                 Toast.makeText(LoginActivity.this, "Hola Admin", Toast.LENGTH_SHORT).show();
+                                firebaseAuth.signOut(); //Borrar luego
                                 break;
                             case "TI":
                                 Toast.makeText(LoginActivity.this, "Hola TI", Toast.LENGTH_SHORT).show();
+                                intentPermisos  = new Intent(LoginActivity.this, TIHomeActivity.class);
+                                startActivity(intentPermisos);
+                                finish();
                                 break;
                         }
-
                     }
                 });
-                firebaseAuth.signOut(); //Borrar luego
             }else{
                 Intent intentNoVerificado = new Intent(LoginActivity.this, NonVerifiedActivity.class);
                 startActivity(intentNoVerificado);
@@ -121,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
     public void goToRegisterActivity(View view){
         Intent registerIntent = new Intent(LoginActivity.this,RegisterActivity.class);
         startActivity(registerIntent);
+        finish();
     }
 
     public void showHidePass(View view){

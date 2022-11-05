@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intentAnonymus = new Intent(MainActivity.this, OnboardingActivity.class);
             startActivity(intentAnonymus);
             finish();
+        }else{
+            //TODO: falta redirigir comprobar si hay conexion a internet
+            FirebaseAuth.getInstance().signOut();
         }
     }
 }

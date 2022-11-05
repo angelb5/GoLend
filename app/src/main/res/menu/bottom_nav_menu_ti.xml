@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottomNavMenuTiHome"
+        android:icon="@drawable/menuicon_home"
+        android:title="Inicio"/>
+    <item
+        android:id="@+id/bottomNavMenuTiSolicitud"
+        android:icon="@drawable/menuicon_solicitud"
+        android:title="Solicitudes"/>
+    <item
+        android:id="@+id/bottomNavMenuTiDevices"
+        android:icon="@drawable/menuicon_devices"
+        android:title="Dispositivos"/>
+    <item
+        android:id="@+id/bottomNavMenuTiProfile"
+        android:icon="@drawable/menuicon_profile"
+        android:title="Perfil"/>
+</menu>
