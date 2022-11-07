@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.paging.CombinedLoadStates;
+import androidx.paging.LoadState;
 import androidx.paging.PagingConfig;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,6 +41,7 @@ public class AdminGestionTiActivity extends AppCompatActivity {
     PagingConfig config = new PagingConfig(5,3,true);
     FirestorePagingOptions<User> options;
     UsersTIAdapter usersTIAdapter;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,10 @@ public class AdminGestionTiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_gestion_ti);
 
         setBottomNavigationView();
+        shimmerFrameLayout = findViewById(R.id.shimmerAdminGestionTi);
         rvUsersTi = findViewById(R.id.rvAdminGestionTi);
 
+        shimmerFrameLayout.startShimmerAnimation();
         Query tiQuery = FirebaseFirestore.getInstance().collection("users").whereEqualTo("permisos","TI");
         options = new FirestorePagingOptions.Builder<User>()
                 .setLifecycleOwner(this)
@@ -58,10 +63,15 @@ public class AdminGestionTiActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvUsersTi.setLayoutManager(layoutManager);
         rvUsersTi.setAdapter(usersTIAdapter);
+
         usersTIAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
             @Override
             public Unit invoke(CombinedLoadStates combinedLoadStates) {
-                Log.d("msg",""+ usersTIAdapter.getItemCount());
+                if (usersTIAdapter.getItemCount()>0){
+                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout.removeAllViews();
+                    usersTIAdapter.removeLoadStateListener(this);
+                }
                 return null;
             }
         });
@@ -107,7 +117,6 @@ public class AdminGestionTiActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("msg","hola estoy aca");
         usersTIAdapter.refresh();
     }
 

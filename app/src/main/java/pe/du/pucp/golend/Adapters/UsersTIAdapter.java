@@ -40,7 +40,7 @@ public class UsersTIAdapter extends FirestorePagingAdapter<User, UsersTIAdapter.
         holder.tvNombre.setText(model.getNombre());
         holder.userTi = model;
         Glide.with(holder.itemView.getContext()).load(model.getAvatarUrl())
-                .placeholder(holder.itemView.getContext().getDrawable(R.drawable.role_student)).dontAnimate()
+                .placeholder(holder.itemView.getContext().getDrawable(R.drawable.avatar_placeholder)).dontAnimate()
                 .into(holder.ivProfilePic);
     }
 
