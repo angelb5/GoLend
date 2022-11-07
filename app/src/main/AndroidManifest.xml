@@ -16,6 +16,9 @@
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
         <activity
+            android:name=".Admin.AdminCreateUserTiActivity"
+            android:exported="false" />
+        <activity
             android:name=".Admin.AdminProfileActivity"
             android:exported="false" />
         <activity
@@ -78,6 +81,7 @@
             android:theme="@style/Theme.Golend.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -39,8 +39,9 @@ public class UsersTIAdapter extends FirestorePagingAdapter<User, UsersTIAdapter.
         holder.tvRol.setText(model.getRol());
         holder.tvNombre.setText(model.getNombre());
         holder.userTi = model;
-        Glide.with(holder.itemView.getContext()).load(model.getAvatarUrl()).into(holder.ivProfilePic)
-                .onLoadStarted(holder.itemView.getContext().getDrawable(R.drawable.role_student));
+        Glide.with(holder.itemView.getContext()).load(model.getAvatarUrl())
+                .placeholder(holder.itemView.getContext().getDrawable(R.drawable.role_student)).dontAnimate()
+                .into(holder.ivProfilePic);
     }
 
     public class UserTIViewHolder extends RecyclerView.ViewHolder {
@@ -60,4 +61,6 @@ public class UsersTIAdapter extends FirestorePagingAdapter<User, UsersTIAdapter.
         }
 
     }
+
+
 }

@@ -2,12 +2,15 @@ package pe.du.pucp.golend.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.paging.CombinedLoadStates;
 import androidx.paging.PagingConfig;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +22,12 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 import pe.du.pucp.golend.Adapters.ImageSelectorAdapter;
 import pe.du.pucp.golend.Adapters.UsersTIAdapter;
+import pe.du.pucp.golend.Anonymus.LoginActivity;
+import pe.du.pucp.golend.Anonymus.RegisterActivity;
 import pe.du.pucp.golend.Decorations.ImageSelectorMargin;
 import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.R;
@@ -29,13 +36,9 @@ import pe.du.pucp.golend.TI.TIHomeActivity;
 public class AdminGestionTiActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     RecyclerView rvUsersTi;
-    Query tiQuery = FirebaseFirestore.getInstance().collection("users").whereEqualTo("permisos","TI");
-    PagingConfig config = new PagingConfig(2,1,true);
-    FirestorePagingOptions<User> options = new FirestorePagingOptions.Builder<User>()
-            .setLifecycleOwner(this)
-            .setQuery(tiQuery, config, User.class)
-            .build();
-    UsersTIAdapter usersTIAdapter = new UsersTIAdapter(options);
+    PagingConfig config = new PagingConfig(5,3,true);
+    FirestorePagingOptions<User> options;
+    UsersTIAdapter usersTIAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +47,24 @@ public class AdminGestionTiActivity extends AppCompatActivity {
 
         setBottomNavigationView();
         rvUsersTi = findViewById(R.id.rvAdminGestionTi);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
+        Query tiQuery = FirebaseFirestore.getInstance().collection("users").whereEqualTo("permisos","TI");
+        options = new FirestorePagingOptions.Builder<User>()
+                .setLifecycleOwner(this)
+                .setQuery(tiQuery, config, User.class)
+                .build();
+        usersTIAdapter = new UsersTIAdapter(options);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvUsersTi.setLayoutManager(layoutManager);
         rvUsersTi.setAdapter(usersTIAdapter);
+        usersTIAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
+            @Override
+            public Unit invoke(CombinedLoadStates combinedLoadStates) {
+                Log.d("msg",""+ usersTIAdapter.getItemCount());
+                return null;
+            }
+        });
     }
 
 
@@ -88,6 +105,13 @@ public class AdminGestionTiActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("msg","hola estoy aca");
+        usersTIAdapter.refresh();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         usersTIAdapter.stopListening();
@@ -98,5 +122,10 @@ public class AdminGestionTiActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
         overridePendingTransition(0,0);
         finish();
+    }
+
+    public void goToCreateUserActivity(View view){
+        Intent loginIntent = new Intent(AdminGestionTiActivity.this, AdminCreateUserTiActivity.class);
+        startActivity(loginIntent);
     }
 }
