@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,6 +19,8 @@ public class AdminReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_report);
+
+        setBottomNavigationView();
     }
 
     public void setBottomNavigationView(){
@@ -40,7 +43,7 @@ public class AdminReportActivity extends AppCompatActivity {
                     case R.id.bottomNavMenuAdminReport:
                         return true;
                     case R.id.bottomNavMenuAdminProfile:
-                        startActivity(new Intent(getApplicationContext(), AdminReportActivity.class));
+                        startActivity(new Intent(getApplicationContext(), AdminProfileActivity.class));
                         overridePendingTransition(0, 0);
                         finish();
                         return true;

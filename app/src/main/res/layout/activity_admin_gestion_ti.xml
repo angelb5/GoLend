@@ -48,7 +48,6 @@
                     <include layout="@layout/card_ti_user_placeholder" />
                     <include layout="@layout/card_ti_user_placeholder" />
                     <include layout="@layout/card_ti_user_placeholder" />
-                    <include layout="@layout/card_ti_user_placeholder" />
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
             <androidx.recyclerview.widget.RecyclerView
