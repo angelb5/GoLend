@@ -1,5 +1,6 @@
 package pe.du.pucp.golend.Anonymus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,14 +15,19 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
+import pe.du.pucp.golend.Admin.AdminHomeActivity;
+import pe.du.pucp.golend.Cliente.ClienteHomeActivity;
 import pe.du.pucp.golend.R;
 import pe.du.pucp.golend.TI.TIHomeActivity;
 
@@ -83,39 +89,56 @@ public class LoginActivity extends AppCompatActivity {
 
     private void firebaseSignIn(String correo, String contrasena){
         firebaseAuth.signInWithEmailAndPassword(correo,contrasena).addOnSuccessListener(authResult -> {
-            ocultarCargando();
+
             assert authResult.getUser()!=null;
-            if(authResult.getUser().isEmailVerified()){
-                //TODO: Ingresar a la respectiva pagina
-                usersRef.document(authResult.getUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Intent intentPermisos;
-                        switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
-                            case "Cliente":
-                                Toast.makeText(LoginActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();
-                                firebaseAuth.signOut(); //Borrar luego
-                                break;
-                            case "Admin":
-                                Toast.makeText(LoginActivity.this, "Hola Admin", Toast.LENGTH_SHORT).show();
-                                firebaseAuth.signOut(); //Borrar luego
-                                break;
-                            case "TI":
-                                Toast.makeText(LoginActivity.this, "Hola TI", Toast.LENGTH_SHORT).show();
-                                intentPermisos  = new Intent(LoginActivity.this, TIHomeActivity.class);
-                                startActivity(intentPermisos);
-                                finish();
-                                break;
-                        }
-                    }
-                });
-            }else{
-                Intent intentNoVerificado = new Intent(LoginActivity.this, NonVerifiedActivity.class);
-                startActivity(intentNoVerificado);
-            }
+            accesoEnBaseARol(authResult.getUser());
+
         }).addOnFailureListener(e -> {
             ocultarCargando();
-            Toast.makeText(LoginActivity.this, "Ocurrió un error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "No se ha podido iniciar sesión", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    public void accesoEnBaseARol(FirebaseUser firebaseUser){
+        usersRef.document(firebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ocultarCargando();
+                if (!documentSnapshot.exists()) return;
+                Intent intentPermisos;
+                switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
+                    case "Cliente":
+                        if(firebaseUser.isEmailVerified()){
+                            Toast.makeText(LoginActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();
+                            intentPermisos  = new Intent(LoginActivity.this, ClienteHomeActivity.class);
+                            startActivity(intentPermisos);
+                            finish();
+                        }else{
+                            Intent intentNoVerificado = new Intent(LoginActivity.this, NonVerifiedActivity.class);
+                            startActivity(intentNoVerificado);
+                        }
+                        break;
+                    case "Admin":
+                        Toast.makeText(LoginActivity.this, "Hola Admin", Toast.LENGTH_SHORT).show();
+                        intentPermisos  = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                        startActivity(intentPermisos);
+                        finish();
+                        break;
+                    case "TI":
+                        Toast.makeText(LoginActivity.this, "Hola TI", Toast.LENGTH_SHORT).show();
+                        intentPermisos  = new Intent(LoginActivity.this, TIHomeActivity.class);
+                        startActivity(intentPermisos);
+                        finish();
+                        break;
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                ocultarCargando();
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(LoginActivity.this, "No se ha podido iniciar sesión", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

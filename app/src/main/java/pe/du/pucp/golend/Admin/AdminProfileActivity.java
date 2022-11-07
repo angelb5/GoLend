@@ -1,4 +1,4 @@
-package pe.du.pucp.golend.TI;
+package pe.du.pucp.golend.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,43 +12,50 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import pe.du.pucp.golend.R;
 
-public class TIHomeActivity extends AppCompatActivity {
+public class AdminProfileActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tihome);
+        setContentView(R.layout.activity_admin_profile);
 
         setBottomNavigationView();
     }
 
     public void setBottomNavigationView(){
-        bottomNavigationView = findViewById(R.id.bottomNavMenuTiHomeAct);
-        bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuTiHome);
+        bottomNavigationView = findViewById(R.id.bottomNavMenuAdminProfileAct);
+        bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuAdminProfile);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
-                    case R.id.bottomNavMenuTiHome:
-                        return true;
-                    case R.id.bottomNavMenuTiSolicitud:
-                        startActivity(new Intent(getApplicationContext(),TISolicitudActivity.class));
+                    case R.id.bottomNavMenuAdminHome:
+                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
                         overridePendingTransition(0,0);
                         finish();
                         return true;
-                    case R.id.bottomNavMenuTiDevices:
-                        startActivity(new Intent(getApplicationContext(),TIDevicesActivity.class));
+                    case R.id.bottomNavMenuAdminGestionTi:
+                        startActivity(new Intent(getApplicationContext(), AdminGestionTiActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+                    case R.id.bottomNavMenuAdminReport:
+                        startActivity(new Intent(getApplicationContext(), AdminReportActivity.class));
                         overridePendingTransition(0, 0);
                         finish();
                         return true;
-                    case R.id.bottomNavMenuTiProfile:
-                        startActivity(new Intent(getApplicationContext(),TIProfileActivity.class));
-                        overridePendingTransition(0,0);
-                        finish();
+                    case R.id.bottomNavMenuAdminProfile:
                         return true;
                 }
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+        overridePendingTransition(0,0);
+        finish();
     }
 }

@@ -24,21 +24,38 @@ public class TIProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiprofile);
 
+        setBottomNavigationView();
+    }
+
+    public void tiLogout(View view){
+        FirebaseAuth.getInstance().signOut();
+        Intent logoutIntent = new Intent(TIProfileActivity.this, LoginActivity.class);
+        startActivity(logoutIntent);
+        ActivityCompat.finishAffinity(TIProfileActivity.this);
+        finish();
+    }
+
+    public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuTiProfileAct);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuTiProfile);
-
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //TODO: completar casos
                 switch(item.getItemId()) {
                     case R.id.bottomNavMenuTiHome:
                         startActivity(new Intent(getApplicationContext(),TIHomeActivity.class));
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.bottomNavMenuTiSolicitud:
+                        startActivity(new Intent(getApplicationContext(),TISolicitudActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.bottomNavMenuTiDevices:
+                        startActivity(new Intent(getApplicationContext(),TIDevicesActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.bottomNavMenuTiProfile:
                         return true;
@@ -48,11 +65,10 @@ public class TIProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void tiLogout(View view){
-        FirebaseAuth.getInstance().signOut();
-        Intent logoutIntent = new Intent(TIProfileActivity.this, LoginActivity.class);
-        startActivity(logoutIntent);
-        ActivityCompat.finishAffinity(TIProfileActivity.this);
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(),TIHomeActivity.class));
+        overridePendingTransition(0,0);
         finish();
     }
 }

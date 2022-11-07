@@ -9,7 +9,7 @@
         style="@style/BottomNav"
         android:id="@+id/bottomNavMenuTiProfileAct"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

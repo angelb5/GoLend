@@ -6,30 +6,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import pe.du.pucp.golend.R;
 
-public class TIHomeActivity extends AppCompatActivity {
+public class TIDevicesActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tihome);
+        setContentView(R.layout.activity_tidevices);
 
         setBottomNavigationView();
     }
 
     public void setBottomNavigationView(){
-        bottomNavigationView = findViewById(R.id.bottomNavMenuTiHomeAct);
-        bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuTiHome);
+        bottomNavigationView = findViewById(R.id.bottomNavMenuTiDevicesAct);
+        bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuTiDevices);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.bottomNavMenuTiHome:
+                        startActivity(new Intent(getApplicationContext(),TIHomeActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.bottomNavMenuTiSolicitud:
                         startActivity(new Intent(getApplicationContext(),TISolicitudActivity.class));
@@ -37,9 +41,6 @@ public class TIHomeActivity extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.bottomNavMenuTiDevices:
-                        startActivity(new Intent(getApplicationContext(),TIDevicesActivity.class));
-                        overridePendingTransition(0, 0);
-                        finish();
                         return true;
                     case R.id.bottomNavMenuTiProfile:
                         startActivity(new Intent(getApplicationContext(),TIProfileActivity.class));
@@ -50,5 +51,12 @@ public class TIHomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(),TIHomeActivity.class));
+        overridePendingTransition(0,0);
+        finish();
     }
 }

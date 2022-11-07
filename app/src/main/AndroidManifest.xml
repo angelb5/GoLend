@@ -16,11 +16,42 @@
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
         <activity
-            android:name=".TI.TIProfileActivity"
+            android:name=".Admin.AdminProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".TI.TIHomeActivity"
+            android:name=".Admin.AdminReportActivity"
             android:exported="false" />
+        <activity
+            android:name=".Admin.AdminGestionTiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.AdminHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cliente.ClienteProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cliente.ClienteSolicitudActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cliente.ClienteHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TI.TISolicitudActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait" />
+        <activity
+            android:name=".TI.TIDevicesActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait" />
+        <activity
+            android:name=".TI.TIProfileActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait" />
+        <activity
+            android:name=".TI.TIHomeActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Anonymus.NonVerifiedActivity"
             android:exported="false"
@@ -47,7 +78,6 @@
             android:theme="@style/Theme.Golend.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

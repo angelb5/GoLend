@@ -7,13 +7,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
+import pe.du.pucp.golend.Admin.AdminHomeActivity;
+import pe.du.pucp.golend.Anonymus.LoginActivity;
 import pe.du.pucp.golend.Anonymus.OnboardingActivity;
+import pe.du.pucp.golend.Cliente.ClienteHomeActivity;
+import pe.du.pucp.golend.TI.TIHomeActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    CollectionReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_main);
+        usersRef = FirebaseFirestore.getInstance().collection("users");
     }
 
     @Override
@@ -33,8 +48,45 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intentAnonymus);
             finish();
         }else{
-            //TODO: falta redirigir comprobar si hay conexion a internet
-            FirebaseAuth.getInstance().signOut();
+            accesoEnBaseARol(currentUser);
         }
+    }
+
+    public void accesoEnBaseARol(FirebaseUser firebaseUser){
+        usersRef.document(firebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (!documentSnapshot.exists()) return;
+                Intent intentPermisos;
+                switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
+                    case "Cliente":
+                        Toast.makeText(MainActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();
+                        intentPermisos  = new Intent(MainActivity.this, ClienteHomeActivity.class);
+                        startActivity(intentPermisos);
+                        finish();
+                        break;
+                    case "Admin":
+                        Toast.makeText(MainActivity.this, "Hola Admin", Toast.LENGTH_SHORT).show();
+                        intentPermisos  = new Intent(MainActivity.this, AdminHomeActivity.class);
+                        startActivity(intentPermisos);
+                        finish();
+                        break;
+                    case "TI":
+                        Toast.makeText(MainActivity.this, "Hola TI", Toast.LENGTH_SHORT).show();
+                        intentPermisos  = new Intent(MainActivity.this, TIHomeActivity.class);
+                        startActivity(intentPermisos);
+                        finish();
+                        break;
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intentAnonymus = new Intent(MainActivity.this, OnboardingActivity.class);
+                startActivity(intentAnonymus);
+                finish();
+            }
+        });;
     }
 }
