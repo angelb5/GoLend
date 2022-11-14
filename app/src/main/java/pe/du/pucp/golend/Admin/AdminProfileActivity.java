@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
 
 public class AdminProfileActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class AdminProfileActivity extends AppCompatActivity {
 
     public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuAdminProfileAct);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuAdminProfile);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

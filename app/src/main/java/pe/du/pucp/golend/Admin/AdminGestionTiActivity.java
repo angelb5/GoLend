@@ -32,6 +32,7 @@ import pe.du.pucp.golend.Anonymus.LoginActivity;
 import pe.du.pucp.golend.Anonymus.RegisterActivity;
 import pe.du.pucp.golend.Decorations.ImageSelectorMargin;
 import pe.du.pucp.golend.Entity.User;
+import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
 import pe.du.pucp.golend.TI.TIHomeActivity;
 
@@ -80,6 +81,7 @@ public class AdminGestionTiActivity extends AppCompatActivity {
 
     public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuAdminGestonTiAct);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuAdminGestionTi);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -123,6 +125,18 @@ public class AdminGestionTiActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        usersTIAdapter.stopListening();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        usersTIAdapter.startListening();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         usersTIAdapter.stopListening();
     }
 
