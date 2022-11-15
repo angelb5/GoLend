@@ -24,7 +24,7 @@ public class ClienteSolicitudActivity extends AppCompatActivity {
     }
 
     public void setBottomNavigationView(){
-        bottomNavigationView = findViewById(R.id.bottomNavMenuTiSolicitudAct);
+        bottomNavigationView = findViewById(R.id.bottomNavMenuClienteSolicitudAct);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuClienteSolicitud);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
