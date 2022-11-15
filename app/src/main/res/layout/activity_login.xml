@@ -118,7 +118,7 @@
             app:layout_constraintTop_toBottomOf="@id/btnLoginIngresar" />
 
         <TextView
-            android:id="@+id/tvRegisterYaTienes"
+            android:id="@+id/tvLoginNoTienes"
             style="@style/WhiteMedium16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvRegisterYaTienes"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginNoTienes"
             app:layout_goneMarginBottom="24dp" />
 
         <ProgressBar
