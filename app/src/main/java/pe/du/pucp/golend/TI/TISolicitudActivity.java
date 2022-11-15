@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
 
 public class TISolicitudActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class TISolicitudActivity extends AppCompatActivity {
 
     public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuTiSolicitudAct);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuTiSolicitud);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

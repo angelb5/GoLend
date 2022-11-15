@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import pe.du.pucp.golend.Anonymus.LoginActivity;
 import pe.du.pucp.golend.Anonymus.RegisterActivity;
+import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
 
 public class TIProfileActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class TIProfileActivity extends AppCompatActivity {
 
     public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuTiProfileAct);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuTiProfile);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
