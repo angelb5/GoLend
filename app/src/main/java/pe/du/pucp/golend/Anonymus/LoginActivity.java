@@ -148,6 +148,12 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    public void goToForgotPasswordActivity(View view){
+        Intent fpintent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+        startActivity(fpintent);
+        overridePendingTransition(0,0);
+    }
+
     public void showHidePass(View view){
         EditText editPassword = findViewById(R.id.etLoginContrasena);
         if(editPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){

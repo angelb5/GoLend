@@ -63,6 +63,7 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Button btnRegistrar;
     ImageButton btnBack;
+    boolean isBusy = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +212,7 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
     };
 
     public void mostrarCargando(){
+        isBusy = true;
         progressBar.setVisibility(View.VISIBLE);
         btnRegistrar.setClickable(false);
         btnBack.setClickable(false);
@@ -218,10 +220,18 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
     }
 
     public void ocultarCargando(){
+        isBusy = false;
         progressBar.setVisibility(View.GONE);
         btnRegistrar.setClickable(true);
         btnBack.setClickable(true);
         roleSelector.setClickable(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!isBusy){
+            super.onBackPressed();
+        }
     }
 
     public void backButton(View view){

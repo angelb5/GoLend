@@ -166,6 +166,7 @@
         <item name="itemPaddingBottom">12dp</item>
         <item name="itemIconSize">22dp</item>
         <item name="itemIconTint">@color/nav_icon_color</item>
+        <item name="itemTextColor">@color/nav_icon_color</item>
         <item name="labelVisibilityMode">labeled</item>
         <item name="itemTextAppearanceInactive">@style/UncheckedRegular10</item>
         <item name="itemTextAppearanceActive">@style/WhiteMedium10</item>

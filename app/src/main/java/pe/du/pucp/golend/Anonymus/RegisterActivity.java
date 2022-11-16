@@ -68,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Button btnLogin;
     Button btnRegistrar;
+    boolean isBusy = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,6 +239,7 @@ public class RegisterActivity extends AppCompatActivity {
     };
 
     public void mostrarCargando(){
+        isBusy = true;
         progressBar.setVisibility(View.VISIBLE);
         btnLogin.setClickable(false);
         btnRegistrar.setClickable(false);
@@ -245,10 +247,18 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void ocultarCargando(){
+        isBusy = false;
         progressBar.setVisibility(View.GONE);
         btnLogin.setClickable(true);
         btnRegistrar.setClickable(true);
         roleSelector.setClickable(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!isBusy){
+            super.onBackPressed();
+        }
     }
 
     public void goToLoginActivity(View view){

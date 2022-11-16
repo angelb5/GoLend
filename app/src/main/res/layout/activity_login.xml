@@ -105,6 +105,7 @@
             android:layout_marginTop="32dp"/>
 
         <Button
+            android:onClick="goToForgotPasswordActivity"
             android:id="@+id/btnLoginForgotPassword"
             style="@style/Widget.Material3.Button.TextButton"
             android:textColor="@color/green_main"
