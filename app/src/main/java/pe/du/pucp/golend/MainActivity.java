@@ -56,7 +56,12 @@ public class MainActivity extends AppCompatActivity {
         usersRef.document(firebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (!documentSnapshot.exists()) return;
+                if (!documentSnapshot.exists()){
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intentAnonymus = new Intent(MainActivity.this, OnboardingActivity.class);
+                    startActivity(intentAnonymus);
+                    finish();
+                }
                 Intent intentPermisos;
                 switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
                     case "Cliente":
