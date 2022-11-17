@@ -168,7 +168,7 @@
         <item name="itemIconTint">@color/nav_icon_color</item>
         <item name="itemTextColor">@color/nav_icon_color</item>
         <item name="labelVisibilityMode">labeled</item>
-        <item name="itemTextAppearanceInactive">@style/UncheckedRegular10</item>
+        <item name="itemTextAppearanceInactive">@style/WhiteMedium10</item>
         <item name="itemTextAppearanceActive">@style/WhiteMedium10</item>
         <item name="itemActiveIndicatorStyle">@style/Golend.Custom.Indicator</item>
     </style>
