@@ -128,6 +128,12 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
             isInvalid = true;
         }
 
+        if(nombre.length()>30){
+            etNombre.setError("No puede tener más de 30 caracteres");
+            etNombre.requestFocus();
+            isInvalid = true;
+        }
+
         if(!Patterns.EMAIL_ADDRESS.matcher(correo).matches() || !(correo.endsWith("pucp.edu.pe") || correo.endsWith("pucp.pe"))){
             etCorreo.setError("Ingrese un correo válido");
             etCorreo.requestFocus();
