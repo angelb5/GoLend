@@ -186,4 +186,13 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">100%</item>
     </style>
+
+    <!-- Card -->
+    <style name="BlueLightCard">
+        <item name="android:clickable">true</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">3dp</item>
+        <item name="cardBackgroundColor">@color/blue_light</item>
+    </style>
+
 </resources>
