@@ -189,6 +189,7 @@
 
     <!-- Card -->
     <style name="BlueLightCard">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="cardCornerRadius">16dp</item>
         <item name="cardElevation">3dp</item>
