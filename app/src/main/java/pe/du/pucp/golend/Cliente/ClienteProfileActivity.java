@@ -4,24 +4,48 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
+import pe.du.pucp.golend.Admin.AdminCreateUserTiActivity;
+import pe.du.pucp.golend.Anonymus.LoginActivity;
 import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
-import pe.du.pucp.golend.TI.TIHomeActivity;
 
 public class ClienteProfileActivity extends AppCompatActivity {
+
     BottomNavigationView bottomNavigationView;
+    String  userName;
+    String userCorreo;
+    Uri userFoto;
+    EditText nombre;
+    EditText correo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente_profile);
-
         setBottomNavigationView();
+        nombre =  findViewById(R.id.etUpdateNombre);
+        correo = findViewById(R.id.etUpdateCorreo);
+        userName= FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        userCorreo = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        userFoto = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
+        Toast.makeText(ClienteProfileActivity.this, userName, Toast.LENGTH_LONG).show();
+        nombre.setText(userName);
+        correo.setText(userCorreo);
     }
 
     public void setBottomNavigationView(){
@@ -56,4 +80,16 @@ public class ClienteProfileActivity extends AppCompatActivity {
         overridePendingTransition(0,0);
         finish();
     }
+
+    public void actualizarPerfilCliente(View view){
+
+
+    }
+
+    public void cerrarSesionCliente(View view){
+        FirebaseAuth.getInstance().signOut();
+        Toast.makeText(ClienteProfileActivity.this, "Has cerrado sesión", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(ClienteProfileActivity.this,LoginActivity.class));
+    }
+
 }
