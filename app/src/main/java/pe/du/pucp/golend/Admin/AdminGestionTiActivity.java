@@ -17,10 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.firebase.ui.firestore.SnapshotParser;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -57,7 +59,18 @@ public class AdminGestionTiActivity extends AppCompatActivity {
         Query tiQuery = FirebaseFirestore.getInstance().collection("users").whereEqualTo("permisos","TI");
         options = new FirestorePagingOptions.Builder<User>()
                 .setLifecycleOwner(this)
-                .setQuery(tiQuery, config, User.class)
+                .setQuery(tiQuery, config, new SnapshotParser<User>() {
+                    @NonNull
+                    @Override
+                    public User parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        User user = snapshot.toObject(User.class);
+                        if (user !=null){
+                            user.setUid(snapshot.getId());
+                            return user;
+                        }
+                        return new User();
+                    }
+                })
                 .build();
         usersTIAdapter = new UsersTIAdapter(options);
 

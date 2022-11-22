@@ -1,6 +1,10 @@
 package pe.du.pucp.golend.Entity;
 
+import com.google.firebase.firestore.Exclude;
+
 public class User {
+    @Exclude
+    private String uid;
     private String nombre;
     private String correo;
     private String codigo;
@@ -66,5 +70,13 @@ public class User {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

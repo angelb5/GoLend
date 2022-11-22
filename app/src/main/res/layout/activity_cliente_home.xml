@@ -62,6 +62,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvClienteHomeCategories"
         tools:itemCount="1"
+        tools:listitem="@layout/item_image_selector_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
