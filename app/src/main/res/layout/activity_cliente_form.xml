@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cliente.ClienteFormActivity">
+
+    <LinearLayout
+        android:id="@+id/llClienteReservasTitle"
+        style="@style/LayoutTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibClienteReservasBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?actionBarItemBackground"
+            android:clickable="true"
+            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
+            android:src="@drawable/button_back"/>
+
+        <TextView
+            style="@style/GreenSemiBoldSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="Reservas de equipo" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llClienteReservasTitle">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/tvClienteReservasTxT"
+                style="@style/WhiteMedium16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="Completa este formulario para hacer tu reserva" />
+
+            <TextView
+                android:id="@+id/tvClienteReservasMotivo"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:text="Motivo" />
+
+            <EditText
+                android:id="@+id/etClienteReservasMotivo"
+                style="@style/InputGrey"
+                android:hint="Especifique el motivo de la reserva"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvClienteReservasCurso"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Curso" />
+
+            <EditText
+                style="@style/InputGrey"
+                android:id="@+id/etClienteReservasCurso"
+                android:hint="Nombre del curso asociado al préstamo"
+                android:inputType="textPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvClienteReservasTiempo"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Tiempo de reserva" />
+
+            <EditText
+                android:id="@+id/etClienteReservasTiempo"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Número de días del préstamo"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tvClienteReservasProgramas"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Programas" />
+            <EditText
+                android:id="@+id/etClienteReservasProgramas"
+                style="@style/InputGrey"
+                android:hint="Programas que requiere en su equipo"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvClienteReservasDNI"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="DNI" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:focusable="true"
+                android:id="@+id/rvAdminCreateRestaurantFotos"
+                android:layout_width="match_parent"
+                tools:itemCount="0"
+                android:layout_weight="0.9"
+                tools:listitem="@layout/item_dni_upload"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="16dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/glAdminCreateRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:columnCount="2"
+                android:useDefaultMargins="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:backgroundTint="@color/unfocused">
+
+                <ImageView
+                    android:id="@+id/etClienteReservasDNI"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_photo" />
+            </androidx.cardview.widget.CardView>
+            <ProgressBar
+                android:id="@+id/pbAdminCreateRestaurantPhoto"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:max="100"
+                android:progress="0"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/ClienteReservasTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="end">
+
+                <ImageButton
+                    android:id="@+id/ibClienteReservasPhotoAttach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/button_attachment" />
+
+                <ImageButton
+                    android:id="@+id/ibClienteReservasPhotoCam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/button_camera" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvClienteReservasOtros"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Otros" />
+
+            <EditText
+                android:id="@+id/etClienteReservasOtros"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Detalles adicionales para la reserva"
+                android:inputType="textMultiLine" />
+            <Button
+                android:id="@+id/btnClienteReservasEnviarSoli"
+                style="@style/BtnPrimary"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Enviar Solicitud"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/pbAdminCreateRestaurantLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

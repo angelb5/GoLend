@@ -77,6 +77,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="WhiteMedium14">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
     <style name="WhiteRegular16">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textColor">@color/white</item>
@@ -194,6 +199,12 @@
         <item name="cardCornerRadius">16dp</item>
         <item name="cardElevation">3dp</item>
         <item name="cardBackgroundColor">@color/blue_light</item>
+    </style>
+
+    <style name="LayoutTitle">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/blue_light</item>
     </style>
 
 </resources>
