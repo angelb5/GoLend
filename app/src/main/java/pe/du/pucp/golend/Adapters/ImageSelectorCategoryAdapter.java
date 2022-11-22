@@ -13,21 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 import pe.du.pucp.golend.R;
 
-public class ImageSelectorAdapter extends RecyclerView.Adapter<ImageSelectorAdapter.ViewHolder>
-        implements View.OnClickListener {
+public class ImageSelectorCategoryAdapter extends RecyclerView.Adapter<ImageSelectorCategoryAdapter.ViewHolder>
+implements View.OnClickListener {
     private Context context;
     private int selectedItem = 0;
     private List<Integer> images;
     private List<Integer> texts;
     private View.OnClickListener listener;
 
-    public ImageSelectorAdapter(Context context, List<Integer> images, List<Integer> texts) {
+    public ImageSelectorCategoryAdapter(Context context, List<Integer> images, List<Integer> texts) {
         this.context = context;
         this.images = images;
         this.texts = texts;
@@ -40,7 +38,7 @@ public class ImageSelectorAdapter extends RecyclerView.Adapter<ImageSelectorAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_selector, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_selector_category, parent, false);
         view.setOnClickListener(this);
         return new ViewHolder(view);
     }
@@ -82,9 +80,9 @@ public class ImageSelectorAdapter extends RecyclerView.Adapter<ImageSelectorAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            flOverlay =itemView.findViewById(R.id.flImageSelector);
-            ivImage = itemView.findViewById(R.id.ivImageSelector);
-            tvDesc = itemView.findViewById(R.id.tvImageSelector);
+            flOverlay =itemView.findViewById(R.id.flImageSelectorCategory);
+            ivImage = itemView.findViewById(R.id.ivImageSelectorCategory);
+            tvDesc = itemView.findViewById(R.id.tvImageSelectorCategory);
         }
     }
 

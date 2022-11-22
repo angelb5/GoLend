@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Cliente.ClienteHomeActivity">
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/BottomNav"
         android:id="@+id/bottomNavMenuClienteHomeAct"
@@ -14,4 +15,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu_cliente" />
+
+
+    <TextView
+        android:id="@+id/tvClienteHomeSaludo"
+        style="@style/WhiteBoldTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:textSize="26dp"
+        android:text="Buenas tardes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/etClienteHomeSearch"
+        style="@style/InputGrey"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:drawableEnd="@drawable/ic_search"
+        android:ems="10"
+        android:hint="¿Qué necesitas hoy"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvClienteHomeSaludo" />
+    <TextView
+        style="@style/WhiteSemiBoldSubtitle"
+        android:layout_marginHorizontal="24dp"
+        android:text="Explora categorías"
+        android:id="@+id/tvClienteHomeCategorias"
+        android:layout_marginTop="24dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etClienteHomeSearch" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvClienteHomeCategories"
+        tools:itemCount="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvClienteHomeCategorias" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

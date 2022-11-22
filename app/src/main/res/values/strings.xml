@@ -9,4 +9,9 @@
     <string name="role_student">Estudiante</string>
     <string name="role_administrator">Administrativ@</string>
     <string name="role_teacher">Docente</string>
+    <string name="category_laptop">Laptop</string>
+    <string name="category_celular">Celular</string>
+    <string name="category_tablet">Tablet</string>
+    <string name="category_monitor">Monitor</string>
+    <string name="category_otros">Otros</string>
 </resources>
