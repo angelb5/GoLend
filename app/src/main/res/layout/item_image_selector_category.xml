@@ -16,7 +16,7 @@
         android:src="@drawable/laptops"/>
 
     <TextView
-        style="@style/UnselectedMedium12"
+        style="@style/WhiteMedium12"
         android:id="@+id/tvImageSelectorCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
