@@ -45,16 +45,6 @@ implements View.OnClickListener {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if (selectedItem == position) {
-            holder.flOverlay.setForeground(null);
-            holder.tvDesc.setTextColor(context.getColor(R.color.white));
-            holder.tvDesc.setTypeface(context.getResources().getFont(R.font.montserrat_semibold));
-        }else{
-            holder.flOverlay.setForeground(AppCompatResources.getDrawable(context,R.drawable.shape_semiblackcircle));
-            holder.tvDesc.setTextColor(context.getColor(R.color.grey_image_unselected));
-            holder.tvDesc.setTypeface(context.getResources().getFont(R.font.montserrat_medium));
-        }
-
         holder.ivImage.setImageResource(images.get(position));
         holder.tvDesc.setText(texts.get(position));
     }
@@ -74,23 +64,13 @@ implements View.OnClickListener {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        FrameLayout flOverlay;
         ImageView ivImage;
         TextView tvDesc;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            flOverlay =itemView.findViewById(R.id.flImageSelectorCategory);
             ivImage = itemView.findViewById(R.id.ivImageSelectorCategory);
             tvDesc = itemView.findViewById(R.id.tvImageSelectorCategory);
         }
-    }
-
-    public int getSelectedItem(){
-        return selectedItem;
-    }
-
-    public void setSelectedItem(int selectedItem) {
-        this.selectedItem = selectedItem;
     }
 }
