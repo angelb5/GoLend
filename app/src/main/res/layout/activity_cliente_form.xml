@@ -7,7 +7,7 @@
     tools:context=".Cliente.ClienteFormActivity">
 
     <LinearLayout
-        android:id="@+id/llClienteReservasTitle"
+        android:id="@+id/llClienteFormTitle"
         style="@style/LayoutTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/ibClienteReservasBack"
+            android:id="@+id/ibClienteFormBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
@@ -42,7 +42,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llClienteReservasTitle">
+        app:layout_constraintTop_toBottomOf="@+id/llClienteFormTitle">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
             android:paddingHorizontal="16dp">
 
             <TextView
-                android:id="@+id/tvClienteReservasTxT"
+                android:id="@+id/tvClienteFormTxT"
                 style="@style/WhiteMedium16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:text="Completa este formulario para hacer tu reserva" />
 
             <TextView
-                android:id="@+id/tvClienteReservasMotivo"
+                android:id="@+id/tvClienteFormMotivo"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:text="Motivo" />
 
             <EditText
-                android:id="@+id/etClienteReservasMotivo"
+                android:id="@+id/etClienteFormMotivo"
                 style="@style/InputGrey"
                 android:hint="Especifique el motivo de la reserva"
                 android:inputType="textMultiLine"
@@ -77,7 +77,7 @@
                 android:layout_marginBottom="16dp"/>
 
             <TextView
-                android:id="@+id/tvClienteReservasCurso"
+                android:id="@+id/tvClienteFormCurso"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
 
             <EditText
                 style="@style/InputGrey"
-                android:id="@+id/etClienteReservasCurso"
+                android:id="@+id/etClienteFormCurso"
                 android:hint="Nombre del curso asociado al préstamo"
                 android:inputType="textPersonName"
                 android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                 android:layout_marginBottom="16dp"/>
 
             <TextView
-                android:id="@+id/tvClienteReservasTiempo"
+                android:id="@+id/tvClienteFormTiempo"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                 android:text="Tiempo de reserva" />
 
             <EditText
-                android:id="@+id/etClienteReservasTiempo"
+                android:id="@+id/etClienteFormTiempo"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,14 +111,14 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/tvClienteReservasProgramas"
+                android:id="@+id/tvClienteFormProgramas"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="Programas" />
             <EditText
-                android:id="@+id/etClienteReservasProgramas"
+                android:id="@+id/etClienteFormProgramas"
                 style="@style/InputGrey"
                 android:hint="Programas que requiere en su equipo"
                 android:inputType="textMultiLine"
@@ -127,7 +127,7 @@
                 android:layout_marginBottom="16dp"/>
 
             <TextView
-                android:id="@+id/tvClienteReservasDNI"
+                android:id="@+id/tvClienteFormDNI"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                 android:text="DNI" />
             <androidx.recyclerview.widget.RecyclerView
                 android:focusable="true"
-                android:id="@+id/rvAdminCreateRestaurantFotos"
+                android:id="@+id/tvClienteDNI"
                 android:layout_width="match_parent"
                 tools:itemCount="0"
                 android:layout_weight="0.9"
@@ -145,7 +145,7 @@
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="16dp"
                 android:layout_columnWeight="1"
-                android:id="@+id/glAdminCreateRestaurant"
+                android:id="@+id/glClienteDNI"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginBottom="8dp"
@@ -159,14 +159,14 @@
                 android:backgroundTint="@color/unfocused">
 
                 <ImageView
-                    android:id="@+id/etClienteReservasDNI"
+                    android:id="@+id/etClienteFormDNI"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="center"
                     android:src="@drawable/ic_photo" />
             </androidx.cardview.widget.CardView>
             <ProgressBar
-                android:id="@+id/pbAdminCreateRestaurantPhoto"
+                android:id="@+id/pbClienteDNIPhoto"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,14 +176,14 @@
                 android:visibility="gone"/>
 
             <LinearLayout
-                android:id="@+id/ClienteReservasTitle"
+                android:id="@+id/ClienteFormTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
                 android:gravity="end">
 
                 <ImageButton
-                    android:id="@+id/ibClienteReservasPhotoAttach"
+                    android:id="@+id/ibClienteFormPhotoAttach"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -191,7 +191,7 @@
                     android:src="@drawable/button_attachment" />
 
                 <ImageButton
-                    android:id="@+id/ibClienteReservasPhotoCam"
+                    android:id="@+id/ibClienteFormPhotoCam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -199,7 +199,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvClienteReservasOtros"
+                android:id="@+id/tvClienteFormOtros"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
                 android:text="Otros" />
 
             <EditText
-                android:id="@+id/etClienteReservasOtros"
+                android:id="@+id/etClienteFormOtros"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                 android:hint="Detalles adicionales para la reserva"
                 android:inputType="textMultiLine" />
             <Button
-                android:id="@+id/btnClienteReservasEnviarSoli"
+                android:id="@+id/btnClienteFormEnviarSoli"
                 style="@style/BtnPrimary"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
@@ -228,7 +228,7 @@
 
     <ProgressBar
         android:visibility="gone"
-        android:id="@+id/pbAdminCreateRestaurantLoading"
+        android:id="@+id/pbClienteFormLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

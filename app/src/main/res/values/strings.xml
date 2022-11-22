@@ -4,6 +4,10 @@
     <string name="onboarding_devices">Reserva todos los equipos que necesites de forma sencilla</string>
     <string name="onboarding_hand">Gestiona las solicitudes de reserva de equipos desde tu teléfono</string>
     <string name="onboarding_ourusers">¡Nuestros usuarios nos recomiendan! ¿Te animas?</string>
+    <string name="reservas_curso_txt">Encuentra aquí los equipos que tienes en préstamo</string>
+    <string name="reservas_pasadas_txt">Encuentra aquí los equipos que ya ha te han sido prestados</string>
+    <string name="solicitudes_pendientes_txt">Encuentra aquí tus solicitudes pendientes de aprobación</string>
+    <string name="solicitudes_rechazadas_txt">Encuentra aquí tus solicitudes que han sido rechazadas</string>
     <string name="onboarding_start">Comenzar</string>
 
     <string name="role_student">Estudiante</string>
@@ -13,5 +17,9 @@
     <string name="category_celular">Celular</string>
     <string name="category_tablet">Tablet</string>
     <string name="category_monitor">Monitor</string>
-    <string name="category_otros">Otros</string>
+    <string name="reservas_curso">Reservas en curso</string>
+    <string name="reservas_pasadas">Reservas pasadas</string>
+    <string name="solicitudes_rechazadas">Solicitudes rechazadas</string>
+    <string name="solicitudes_pendientes">Solicitudes pendientes</string>
+
 </resources>

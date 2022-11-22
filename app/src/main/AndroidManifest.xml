@@ -15,40 +15,52 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
-
+        <activity
+            android:name=".Cliente.ClienteReservasActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Cliente.ClienteFormActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Admin.AdminCreateUserTiActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Admin.AdminProfileActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Admin.AdminReportActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Admin.AdminGestionTiActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Admin.AdminHomeActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
-
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Cliente.ClienteProfileActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Cliente.ClienteSolicitudActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Cliente.ClienteHomeActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".TI.TISolicitudActivity"
             android:exported="false"
@@ -65,11 +77,10 @@
             android:name=".TI.TIHomeActivity"
             android:exported="false"
             android:screenOrientation="userPortrait" />
-
         <activity
             android:name=".Anonymus.ForgotPasswordActivity"
             android:exported="false"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Anonymus.NonVerifiedActivity"
             android:exported="false"

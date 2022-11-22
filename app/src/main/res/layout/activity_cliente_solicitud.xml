@@ -16,7 +16,7 @@
         app:menu="@menu/bottom_nav_menu_cliente" />
 
     <TextView
-        android:id="@+id/tvTIsolicitudTitle"
+        android:id="@+id/tvClienteSolicitudTitle"
         style="@style/WhiteBoldTitle"
         android:layout_width="0dp"
         android:textAlignment="center"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvTIsolicitudRechazadas"
+        android:id="@+id/cvClientesolicitudRechazadas"
         style="@style/BlueLightCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavMenuClienteSolicitudAct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvTIsolicitudPasadas"
+        app:layout_constraintTop_toBottomOf="@+id/cvClientesolicitudPasadas"
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
@@ -80,7 +80,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvTIsolicitudReservas"
+        android:id="@+id/cvClienteSolicitudReservasCurso"
         style="@style/BlueLightCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTIsolicitudTxt">
+        app:layout_constraintTop_toBottomOf="@id/tvClienteSolicitudTxt">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,7 +128,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvTIsolicitudPasadas"
+        android:id="@+id/cvClientesolicitudPasadas"
         style="@style/BlueLightCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvTIsolicitudPendientes">
+        app:layout_constraintTop_toBottomOf="@id/cvClienteolicitudPendientes">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,7 +177,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvTIsolicitudPendientes"
+        android:id="@+id/cvClienteolicitudPendientes"
         style="@style/BlueLightCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvTIsolicitudReservas">
+        app:layout_constraintTop_toBottomOf="@id/cvClienteSolicitudReservasCurso">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -226,7 +226,7 @@
 
     <TextView
         android:textAlignment="center"
-        android:id="@+id/tvTIsolicitudTxt"
+        android:id="@+id/tvClienteSolicitudTxt"
         style="@style/WhiteMedium16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -236,6 +236,6 @@
         android:text="Encuentra aquí tus solicitudes anteriores y en curso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTIsolicitudTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvClienteSolicitudTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
