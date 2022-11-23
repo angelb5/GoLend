@@ -181,6 +181,16 @@
     <!-- FAB -->
     <style name="FabPrimary" parent="Widget.Design.FloatingActionButton">
         <item name="android:foreground">@drawable/fab_primary_add</item>
+        <item name="android:background">?actionBarItemBackground</item>
+        <item name="fabSize">normal</item>
+        <item name="borderWidth">0dp</item>
+        <item name="fabCustomSize">56dp</item>
+        <item name="maxImageSize">56dp</item>
+        <item name="shapeAppearanceOverlay">@style/fabRounded</item>
+    </style>
+    <style name="FabPrimaryUserAdd" parent="Widget.Design.FloatingActionButton">
+        <item name="android:foreground">@drawable/fab_primary_user_add</item>
+        <item name="android:background">?actionBarItemBackground</item>
         <item name="fabSize">normal</item>
         <item name="borderWidth">0dp</item>
         <item name="fabCustomSize">56dp</item>
