@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cliente.ClienteDetalleDispActivity">
+
+    <Button
+        android:id="@+id/btnReservar"
+        style="@style/BtnPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="224dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="29dp"
+        android:text="Reservar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <TextView
+            android:id="@+id/tvClienteDispMarca"
+            style="@style/WhiteMediumSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MSI"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvClienteDispModelo"
+            style="@style/WhiteMediumTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Katana GF76"
+            android:textSize="32sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_laptop_green" />
+
+            <TextView
+                android:id="@+id/tvClienteDispTipo"
+                style="@style/GreenSemiBoldSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Laptop" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvClienteDispDescripcion"
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Laptop Gamer MSI Katana GF76-11UD-041SP 17.3 Intel Core i7-11800H 512GB SSD 16GB RAM." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvAccesoriosText"
+                style="@style/WhiteMedium16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incluye:" />
+
+            <TextView
+                android:id="@+id/tvClienteDispAccesorios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Cargador" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvDisponibilidadText"
+                style="@style/WhiteMedium16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disponibles:" />
+
+            <TextView
+                android:id="@+id/tvClienteDispDisponibilidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/imgSlider"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:background="@drawable/gradient_background"
+                app:iss_auto_cycle="true"
+                app:iss_delay="1000"
+                app:iss_period="1000"
+                app:iss_title_background="@string/app_name">
+
+                <ImageButton
+                    android:id="@+id/ibDetallesDispBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@null"
+                    android:scaleType="center"
+                    android:src="@drawable/button_back_alt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.denzcoskun.imageslider.ImageSlider>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
