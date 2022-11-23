@@ -6,49 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".Cliente.ClienteFormActivity">
 
-    <LinearLayout
-        android:id="@+id/llClienteFormTitle"
-        style="@style/LayoutTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/ibClienteFormBack"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="?actionBarItemBackground"
-            android:clickable="true"
-            android:paddingStart="16dp"
-            android:paddingEnd="12dp"
-            android:src="@drawable/button_back"/>
-
-        <TextView
-            style="@style/GreenSemiBoldSubtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"
-            android:text="Reservas de equipo" />
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llClienteFormTitle">
+        app:layout_constraintTop_toTopOf="parent">
+
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingHorizontal="16dp">
+            <LinearLayout
+                android:id="@+id/llCreateDeviceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageButton
+                    android:id="@+id/ibCreateUserTiBack"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?actionBarItemBackground"
+                    android:onClick="backButton"
+                    android:scaleType="center"
+                    android:src="@drawable/button_back" />
+
+                <TextView
+                    style="@style/GreenBoldTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reserva de equipo" />
+            </LinearLayout>
             <TextView
                 android:id="@+id/tvClienteFormTxT"
                 style="@style/WhiteMedium16"
@@ -70,11 +68,11 @@
             <EditText
                 android:id="@+id/etClienteFormMotivo"
                 style="@style/InputGrey"
-                android:hint="Especifique el motivo de la reserva"
-                android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:hint="Especifique el motivo de la reserva"
+                android:inputType="textMultiLine" />
 
             <TextView
                 android:id="@+id/tvClienteFormCurso"
@@ -85,13 +83,13 @@
                 android:text="Curso" />
 
             <EditText
-                style="@style/InputGrey"
                 android:id="@+id/etClienteFormCurso"
-                android:hint="Nombre del curso asociado al préstamo"
-                android:inputType="textPersonName"
+                style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:hint="Nombre del curso asociado al préstamo"
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/tvClienteFormTiempo"
@@ -117,14 +115,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="Programas" />
+
             <EditText
                 android:id="@+id/etClienteFormProgramas"
                 style="@style/InputGrey"
-                android:hint="Programas que requiere en su equipo"
-                android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:hint="Programas que requiere en su equipo"
+                android:inputType="textMultiLine" />
 
             <TextView
                 android:id="@+id/tvClienteFormDNI"
@@ -133,30 +132,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="DNI" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:focusable="true"
                 android:id="@+id/tvClienteDNI"
                 android:layout_width="match_parent"
-                tools:itemCount="0"
-                android:layout_weight="0.9"
-                tools:listitem="@layout/item_dni_upload"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.9"
+                android:focusable="true"
+                tools:itemCount="0"
+                tools:listitem="@layout/item_dni_upload" />
+
             <androidx.cardview.widget.CardView
-                app:cardCornerRadius="16dp"
-                android:layout_columnWeight="1"
                 android:id="@+id/glClienteDNI"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:layout_columnWeight="1"
                 android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
+                android:backgroundTint="@color/unfocused"
                 android:columnCount="2"
+                android:orientation="horizontal"
                 android:useDefaultMargins="true"
+                app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:backgroundTint="@color/unfocused">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/etClienteFormDNI"
@@ -165,6 +166,7 @@
                     android:scaleType="center"
                     android:src="@drawable/ic_photo" />
             </androidx.cardview.widget.CardView>
+
             <ProgressBar
                 android:id="@+id/pbClienteDNIPhoto"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -173,7 +175,7 @@
                 android:layout_marginBottom="8dp"
                 android:max="100"
                 android:progress="0"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/ClienteFormTitle"
@@ -214,15 +216,16 @@
                 android:layout_marginBottom="16dp"
                 android:hint="Detalles adicionales para la reserva"
                 android:inputType="textMultiLine" />
+
             <Button
                 android:id="@+id/btnClienteFormEnviarSoli"
                 style="@style/BtnPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Enviar Solicitud"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:text="Enviar Solicitud" />
         </LinearLayout>
     </ScrollView>
 
