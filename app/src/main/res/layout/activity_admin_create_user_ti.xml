@@ -30,7 +30,7 @@ tools:context=".Admin.AdminCreateUserTiActivity">
             android:layout_height="36dp"
             android:layout_marginEnd="8dp"
             android:scaleType="center"
-            android:background="@null"
+            android:background="?actionBarItemBackground"
             android:src="@drawable/button_back" />
         <TextView
             style="@style/GreenBoldTitle"
@@ -40,26 +40,17 @@ tools:context=".Admin.AdminCreateUserTiActivity">
     </LinearLayout>
 
     <TextView
-        style="@style/WhiteSemiBoldSubtitle"
+        style="@style/WhiteMedium16"
         android:id="@+id/tvCreateUserTiQueRol"
-        android:layout_width="wrap_content"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="24dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="¿Qué rol desempeña?"
+        android:layout_marginTop="12dp"
+        android:text="Llena el formulario para agregar un usuario TI"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llCreateUserTiTitle" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCreateUserTiImageSelector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreateUserTiQueRol"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_image_selector" />
 
     <EditText
         android:id="@+id/etCreateUserTiNombre"
@@ -72,7 +63,7 @@ tools:context=".Admin.AdminCreateUserTiActivity">
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvCreateUserTiImageSelector" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCreateUserTiQueRol" />
 
     <EditText
         android:id="@+id/etCreateUserTiCorreo"

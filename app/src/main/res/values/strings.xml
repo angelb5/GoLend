@@ -23,4 +23,12 @@
     <string name="solicitudes_rechazadas">Solicitudes rechazadas</string>
     <string name="solicitudes_pendientes">Solicitudes pendientes</string>
 
+    <string-array name="avatars">
+        <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_student.png?alt=media&amp;token=fc83e656-00d2-4e16-aaaf-449778d7715d</item>
+        <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Fpfp2.png?alt=media&amp;token=de80952d-f935-402e-a5b4-559e543b0c54</item>
+        <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Fpfp1.png?alt=media&amp;token=74035c44-5959-4d87-ae06-6f8c15bd2f14</item>
+        <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Fpfp3.png?alt=media&amp;token=1b42a0a4-d752-4b4e-ab2d-f86c98679a82</item>
+        <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Fpfp4.png?alt=media&amp;token=fdcb3f3e-d8dc-497c-adea-134a77fa8150</item>
+        <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_administrator.png?alt=media&amp;token=d3e01332-feec-4f3f-9253-e8b9e6f395ed</item>
+    </string-array>
 </resources>

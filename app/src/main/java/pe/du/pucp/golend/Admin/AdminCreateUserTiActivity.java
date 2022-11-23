@@ -46,14 +46,7 @@ import pe.du.pucp.golend.ScreenMessageActivity;
 
 public class AdminCreateUserTiActivity extends AppCompatActivity {
 
-    final int IMAGE_SELECTOR_COLUMNS = 3;
-    final int IMAGE_SELECTOR_MARGIN = 8;
-    final List<Integer> ROLE_IMAGES =  Arrays.asList(R.drawable.role_student, R.drawable.role_administrator, R.drawable.role_teacher);
-    final List<Integer> ROLE_TEXTS = Arrays.asList(R.string.role_student, R.string.role_administrator, R.string.role_teacher);
-    final List<String> ROLE_AVATAR_URLS = Arrays.asList("https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_student.png?alt=media&token=fc83e656-00d2-4e16-aaaf-449778d7715d",
-            "https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_administrator.png?alt=media&token=d3e01332-feec-4f3f-9253-e8b9e6f395ed",
-            "https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_teacher.png?alt=media&token=77923516-fe28-4835-a0e0-676f73f1c0ef");
-    RecyclerView roleSelector;
+    String[] AVATAR_URLS;
     FirebaseAuth firebaseAuth;
     FirebaseAuth firebaseAuth2;
     CollectionReference usersRef;
@@ -69,8 +62,6 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_create_user_ti);
-        //Setea el selector de roles
-        roleSelector = findViewById(R.id.rvCreateUserTiImageSelector);
         //Setea los EditText, ProgressBar y Button
         etNombre = findViewById(R.id.etCreateUserTiNombre);
         etCorreo = findViewById(R.id.etCreateUserTiCorreo);
@@ -78,25 +69,6 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.pbCreateUserTi);
         btnRegistrar = findViewById(R.id.btnCreateUserTiRegistrar);
         btnBack = findViewById(R.id.ibCreateUserTiBack);
-
-        //Selector de roles
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        ImageSelectorAdapter selectorAdapter = new ImageSelectorAdapter(this, ROLE_IMAGES, ROLE_TEXTS);
-        selectorAdapter.setOnItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = roleSelector.getChildAdapterPosition(view);
-                if (position>=0 && position<ROLE_IMAGES.size()){
-                    selectorAdapter.setSelectedItem(position);
-                    selectorAdapter.notifyDataSetChanged();
-                }
-            }
-        });
-        ImageSelectorMargin imageSelectorMargin = new ImageSelectorMargin(IMAGE_SELECTOR_COLUMNS,IMAGE_SELECTOR_MARGIN);
-
-        roleSelector.setLayoutManager(layoutManager);
-        roleSelector.setAdapter(selectorAdapter);
-        roleSelector.addItemDecoration(imageSelectorMargin);
 
         //Setea Firestore
         firebaseAuth = FirebaseAuth.getInstance();
@@ -108,20 +80,16 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
             firebaseAuth2 = FirebaseAuth.getInstance(FirebaseApp.getInstance("Golend"));
         }
         usersRef = FirebaseFirestore.getInstance().collection("users");
+
+        AVATAR_URLS = getResources().getStringArray(R.array.avatars);
     }
 
     public void registrarUsuario(View view){
         boolean isInvalid = false;
-        int selectedRole = ((ImageSelectorAdapter) roleSelector.getAdapter()).getSelectedItem();
         String nombre = etNombre.getText().toString().trim();
         String correo = etCorreo.getText().toString().trim();
         String codigo = etCodigo.getText().toString().trim();
-        String rol = getResources().getString(ROLE_TEXTS.get(selectedRole));
-        String avatarUrl = ROLE_AVATAR_URLS.get(selectedRole);
-        byte[] array = new byte[16];
-        new Random().nextBytes(array);
-        String contrasena = new String(array, Charset.forName("UTF-8"));
-
+        String rol = "";
         if(nombre.isEmpty()){
             etNombre.setError("No puede estar vacío");
             etNombre.requestFocus();
@@ -147,6 +115,10 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
         }
 
         if(isInvalid) return;
+        byte[] array = new byte[16];
+        new Random().nextBytes(array);
+        String avatarUrl = AVATAR_URLS[new Random().nextInt(AVATAR_URLS.length)];
+        String contrasena = new String(array, Charset.forName("UTF-8"));
 
         //Verifica que el codigo y correo sean únicos
         mostrarCargando();
@@ -222,7 +194,6 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         btnRegistrar.setClickable(false);
         btnBack.setClickable(false);
-        roleSelector.setClickable(false);
     }
 
     public void ocultarCargando(){
@@ -230,7 +201,6 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         btnRegistrar.setClickable(true);
         btnBack.setClickable(true);
-        roleSelector.setClickable(true);
     }
 
     @Override

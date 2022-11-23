@@ -28,13 +28,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tvUserTiRol"
+                android:id="@+id/tvUserTiCodigo"
                 style="@style/GreySemibold12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:textAllCaps="true"
-                android:text="Estudiante"/>
+                android:text="20190981"/>
             <TextView
                 android:id="@+id/tvUserTiNombre"
                 style="@style/GreenSemiBoldSubtitle"

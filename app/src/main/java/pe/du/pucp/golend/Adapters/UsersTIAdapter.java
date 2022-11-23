@@ -36,7 +36,7 @@ public class UsersTIAdapter extends FirestorePagingAdapter<User, UsersTIAdapter.
 
     @Override
     protected void onBindViewHolder(@NonNull UserTIViewHolder holder, int position, @NonNull User model) {
-        holder.tvRol.setText(model.getRol());
+        holder.tvCodigo.setText(model.getCodigo());
         holder.tvNombre.setText(model.getNombre());
         holder.userTi = model;
         Glide.with(holder.itemView.getContext()).load(model.getAvatarUrl())
@@ -46,14 +46,14 @@ public class UsersTIAdapter extends FirestorePagingAdapter<User, UsersTIAdapter.
 
     public class UserTIViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProfilePic;
-        TextView tvRol;
+        TextView tvCodigo;
         TextView tvNombre;
         User userTi;
 
         public UserTIViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProfilePic = itemView.findViewById(R.id.ivUserTiPImage);
-            tvRol = itemView.findViewById(R.id.tvUserTiRol);
+            tvCodigo = itemView.findViewById(R.id.tvUserTiCodigo);
             tvNombre = itemView.findViewById(R.id.tvUserTiNombre);
             itemView.findViewById(R.id.btnUserTiActualizar).setOnClickListener(view -> {
                 Log.d("msg", "hola desde el usuario "+userTi.getNombre());

@@ -27,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/tvClienteHomeSaludo"
             style="@style/WhiteBoldTitle"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
