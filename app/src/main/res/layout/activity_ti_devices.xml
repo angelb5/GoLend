@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TI.TIDevicesActivity">
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:onClick="goToCreateDevice"
         android:id="@+id/fabTiDevicesCreate"
         style="@style/FabPrimary"
         android:layout_width="56dp"

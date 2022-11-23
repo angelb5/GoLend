@@ -19,7 +19,7 @@ public class TIDevicesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tidevices);
+        setContentView(R.layout.activity_ti_devices);
 
         setBottomNavigationView();
     }
@@ -60,5 +60,9 @@ public class TIDevicesActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),TIHomeActivity.class));
         overridePendingTransition(0,0);
         finish();
+    }
+
+    public void goToCreateDevice(View view){
+        startActivity(new Intent(TIDevicesActivity.this,TICreateDeviceActivity.class));
     }
 }

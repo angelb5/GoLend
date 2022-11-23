@@ -18,7 +18,7 @@ public class TIHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tihome);
+        setContentView(R.layout.activity_ti_home);
 
         setBottomNavigationView();
     }

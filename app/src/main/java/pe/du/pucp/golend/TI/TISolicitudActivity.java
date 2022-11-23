@@ -18,7 +18,7 @@ public class TISolicitudActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tisolicitud);
+        setContentView(R.layout.activity_ti_solicitud);
 
         setBottomNavigationView();
     }
