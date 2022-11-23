@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TI.TISolicitudesPendientesActivity">
+
+    <LinearLayout
+        style="@style/LayoutTitle"
+        android:layout_width="410dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:background="?actionBarItemBackground"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llTISolicitudesPendientesTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/ibTISolicitudesPendientesBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?actionBarItemBackground"
+                android:clickable="true"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:src="@drawable/button_back" />
+
+            <TextView
+                android:id="@+id/tvTISolicitudPendienteTittle"
+                style="@style/GreenBoldTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Solicitudes Pendientes" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/llTISolicitudesPendientesTxt"
+            style="@style/WhiteRegular13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="?actionBarItemBackground"
+            android:gravity="center"
+            android:text="Revisa las solicitudes pendientes de aprobación"
+            app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llTISolicitudesPendientesTitle" />
+
+    </LinearLayout>
+
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavMenuTiSolicitudPendAct"
+        style="@style/BottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu_ti" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="409dp"
+        android:layout_height="581dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavMenuTiSolicitudPendAct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerTiSolicitudesPendientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:duration="800">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTISolicitudesPendientes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="88dp"
+                android:background="@null"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="5"
+                tools:listitem="@layout/card_ti_solicitud" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
