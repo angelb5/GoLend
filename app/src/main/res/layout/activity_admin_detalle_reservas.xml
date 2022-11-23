@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminDetalleReservasActivity">
+
+    <LinearLayout
+        android:id="@+id/llAdminDetalleReservasTitle"
+        style="@style/LayoutTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibAdminDetalleReservasBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?actionBarItemBackground"
+            android:clickable="true"
+            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
+            android:src="@drawable/button_back"/>
+
+        <TextView
+            style="@style/GreenSemiBoldSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="Detalle de reserva" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llAdminDetalleReservasTitle">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasTxT"
+                style="@style/WhiteMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="Enviada hoy" />
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasEstado"
+                style="@style/WhiteMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp"
+                android:text="Enviada hoy" />
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasMotivoTIttle"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:text="Motivo" />
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasMotivo"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasCursoTittle"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Curso" />
+
+            <TextView
+                style="@style/InputGrey"
+                android:id="@+id/tvAdminDetalleReservasCurso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasTiempoTittle"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Tiempo de reserva" />
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasTiempo"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasProgramasTittle"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Programas" />
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasProgramas"
+                style="@style/InputGrey"
+                android:hint="Programas que requiere en su equipo"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasDNItittle"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="DNI" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:focusable="true"
+                android:id="@+id/tvAdminDetalleReservaDNI"
+                android:layout_width="match_parent"
+                tools:itemCount="0"
+                android:layout_weight="0.9"
+                tools:listitem="@layout/item_dni_upload"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="16dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/glAdminDetalleReservaDNI"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:columnCount="2"
+                android:useDefaultMargins="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:backgroundTint="@color/unfocused">
+
+                <ImageView
+                    android:id="@+id/ivAdminDetalleReservasDNI"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_photo" />
+            </androidx.cardview.widget.CardView>
+            <ProgressBar
+                android:id="@+id/pbAdminDetalleReservasDNIPhoto"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:max="100"
+                android:progress="0"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasOtrosTittle"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Otros" />
+
+            <EditText
+                android:id="@+id/etAdminDetalleReservasOtros"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Detalles adicionales para la reserva"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:id="@+id/tvAdminDetalleReservasResponseTittle"
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Respondido por" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="24dp"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/ivAdminDetalleReservaImageTI"
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/role_student"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="12dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvAdminDetalleReservaNombreTI"
+                        style="@style/GreenMedium16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Oliver Bustamente"/>
+                    <TextView
+                        android:id="@+id/tvAdminDetalleReservaFechaResponseTI"
+                        style="@style/GreySemibold12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="14 Oct 2022"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/pbAdminDetalleReservaLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
