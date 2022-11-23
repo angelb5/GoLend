@@ -16,6 +16,13 @@
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
         <activity
+            android:name=".Cliente.ClienteDetalleReservaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Cliente.ClienteDetalleDispActivity"
             android:exported="false">
             <meta-data

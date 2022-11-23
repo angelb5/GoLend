@@ -3,24 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="108dp"
+    android:layout_marginStart="15dp"
     android:layout_height="wrap_content">
 
     <ImageView
         android:layout_marginTop="4dp"
         android:id="@+id/ivImageSelectorCategory"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/laptops"/>
 
     <TextView
-        style="@style/WhiteMedium12"
+        style="@style/WhiteMedium14"
         android:id="@+id/tvImageSelectorCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="@string/category_laptop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

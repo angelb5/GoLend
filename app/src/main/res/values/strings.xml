@@ -17,6 +17,7 @@
     <string name="category_celular">Celular</string>
     <string name="category_tablet">Tablet</string>
     <string name="category_monitor">Monitor</string>
+    <string name="category_otros">Otros</string>
     <string name="reservas_curso">Reservas en curso</string>
     <string name="reservas_pasadas">Reservas pasadas</string>
     <string name="solicitudes_rechazadas">Solicitudes rechazadas</string>
