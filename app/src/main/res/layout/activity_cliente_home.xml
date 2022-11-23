@@ -16,21 +16,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu_cliente" />
 
+    <LinearLayout
+        android:id="@+id/llClienteHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvClienteHomeSaludo"
-        style="@style/WhiteBoldTitle"
+        <TextView
+            style="@style/WhiteBoldTitle"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="24dp"
+            android:lines="2"
+            android:text="Hola, Angel"
+            android:textSize="26dp" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/role_student" />
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvClienteHomeCategories"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="24dp"
-        android:textSize="26dp"
-        android:text="Buenas tardes"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvClienteHomeCategorias"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_image_selector_category" />
 
+    <ImageView
+        android:id="@+id/ivClienteDetalleReservaImageTI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home_cliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llClienteHome" />
 
     <EditText
         android:id="@+id/etClienteHomeSearch"
@@ -38,36 +76,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="24dp"
         android:drawableEnd="@drawable/ic_search"
         android:ems="10"
         android:hint="¿Qué necesitas hoy"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvClienteHomeSaludo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivClienteDetalleReservaImageTI" />
+
     <TextView
-        style="@style/WhiteSemiBoldSubtitle"
-        android:layout_marginHorizontal="24dp"
-        android:text="Explora categorías"
         android:id="@+id/tvClienteHomeCategorias"
-        android:layout_marginTop="24dp"
+        style="@style/WhiteSemiBoldSubtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Explora categorías"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etClienteHomeSearch" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvClienteHomeCategories"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_image_selector_category"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvClienteHomeCategorias" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
