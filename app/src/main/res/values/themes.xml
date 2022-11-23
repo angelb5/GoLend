@@ -61,6 +61,12 @@
         <item name="android:textColor">@color/green_main</item>
         <item name="android:textSize">20sp</item>
     </style>
+    <!-- Tamaño 14 -->
+    <style name="WhiteBold14">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
     <!-- Tamaño 16 -->
     <style name="WhiteBold16">
         <item name="android:fontFamily">@font/montserrat_bold</item>
@@ -82,6 +88,13 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="WhiteRegular13">
+    <item name="android:fontFamily">@font/montserrat_regular</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">13sp</item>
+    </style>
+
     <style name="WhiteRegular16">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textColor">@color/white</item>
@@ -108,11 +121,19 @@
         <item name="android:textColor">@color/unfocused</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <style name="GreyRegular12">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/unfocused</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="UnselectedMedium12">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textColor">@color/grey_image_unselected</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+
     <!-- Tamaño 10 -->
     <style name="UncheckedRegular10">
         <item name="android:fontFamily">@font/montserrat_regular</item>
