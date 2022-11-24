@@ -67,7 +67,7 @@
                 tools:itemCount="1"
                 tools:listitem="@layout/item_image_selector" />
             <EditText
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/etCreateDeviceOtrosCategoria"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
@@ -193,7 +193,7 @@
             </GridLayout>
 
             <ProgressBar
-                android:id="@+id/pbAdminCreateDevicePhoto"
+                android:id="@+id/pbCreateDevicePhoto"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -257,12 +257,13 @@
                 android:inputType="number" />
 
             <Button
+                android:onClick="anadirDispositivo"
                 android:id="@+id/btnCreateDeviceAnadir"
                 style="@style/BtnPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="32dp"
                 android:text="Añadir" />
         </LinearLayout>
     </ScrollView>

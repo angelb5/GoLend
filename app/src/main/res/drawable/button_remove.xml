@@ -20,7 +20,7 @@
       android:width="40dp"
       android:height="40dp">
     <shape android:shape="oval">
-      <solid android:color="@color/grey3_25"/>
+      <solid android:color="@color/blue_light"/>
     </shape>
   </item>
   <item android:bottom="2dp"

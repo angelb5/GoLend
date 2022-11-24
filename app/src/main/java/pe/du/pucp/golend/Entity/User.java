@@ -72,6 +72,7 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
+    @Exclude
     public String getUid() {
         return uid;
     }
