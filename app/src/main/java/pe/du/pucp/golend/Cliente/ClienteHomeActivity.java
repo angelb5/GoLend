@@ -26,7 +26,7 @@ import pe.du.pucp.golend.R;
 
 public class ClienteHomeActivity extends AppCompatActivity {
 
-    final List<Integer> CATEGORY_IMAGES = Arrays.asList(R.drawable.laptops, R.drawable.celulares, R.drawable.tablet, R.drawable.monitor, R.drawable.otros);
+    final List<Integer> CATEGORY_IMAGES = Arrays.asList(R.drawable.category_laptop, R.drawable.category_celular, R.drawable.category_tablet, R.drawable.category_monitor, R.drawable.category_otros);
     final List<Integer> CATEGORY_TEXTS = Arrays.asList(R.string.category_laptop, R.string.category_celular, R.string.category_tablet, R.string.category_monitor, R.string.category_otros);
     final int CATEGORY_SELECTOR_COLUMNS = CATEGORY_IMAGES.size();
     final int CATEGORY_SELECTOR_MARGIN = 16;

@@ -58,7 +58,7 @@
                     android:layout_height="108dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="4dp"
-                    android:src="@drawable/laptops"
+                    android:src="@drawable/category_laptop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

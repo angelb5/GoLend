@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    style="@style/Widget.Material3.BottomSheet"
+    android:padding="20dp"
+    android:background="@drawable/background_modal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <!-- Bottom sheet contents. -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="16dp">
+        <TextView
+            style="@style/WhiteBoldTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:text="Filtros"/>
+        <ImageButton
+            android:id="@+id/ibModalBottomSheetClose"
+            android:background="?actionBarItemBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_close"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"/>
+    </RelativeLayout>
+
+    <TextView
+        style="@style/WhiteSemiBoldSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Categorías"
+        android:layout_marginBottom="8dp"/>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgModalBottomSheet"
+        app:chipSpacingVertical="4dp"
+        app:chipSpacingHorizontal="8dp"
+        android:layout_marginBottom="16dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            android:checked="true"
+            style="@style/chipSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Todas las categorías"/>
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            style="@style/chipUnselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_laptop"
+            app:chipIcon="@drawable/category_laptop"/>
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            style="@style/chipUnselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_celular"
+            app:chipIcon="@drawable/category_celular"/>
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            style="@style/chipUnselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_tablet"
+            app:chipIcon="@drawable/category_tablet"/>
+
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            style="@style/chipUnselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_monitor"
+            app:chipIcon="@drawable/category_monitor"/>
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            style="@style/chipUnselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_otros"
+            app:chipIcon="@drawable/category_otros"/>
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        style="@style/WhiteSemiBoldSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Marcas"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spModalBottomSheetMarcas"
+        style="@style/SpinnerGrey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        style="@style/BtnPrimary"
+        android:id="@+id/btnModalBottomSheetApply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Aplicar filtros"/>
+
+</LinearLayout>

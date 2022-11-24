@@ -36,6 +36,7 @@
                 android:src="@drawable/button_back" />
 
             <EditText
+                android:id="@+id/etTiListDevicesSearch"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,6 +45,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:onClick="showFilters"
+            android:clickable="true"
             android:id="@+id/llTiListDevicesFilters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,6 +67,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvTiListDevicesFilters"
                     style="@style/WhiteSemibold12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,12 +90,56 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llTiListDevicesHead">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:visibility="visible"
+            android:id="@+id/shimmerTiListDevices"
             android:paddingHorizontal="12dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:duration="800">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/card_devices_placeholder" />
+                <include layout="@layout/card_devices_placeholder" />
+                <include layout="@layout/card_devices_placeholder" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/card_devices"
+            tools:itemCount="0"
+            android:id="@+id/rvTiListDevices"
+            android:paddingHorizontal="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/llTiListDevicesEmptyView"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:layout_marginTop="112dp"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:src="@drawable/empty_search"/>
+            <TextView
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="No encontramos resultados para tu búsqueda"
+                android:layout_marginBottom="8dp"/>
+            <TextView
+                style="@style/WhiteRegular13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prueba con otros términos de búsqueda"/>
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
