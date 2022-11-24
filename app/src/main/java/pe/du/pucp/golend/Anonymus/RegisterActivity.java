@@ -3,6 +3,7 @@ package pe.du.pucp.golend.Anonymus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -87,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //Selector de roles
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, IMAGE_SELECTOR_COLUMNS);
         ImageSelectorAdapter selectorAdapter = new ImageSelectorAdapter(this, ROLE_IMAGES, ROLE_TEXTS);
         selectorAdapter.setOnItemClickListener(new View.OnClickListener() {
             @Override
@@ -166,26 +167,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Verifica que el codigo y correo sean únicos
         mostrarCargando();
-        usersRef.whereEqualTo("codigo",codigo).count().get(AggregateSource.SERVER).addOnSuccessListener(aggregateQuerySnapshot -> {
-            if (aggregateQuerySnapshot.getCount()>0){
-                ocultarCargando();
-                etCodigo.setError("Ya existe una cuenta con este código");
-                etCodigo.requestFocus();
-                return;
-            }
-            firebaseAuth.fetchSignInMethodsForEmail(correo).addOnCompleteListener(signInMethodQueryResult -> {
-                if(!Objects.requireNonNull(signInMethodQueryResult.getResult().getSignInMethods()).isEmpty()){
-                    ocultarCargando();
-                    etCorreo.setError("Ya existe una cuenta con este correo");
-                    etCorreo.requestFocus();
-                    return;
-                };
-                User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
-                crearUsuario(user, contrasena);
-            });
-        }).addOnFailureListener(e -> ocultarCargando());
+        //TODO: consultar microservicio para ver que no se repita el código
 
-
+        //etCodigo.setError("Ya existe una cuenta con este código");
+        //etCodigo.requestFocus();
+        //return;
+        User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
+        crearUsuario(user, contrasena);
     }
 
     public void crearUsuario(User user, String contrasena){
@@ -194,7 +182,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     ocultarCargando();
                     Log.d("msg",e.getMessage());
-                    Toast.makeText(RegisterActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
+                    etCorreo.setError("Verifica que el correo no esté en uso");
+                    etCorreo.requestFocus();
         });
     };
 
