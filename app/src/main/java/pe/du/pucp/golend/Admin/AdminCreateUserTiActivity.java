@@ -129,16 +129,8 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
                 etCodigo.requestFocus();
                 return;
             }
-            firebaseAuth2.fetchSignInMethodsForEmail(correo).addOnCompleteListener(signInMethodQueryResult -> {
-                if(!Objects.requireNonNull(signInMethodQueryResult.getResult().getSignInMethods()).isEmpty()){
-                    ocultarCargando();
-                    etCorreo.setError("Ya existe una cuenta con este correo");
-                    etCorreo.requestFocus();
-                    return;
-                };
-                User user = new User(nombre,correo,codigo,rol,avatarUrl,"TI");
-                crearUsuario(user, contrasena);
-            });
+            User user = new User(nombre,correo,codigo,rol,avatarUrl,"TI");
+            crearUsuario(user, contrasena);
         }).addOnFailureListener(e -> ocultarCargando());
     }
 
@@ -148,7 +140,8 @@ public class AdminCreateUserTiActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     ocultarCargando();
                     Log.d("msg",e.getMessage());
-                    Toast.makeText(AdminCreateUserTiActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
+                    etCorreo.setError("Verifica que el correo no esté en uso");
+                    etCorreo.requestFocus();
                 });
     };
 
