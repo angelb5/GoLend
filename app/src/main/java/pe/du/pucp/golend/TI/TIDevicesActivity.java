@@ -62,6 +62,10 @@ public class TIDevicesActivity extends AppCompatActivity {
         finish();
     }
 
+    public void backButton(View view){
+        onBackPressed();
+    }
+
     public void goToCreateDevice(View view){
         startActivity(new Intent(TIDevicesActivity.this,TICreateDeviceActivity.class));
     }

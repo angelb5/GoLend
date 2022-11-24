@@ -15,6 +15,8 @@ public class Device {
     private String accesorios;
     private List<String> fotosUrl;
     private int stock;
+    private int disponibles;
+    private int enPrestamo;
     private List<String> searchKeywords;
     private String searchCategoria;
     private String searchMarca; //estará en lowercase
@@ -33,6 +35,8 @@ public class Device {
         this.searchKeywords = searchKeywords;
         this.searchCategoria = searchCategoria;
         searchMarca = marca.toLowerCase(Locale.ROOT);
+        disponibles = stock;
+        enPrestamo = 0;
     }
 
     public String getCategoria() {
@@ -99,6 +103,22 @@ public class Device {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(int disponibles) {
+        this.disponibles = disponibles;
+    }
+
+    public int getEnPrestamo() {
+        return enPrestamo;
+    }
+
+    public void setEnPrestamo(int enPrestamo) {
+        this.enPrestamo = enPrestamo;
     }
 
     public List<String> getSearchKeywords() {
