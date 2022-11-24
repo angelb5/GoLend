@@ -37,7 +37,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".TI.TISolicitudesPendientesActivity"
+            android:name=".TI.TIListSolicitudesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

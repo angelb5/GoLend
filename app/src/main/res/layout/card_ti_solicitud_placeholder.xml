@@ -15,7 +15,7 @@
         android:layout_gravity="center_vertical"
         android:background="@color/grey3_25"
         android:orientation="horizontal"
-        android:paddingHorizontal="30dp"
+        android:paddingHorizontal="16dp"
         android:paddingVertical="16dp">
 
         <LinearLayout

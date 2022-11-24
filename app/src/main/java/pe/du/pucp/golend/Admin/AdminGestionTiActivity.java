@@ -2,23 +2,18 @@ package pe.du.pucp.golend.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.paging.CombinedLoadStates;
-import androidx.paging.LoadState;
 import androidx.paging.PagingConfig;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.SnapshotParser;
-import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -28,15 +23,9 @@ import com.google.firebase.firestore.Query;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import pe.du.pucp.golend.Adapters.ImageSelectorAdapter;
 import pe.du.pucp.golend.Adapters.UsersTIAdapter;
-import pe.du.pucp.golend.Anonymus.LoginActivity;
-import pe.du.pucp.golend.Anonymus.RegisterActivity;
-import pe.du.pucp.golend.Decorations.ImageSelectorMargin;
 import pe.du.pucp.golend.Entity.User;
-import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
-import pe.du.pucp.golend.TI.TIHomeActivity;
 
 public class AdminGestionTiActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -94,7 +83,6 @@ public class AdminGestionTiActivity extends AppCompatActivity {
 
     public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuAdminGestonTiAct);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuAdminGestionTi);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

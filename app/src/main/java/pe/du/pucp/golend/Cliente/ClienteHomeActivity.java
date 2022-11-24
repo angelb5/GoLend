@@ -21,7 +21,6 @@ import java.util.List;
 
 import pe.du.pucp.golend.Adapters.ImageSelectorCategoryAdapter;
 import pe.du.pucp.golend.Decorations.ImageSelectorCategoryMargin;
-import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
 
 public class ClienteHomeActivity extends AppCompatActivity {
@@ -68,7 +67,6 @@ public class ClienteHomeActivity extends AppCompatActivity {
     public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuClienteHomeAct);
         bottomNavigationView.clearAnimation();
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuClienteHome);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

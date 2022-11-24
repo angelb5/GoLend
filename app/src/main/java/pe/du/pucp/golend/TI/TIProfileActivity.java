@@ -16,7 +16,6 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import pe.du.pucp.golend.Anonymus.LoginActivity;
-import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
 
 public class TIProfileActivity extends AppCompatActivity {

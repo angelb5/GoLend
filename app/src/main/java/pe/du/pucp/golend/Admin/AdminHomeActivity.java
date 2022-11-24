@@ -10,11 +10,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import pe.du.pucp.golend.Helpers.BottomNavigationViewHelper;
 import pe.du.pucp.golend.R;
-import pe.du.pucp.golend.TI.TIDevicesActivity;
-import pe.du.pucp.golend.TI.TIProfileActivity;
-import pe.du.pucp.golend.TI.TISolicitudActivity;
 
 public class AdminHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -28,7 +24,6 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     public void setBottomNavigationView(){
         bottomNavigationView = findViewById(R.id.bottomNavMenuAdminHomeAct);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.bottomNavMenuAdminHome);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
