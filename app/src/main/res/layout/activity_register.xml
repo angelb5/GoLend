@@ -73,7 +73,7 @@
             style="@style/InputGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:drawableStart="@drawable/inputicon_name"
             android:hint="Nombre"
             android:inputType="textPersonName"
