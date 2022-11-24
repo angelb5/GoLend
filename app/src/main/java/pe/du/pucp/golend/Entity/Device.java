@@ -2,10 +2,11 @@ package pe.du.pucp.golend.Entity;
 
 import com.google.firebase.firestore.Exclude;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
-public class Device {
+public class Device implements Serializable {
     @Exclude
     private String key;
     private String modelo;

@@ -1,5 +1,6 @@
 package pe.du.pucp.golend.Adapters;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,7 +87,9 @@ public class DeviceCardAdapter extends FirestorePagingAdapter<Device, DeviceCard
             tvMarca = itemView.findViewById(R.id.tvCardDevicesMarca);
             tvModelo = itemView.findViewById(R.id.tvCardDevicesModelo);
             itemView.setOnClickListener(view -> {
-                Log.d("msg", "hola desde "+device.getModelo());
+                Intent deviceIntent = new Intent(itemView.getContext(), nextActivity);
+                deviceIntent.putExtra("dispositivo", device);
+                itemView.getContext().startActivity(deviceIntent);
             });
         }
     }

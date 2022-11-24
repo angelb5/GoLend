@@ -21,46 +21,47 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvTIDetalleDisp">
 
         <TextView
-            android:id="@+id/tvTIDispMarca"
-            style="@style/WhiteSemiBoldSubtitle"
+            android:id="@+id/tvTiDispMarca"
+            style="@style/GreySemiBoldSubtitle"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MSI"
-            />
+            android:text="MSI" />
 
         <TextView
-            android:id="@+id/tvTIDispModelo"
-            style="@style/WhiteSemiBoldTitle"
+            android:textSize="32sp"
+            android:id="@+id/tvTiDispModelo"
+            style="@style/WhiteBoldTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Katana GF76"
-             />
+             android:layout_marginBottom="4dp"/>
 
         <LinearLayout
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/ivTiDispCategoria"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/ic_laptop_green" />
 
             <TextView
-                android:id="@+id/tvTIDispTipo"
+                android:id="@+id/tvTiDispCategoria"
                 style="@style/GreenMedium16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="4dp"
                 android:text="Laptop" />
 
         </LinearLayout>
@@ -68,12 +69,13 @@
         <TextView
             style="@style/WhiteRegular16"
             android:id="@+id/tvTIDispDescripcion"
-            android:layout_width="212dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginVertical="16dp"
             android:text="Laptop Gamer MSI Katana GF76-11UD-041SP 17.3 Intel Core i7-11800H 512GB SSD 16GB RAM." />
 
         <LinearLayout
+            android:layout_marginBottom="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -127,7 +129,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/unfocused">
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/isTIDisp"
@@ -135,11 +138,13 @@
                 android:layout_height="300dp"
                 android:background="@drawable/gradient_background"
                 app:iss_auto_cycle="true"
-                app:iss_delay="1000"
-                app:iss_period="1000"
+                app:iss_delay="2000"
+                app:iss_period="2000"
+                app:iss_placeholder="@drawable/image_device_placeholder"
                 app:iss_title_background="@string/app_name">
 
                 <ImageButton
+                    android:onClick="backButton"
                     android:id="@+id/ibTIDetallesDispBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,7 +152,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="11dp"
-                    android:background="@null"
+                    android:background="?actionBarItemBackground"
                     android:scaleType="center"
                     android:src="@drawable/button_back_alt"
                     app:layout_constraintStart_toStartOf="parent"

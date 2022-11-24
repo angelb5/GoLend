@@ -1,5 +1,9 @@
 package pe.du.pucp.golend.TI;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.paging.CombinedLoadStates;
@@ -254,13 +258,8 @@ public class TIDevicesActivity extends AppCompatActivity {
     }
 
     public void goToCreateDevice(View view){
-        startActivity(new Intent(TIDevicesActivity.this,TICreateDeviceActivity.class));
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        if(deviceCardAdapter!=null) deviceCardAdapter.refresh();
+        Intent createIntent = new Intent(TIDevicesActivity.this,TICreateDeviceActivity.class);
+        createActivityResultLauncher.launch(createIntent);
     }
 
     @Override
@@ -294,5 +293,12 @@ public class TIDevicesActivity extends AppCompatActivity {
         }
     };
 
-
+    ActivityResultLauncher<Intent> createActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(deviceCardAdapter!=null) deviceCardAdapter.refresh(); //solo se refrescara el listado si viene de crear un dispositivo
+                }
+            });
 }

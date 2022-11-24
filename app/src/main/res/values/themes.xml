@@ -30,6 +30,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">24sp</item>
     </style>
+    <style name="GreySemiBoldTitle">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textColor">@color/unfocused</item>
+        <item name="android:textSize">24sp</item>
+    </style>
     <style name="WhiteSemiBoldTitle">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
         <item name="android:textColor">@color/white</item>
@@ -54,6 +59,11 @@
     <style name="WhiteMediumSubtitle">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="GreySemiBoldSubtitle">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textColor">@color/unfocused</item>
         <item name="android:textSize">20sp</item>
     </style>
     <style name="GreenSemiBoldSubtitle">
