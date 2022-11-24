@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TI.TIUpdateDeviceActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+
+            <LinearLayout
+                android:id="@+id/llUpdateDeviceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/ibUpdateDeviceBack"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?actionBarItemBackground"
+                    android:onClick="backButton"
+                    android:scaleType="center"
+                    android:src="@drawable/button_back" />
+
+                <TextView
+                    style="@style/GreenBoldTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Actualizar Dispositivo" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/rvUpdateDeviceCategorySelector"
+                    android:layout_width="108dp"
+                    android:layout_height="108dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/laptops"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    style="@style/WhiteMedium14"
+                    android:id="@+id/tvUpdateDeviceCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_laptop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivImageSelectorCategory" />
+
+            </LinearLayout>
+
+            <EditText
+                android:visibility="visible"
+                android:id="@+id/etUpdateDeviceOtrosCategoria"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Marca" />
+
+            <EditText
+                android:id="@+id/etUpdateDeviceMarca"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Modelo" />
+
+            <EditText
+                android:id="@+id/etUpdateDeviceModelo"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Descripción" />
+            <EditText
+                android:id="@+id/etUpdateDeviceDescripcion"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Fotos" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUpdateDeviceFotos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="0.9"
+                android:focusable="true"
+                tools:itemCount="0"
+                tools:listitem="@layout/item_image_upload" />
+
+            <GridLayout
+                android:id="@+id/glUpdateDevice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:useDefaultMargins="true">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_height="120dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/unfocused"
+                    android:layout_columnWeight="1"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="16dp"
+                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/grey3_25"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_image_placeholder_48" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="16dp"
+                    android:visibility="invisible"
+                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/grey3_25"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_image_placeholder_48" />
+                </com.google.android.material.card.MaterialCardView>
+            </GridLayout>
+
+            <ProgressBar
+                android:id="@+id/pbAdminUpdateDevicePhoto"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:max="100"
+                android:progress="0"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="end">
+
+                <ImageButton
+                    android:id="@+id/ibUpdateDevicePhotoAttach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/button_attachment" />
+
+                <ImageButton
+                    android:id="@+id/ibUpdateDevicePhotoCam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/button_camera" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Accesorios" />
+            <EditText
+                android:id="@+id/etUpdateDeviceAccesorios"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                style="@style/WhiteSemiBoldSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Stock" />
+            <EditText
+                android:id="@+id/etUpdateDeviceStock"
+                style="@style/InputGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnUpdateDeviceAnadir"
+                style="@style/BtnPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:text="Acttualizar" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/pbUpdateDeviceLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
