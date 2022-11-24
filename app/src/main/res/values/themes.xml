@@ -120,6 +120,12 @@
         <item name="android:textColor">@color/unfocused</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="GreyRegular14">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/unfocused</item>
+        <item name="android:textSize">14sp</item>
+    </style>
     <!-- Tamaño 12-->
     <style name="WhiteSemibold12">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
@@ -266,42 +272,47 @@
 
 
 <!--Estilos de AlertDialog-->
-    <style name="AlertDialogTheme.Center" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="colorSurface">@color/blue_dark</item>
-        <item name="materialAlertDialogTitlePanelStyle">@style/TitlePaneStyleCenter</item>
-        <item name="materialAlertDialogTitleTextStyle">@style/TitleTextStyleCenter</item>
-        <item name="materialAlertDialogTitleIconStyle">@style/TitleIconStyleCenter</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/BodyTextStyleCenter</item>
+    <style name="AlertDialogTheme.Center" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="colorSurface">@color/blue_light</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Title.Body</item>
         <item name="buttonBarStyle">@style/ButtonBarStyle</item>
         <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
         <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
     </style>
-    <style name="TitlePaneStyleCenter" parent="MaterialAlertDialog.MaterialComponents.Title.Panel.CenterStacked">
-        <item name="android:background">@color/blue_dark</item>
-        <item name="android:padding">12dp</item>
-    </style>
-    <style name="TitleIconStyleCenter" parent="MaterialAlertDialog.MaterialComponents.Title.Icon.CenterStacked">
-        <item name="android:tint">@color/grey_image_unselected</item>
-        <item name="android:layout_marginBottom">20dp</item>
-    </style>
-    <style name="TitleTextStyleCenter" parent="MaterialAlertDialog.MaterialComponents.Title.Text.CenterStacked">
-        <item name="android:textColor">@color/grey_image_unselected</item>
-        <item name="android:fontFamily">@font/montserrat_semibold</item>
-        <item name="android:textSize">20sp</item>
+
+    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.Material3">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="shapeAppearanceOverlay">@null</item>
     </style>
 
-    <style name="BodyTextStyleCenter" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text.CenterStacked">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textAppearance">?attr/textAppearanceHeadlineSmall</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Body" parent="MaterialAlertDialog.Material3.Body.Text.CenterStacked">
+        <item name="android:textColor">@color/unfocused</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">28dp</item>
     </style>
 
     <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
         <item name="android:textColor">@color/green_main</item>
     </style>
 
     <style name="ButtonBarStyle">
-        <item name="android:background">@color/blue_dark</item>
+        <item name="android:background">@color/blue_light</item>
     </style>
+
 
     <!-- Chips (y Dale) -->
     <style name="chipTextUnselected" parent="TextAppearance.MaterialComponents.Chip">
