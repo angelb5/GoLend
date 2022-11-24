@@ -16,6 +16,14 @@
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
         <activity
+            android:name=".TI.TIDetalleDispActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+        <activity
             android:name=".TI.TICreateDeviceActivity"
             android:exported="false">
             <meta-data

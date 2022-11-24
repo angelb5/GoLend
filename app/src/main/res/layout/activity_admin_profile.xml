@@ -44,12 +44,14 @@
         style="@style/InputGrey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:drawableStart="@drawable/inputicon_name"
         android:hint="Nombre"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="364dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigo" />
 
     <EditText
         android:id="@+id/etUpdateCorreo"
@@ -60,6 +62,7 @@
         android:drawableStart="@drawable/inputicon_mail"
         android:hint="Correo"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUpdateNombre" />
@@ -84,7 +87,7 @@
         style="@style/BtnPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:onClick="actualizarPerfilAdmin"
         android:text="Actualizar"
         android:textSize="16sp"
@@ -98,11 +101,10 @@
         android:id="@+id/imageView"
         android:layout_width="211dp"
         android:layout_height="161dp"
-        app:layout_constraintBottom_toTopOf="@+id/etUpdateNombre"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvtxtito"
-        app:layout_constraintVertical_bias="0.343"
         tools:srcCompat="@drawable/avatar_placeholder" />
 
     <TextView
@@ -111,9 +113,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/etUpdateNombre"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.193"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="174dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@
             android:src="@drawable/button_back"/>
 
         <TextView
+            android:id="@+id/tvClienteReservasTittle"
             style="@style/GreenSemiBoldSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,13 +35,28 @@
             android:text="Reservas en curso" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvClienteReservasTxt"
+        style="@style/WhiteMedium16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/reservas_curso_txt"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llClienteReservasTitle" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvClienteListReservas"
-        tools:listitem="@layout/card_cliente_reservas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llClienteReservasTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvClienteReservasTxt"
+        tools:listitem="@layout/card_cliente_reservas_placeholder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

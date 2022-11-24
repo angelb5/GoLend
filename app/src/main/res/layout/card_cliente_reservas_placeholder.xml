@@ -20,34 +20,34 @@
             android:paddingHorizontal="24dp"
             android:background="@color/grey3_25"
             android:layout_gravity="center_vertical">
+
             <ImageView
-                android:id="@+id/ivClienteReservasCardImage"
-                android:layout_width="96dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/role_student"
+                android:layout_width="103dp"
+                android:layout_height="67dp"
+                android:layout_marginEnd="24dp"
                 android:scaleType="fitCenter"
-                android:layout_marginEnd="24dp"/>
+                android:src="@drawable/avatar_placeholder" />
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/tvClienteReservasCardModelo"
+
+                <View
                     style="@style/WhiteSemiBoldSubtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:textAllCaps="true"
-                    android:text="MSI Katana GF76"/>
-                <TextView
-                    android:id="@+id/tvClienteReservasCardFecha"
-                    style="@style/WhiteMedium14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
+                    android:layout_width="189dp"
+                    android:layout_height="20dp"
                     android:layout_marginEnd="16dp"
-                    android:lines="2"
-                    android:text="Finaliza el 31 Octubre de 2022"/>
+                    android:layout_marginBottom="4dp"
+                    android:background="@color/unfocused" />
+
+                <View
+                    style="@style/WhiteMedium14"
+                    android:layout_width="154dp"
+                    android:layout_height="14dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@color/unfocused"
+                    android:textAllCaps="true" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -60,9 +60,9 @@
             android:layout_gravity="center_vertical">
             <Button
                 android:textAlignment="center"
-                android:id="@+id/btnClienteReservasCardDetalle"
+                android:id="@+id/btnUserTiActualizar"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:textColor="@color/green_main"
+                android:textColor="@color/unfocused"
                 android:padding="2dp"
                 android:layout_marginVertical="0dp"
                 android:fontFamily="@font/montserrat_semibold"
