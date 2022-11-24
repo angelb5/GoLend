@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TI.TIDetalleDispActivity">
+
+    <Button
+        android:id="@+id/btnActualizar"
+        style="@style/BtnPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="35dp"
+        android:text="Actualizar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvTIDetalleDisp">
+
+        <TextView
+            android:id="@+id/tvTIDispMarca"
+            style="@style/WhiteSemiBoldSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MSI"
+            />
+
+        <TextView
+            android:id="@+id/tvTIDispModelo"
+            style="@style/WhiteSemiBoldTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Katana GF76"
+             />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_laptop_green" />
+
+            <TextView
+                android:id="@+id/tvTIDispTipo"
+                style="@style/GreenMedium16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Laptop" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/WhiteRegular16"
+            android:id="@+id/tvTIDispDescripcion"
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Laptop Gamer MSI Katana GF76-11UD-041SP 17.3 Intel Core i7-11800H 512GB SSD 16GB RAM." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvAccesoriosText"
+                style="@style/WhiteSemibold16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incluye:" />
+
+            <TextView
+                style="@style/WhiteRegular16"
+                android:id="@+id/tvTIDispAccesorios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Cargador" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvDisponibilidadText"
+                style="@style/WhiteSemibold16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disponibles:" />
+
+            <TextView
+                android:id="@+id/tvTIDispDisponibilidad"
+                style="@style/WhiteRegular16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvTIDetalleDisp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/isTIDisp"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:background="@drawable/gradient_background"
+                app:iss_auto_cycle="true"
+                app:iss_delay="1000"
+                app:iss_period="1000"
+                app:iss_title_background="@string/app_name">
+
+                <ImageButton
+                    android:id="@+id/ibTIDetallesDispBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@null"
+                    android:scaleType="center"
+                    android:src="@drawable/button_back_alt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.denzcoskun.imageslider.ImageSlider>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:onClick="showAlert"
+        android:id="@+id/btnEliminar"
+        style="@style/BtnSecondary"
+        android:layout_width="123dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="35dp"
+        android:drawableBottom="@drawable/ic_trash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
