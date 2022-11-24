@@ -1,6 +1,7 @@
 package pe.du.pucp.golend.Modals;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import pe.du.pucp.golend.R;
@@ -33,9 +32,9 @@ public class ModalBottomSheetFilter extends BottomSheetDialogFragment {
 
         View view = inflater.inflate(R.layout.modal_bottom_sheet_filter, container, false);
 
-        ArrayAdapter<String> spAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, marcasList);
+        ArrayAdapter<String> spAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, marcasList);
         spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+        Spinner spMarcas = view.findViewById(R.id.spModalBottomSheetMarcas);
         ChipGroup chipGroup = view.findViewById(R.id.cgModalBottomSheet);
         chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
             @Override
@@ -61,12 +60,15 @@ public class ModalBottomSheetFilter extends BottomSheetDialogFragment {
             dismiss();
         });
         view.findViewById(R.id.btnModalBottomSheetApply).setOnClickListener(view1 -> {
+            String marcasFilter = spMarcas.getSelectedItem().toString().equals("Todas las marcas")?"":spMarcas.getSelectedItem().toString();
+
             if (getActivity() instanceof TIDevicesActivity){
-                ((TIDevicesActivity) getActivity()).setCategoryFilter(categoryFilter);
+                Log.d("msg", marcasFilter +" modal");
+                ((TIDevicesActivity) getActivity()).setFilters(categoryFilter, marcasFilter);
             }
             dismiss();
         });
-        ((Spinner) view.findViewById(R.id.spModalBottomSheetMarcas)).setAdapter(spAdapter);
+        spMarcas.setAdapter(spAdapter);
         return view;
     }
 

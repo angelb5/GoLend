@@ -39,8 +39,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -182,6 +182,10 @@ public class TIDevicesActivity extends AppCompatActivity {
             devicesQuery = devicesQuery.whereEqualTo("searchCategoria",categoryFilter);
             categoria = categoryFilter;
         }
+        if(!marcasFilter.isEmpty()){
+            devicesQuery = devicesQuery.whereEqualTo("searchMarca",marcasFilter.toLowerCase(Locale.ROOT));
+            marca = marcasFilter;
+        }
         if(!searchText.isEmpty()){
             devicesQuery = devicesQuery.whereArrayContains("searchKeywords", searchText);
         }
@@ -199,9 +203,11 @@ public class TIDevicesActivity extends AppCompatActivity {
         modalBottomSheet.show(getSupportFragmentManager(), modalBottomSheet.getTag());
     }
 
-    public void setCategoryFilter(String categoryFilter) {
-        if(!this.categoryFilter.equals(categoryFilter)){
+    public void setFilters(String categoryFilter, String marcasFilter) {
+        Log.d("msg", marcasFilter);
+        if(!this.categoryFilter.equals(categoryFilter) || !this.marcasFilter.equals(marcasFilter)){
             this.categoryFilter = categoryFilter;
+            this.marcasFilter = marcasFilter;
             ejecutarQuery();
         }
     }
