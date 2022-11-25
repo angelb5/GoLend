@@ -1,103 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Cliente.ClienteHomeActivity">
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        style="@style/BottomNav"
-        android:id="@+id/bottomNavMenuClienteHomeAct"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu_cliente" />
-
-    <LinearLayout
-        android:id="@+id/llClienteHome"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:scaleType="fitStart"
+        android:src="@drawable/circle_gradient_bg"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            style="@style/BottomNav"
+            android:id="@+id/bottomNavMenuClienteHomeAct"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu_cliente" />
 
-        <TextView
-            android:id="@+id/tvClienteHomeSaludo"
-            style="@style/WhiteBoldTitle"
-            android:layout_width="220dp"
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/llClienteHome"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:orientation="horizontal"
             android:layout_marginTop="48dp"
-            android:layout_marginEnd="24dp"
-            android:lines="2"
-            android:text="Hola, Angel"
-            android:textSize="26dp" />
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="12dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvClienteHomeSaludo"
+                    style="@style/WhiteSemiBoldTitle"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Buenos días,"/>
+                <TextView
+                    android:id="@+id/tvClienteHomeNombre"
+                    style="@style/GreenSemiBoldSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Elianne Ticse"
+                    android:textSize="24sp"/>
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/ivCLienteHomePfp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/avatar_placeholder" />
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvClienteHomeCategories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvClienteHomeCategorias"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_image_selector_category" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="12dp"
+            android:id="@+id/ivClienteHome"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="4dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/role_student" />
-    </LinearLayout>
+            android:src="@drawable/cliente_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llClienteHome" />
+
+        <EditText
+            android:id="@+id/etClienteHomeSearch"
+            style="@style/InputGrey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/inputicon_search"
+            android:ems="10"
+            android:hint="¿Qué necesitas hoy?"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivClienteHome" />
+
+        <TextView
+            android:id="@+id/tvClienteHomeCategorias"
+            style="@style/WhiteSemiBoldSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Explora categorías"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etClienteHomeSearch" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvClienteHomeCategories"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvClienteHomeCategorias"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_image_selector_category" />
-
-    <ImageView
-        android:id="@+id/ivClienteDetalleReservaImageTI"
-        android:layout_width="346dp"
-        android:layout_height="218dp"
-        android:layout_marginTop="4dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/home_cliente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llClienteHome" />
-
-    <EditText
-        android:id="@+id/etClienteHomeSearch"
-        style="@style/InputGrey"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
-        android:drawableEnd="@drawable/inputicon_search"
-        android:ems="10"
-        android:hint="¿Qué necesitas hoy"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivClienteDetalleReservaImageTI" />
-
-    <TextView
-        android:id="@+id/tvClienteHomeCategorias"
-        style="@style/WhiteSemiBoldSubtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Explora categorías"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etClienteHomeSearch" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

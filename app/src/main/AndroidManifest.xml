@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="pe.du.pucp.golend">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.screen.portrait" />
 
     <application
@@ -15,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
+        <activity
+            android:name=".Cliente.ClienteListDevicesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".TI.TIUpdateDeviceActivity"
             android:exported="false">
@@ -102,6 +111,7 @@
         <activity
             android:name=".Cliente.ClienteHomeActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="userPortrait" />
         <activity
             android:name=".TI.TISolicitudActivity"
@@ -109,9 +119,9 @@
             android:screenOrientation="userPortrait" />
         <activity
             android:name=".TI.TIDevicesActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            android:screenOrientation="userPortrait" />
+            android:screenOrientation="userPortrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".TI.TIProfileActivity"
             android:exported="false"

@@ -18,6 +18,7 @@ import com.google.android.material.chip.ChipGroup;
 import java.util.Arrays;
 import java.util.List;
 
+import pe.du.pucp.golend.Cliente.ClienteListDevicesActivity;
 import pe.du.pucp.golend.R;
 import pe.du.pucp.golend.TI.TIDevicesActivity;
 
@@ -36,6 +37,7 @@ public class ModalBottomSheetFilter extends BottomSheetDialogFragment {
         spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spMarcas = view.findViewById(R.id.spModalBottomSheetMarcas);
         ChipGroup chipGroup = view.findViewById(R.id.cgModalBottomSheet);
+
         chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
             @Override
             public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
@@ -56,6 +58,14 @@ public class ModalBottomSheetFilter extends BottomSheetDialogFragment {
                 }
             }
         });
+
+        if(!categoryFilter.isEmpty()){
+            for (int i = 0; i<chipGroup.getChildCount(); i++){
+                Chip c = (Chip) chipGroup.getChildAt(i);
+                c.setChecked(c.getText().equals(categoryFilter));
+            }
+        }
+
         view.findViewById(R.id.ibModalBottomSheetClose).setOnClickListener(view1 -> {
             dismiss();
         });
@@ -63,13 +73,18 @@ public class ModalBottomSheetFilter extends BottomSheetDialogFragment {
             String marcasFilter = spMarcas.getSelectedItem().toString().equals("Todas las marcas")?"":spMarcas.getSelectedItem().toString();
 
             if (getActivity() instanceof TIDevicesActivity){
-                Log.d("msg", marcasFilter +" modal");
                 ((TIDevicesActivity) getActivity()).setFilters(categoryFilter, marcasFilter);
+            }else if(getActivity() instanceof ClienteListDevicesActivity){
+                ((ClienteListDevicesActivity) getActivity()).setFilters(categoryFilter, marcasFilter);
             }
             dismiss();
         });
         spMarcas.setAdapter(spAdapter);
         return view;
+    }
+
+    public void setCategoryFilter(String categoryFilter) {
+        this.categoryFilter = categoryFilter;
     }
 
     public void setMarcasList(List<String> marcasList) {
