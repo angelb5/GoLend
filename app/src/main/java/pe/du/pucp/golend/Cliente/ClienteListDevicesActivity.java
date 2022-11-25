@@ -136,7 +136,7 @@ public class ClienteListDevicesActivity extends AppCompatActivity {
                 .setLifecycleOwner(this)
                 .setQuery(devicesQuery, config, deviceSnapshotParser)
                 .build();
-        deviceCardAdapter = new DeviceCardAdapter(options, TIDetalleDispActivity.class);
+        deviceCardAdapter = new DeviceCardAdapter(options, ClienteDetalleDispActivity.class);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
