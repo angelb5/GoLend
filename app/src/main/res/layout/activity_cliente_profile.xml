@@ -65,6 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUpdateNombre" />
 
+
     <Button
         android:id="@+id/btnActualizar"
         style="@style/BtnPrimary"
@@ -93,28 +94,51 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnActualizar"
-        app:layout_constraintVertical_bias="0.387"
+        app:layout_constraintVertical_bias="0.329"
         app:layout_goneMarginBottom="24dp" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="211dp"
-        android:layout_height="161dp"
-        android:layout_marginTop="32dp"
+    <RelativeLayout
+        android:id="@+id/rlFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvtxtito"
-        tools:srcCompat="@drawable/avatar_placeholder" />
+        app:layout_constraintTop_toBottomOf="@+id/tvtxtito">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="211dp"
+            android:layout_height="161dp"
+            android:layout_marginStart="92dp"
+
+            android:layout_marginTop="6dp"
+            tools:srcCompat="@drawable/avatar_placeholder" />
+
+        <ImageView
+            android:id="@+id/btnEditFoto"
+            android:layout_width="54dp"
+            android:layout_height="46dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="120dp"
+            android:layout_marginRight="122dp"
+            android:src="@drawable/button_edit_profile" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tvcodigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="174dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="174dp" />
+        app:layout_constraintTop_toBottomOf="@+id/rlFoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
