@@ -44,13 +44,13 @@
         style="@style/InputGrey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="32dp"
         android:drawableStart="@drawable/inputicon_name"
         android:hint="Nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvtxtito" />
+        app:layout_constraintTop_toBottomOf="@+id/tvcodigo" />
 
     <EditText
         android:id="@+id/etUpdateCorreo"
@@ -93,17 +93,28 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnActualizar"
-        app:layout_constraintVertical_bias="0.236"
+        app:layout_constraintVertical_bias="0.387"
         app:layout_goneMarginBottom="24dp" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="211dp"
         android:layout_height="161dp"
-        app:layout_constraintBottom_toTopOf="@+id/etUpdateNombre"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvtxtito"
         tools:srcCompat="@drawable/avatar_placeholder" />
+
+    <TextView
+        android:id="@+id/tvcodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="174dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

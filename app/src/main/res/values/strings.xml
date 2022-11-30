@@ -9,7 +9,7 @@
     <string name="solicitudes_pendientes_txt">Encuentra aquí tus solicitudes pendientes de aprobación</string>
     <string name="solicitudes_rechazadas_txt">Encuentra aquí tus solicitudes que han sido rechazadas</string>
     <string name="onboarding_start">Comenzar</string>
-
+    <string name="preferences_key">Settings</string>
     <string name="role_student">Estudiante</string>
     <string name="role_administrator">Administrativ@</string>
     <string name="role_teacher">Docente</string>

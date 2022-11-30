@@ -2,7 +2,10 @@ package pe.du.pucp.golend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -16,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.util.Objects;
 
@@ -23,11 +27,13 @@ import pe.du.pucp.golend.Admin.AdminHomeActivity;
 import pe.du.pucp.golend.Anonymus.LoginActivity;
 import pe.du.pucp.golend.Anonymus.OnboardingActivity;
 import pe.du.pucp.golend.Cliente.ClienteHomeActivity;
+import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.TI.TIHomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     CollectionReference usersRef;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void accesoEnBaseARol(FirebaseUser firebaseUser){
+        sharedPreferences = getSharedPreferences(getString(R.string.preferences_key), Context.MODE_PRIVATE);
         usersRef.document(firebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -63,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
                 Intent intentPermisos;
+                Gson gson = new Gson();
+                User user = documentSnapshot.toObject(User.class);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("user", gson.toJson(user));
+                editor.apply();
                 switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
                     case "Cliente":
                         Toast.makeText(MainActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();

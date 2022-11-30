@@ -3,19 +3,27 @@ package pe.du.pucp.golend.Cliente;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
 
 import pe.du.pucp.golend.Anonymus.LoginActivity;
+import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.R;
 
 public class ClienteProfileActivity extends AppCompatActivity {
@@ -26,6 +34,11 @@ public class ClienteProfileActivity extends AppCompatActivity {
     Uri userFoto;
     EditText nombre;
     EditText correo;
+    User userCliente;
+    TextView tvcodigo;
+    ImageView ivCliente;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +47,18 @@ public class ClienteProfileActivity extends AppCompatActivity {
         setBottomNavigationView();
         nombre =  findViewById(R.id.etUpdateNombre);
         correo = findViewById(R.id.etUpdateCorreo);
+        tvcodigo = findViewById(R.id.tvcodigo);
+        ivCliente = findViewById(R.id.imageView);
         userName= FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         userCorreo = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         userFoto = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
-        Toast.makeText(ClienteProfileActivity.this, userName, Toast.LENGTH_LONG).show();
+        sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        userCliente = gson.fromJson(sharedPreferences.getString("user",""),User.class);
+        tvcodigo.setText(userCliente.getCodigo());
         nombre.setText(userName);
         correo.setText(userCorreo);
+        Glide.with(this).load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()).placeholder(R.drawable.avatar_placeholder).into(ivCliente);
     }
 
     public void setBottomNavigationView(){

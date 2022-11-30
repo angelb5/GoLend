@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -23,15 +24,19 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.util.Objects;
 
 import pe.du.pucp.golend.Admin.AdminHomeActivity;
 import pe.du.pucp.golend.Cliente.ClienteHomeActivity;
+import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.R;
 import pe.du.pucp.golend.TI.TIHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
+
+    SharedPreferences sharedPreferences;
     FirebaseAuth firebaseAuth;
     CollectionReference usersRef;
     EditText etCorreo;
@@ -40,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnForgotPassword;
     Button btnRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +112,11 @@ public class LoginActivity extends AppCompatActivity {
                 ocultarCargando();
                 if (!documentSnapshot.exists()) return;
                 Intent intentPermisos;
+                Gson gson = new Gson();
+                User user = documentSnapshot.toObject(User.class);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("user", gson.toJson(user));
+                editor.apply();
                 switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
                     case "Cliente":
                         if(firebaseUser.isEmailVerified()){
