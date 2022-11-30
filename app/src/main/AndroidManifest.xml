@@ -18,6 +18,27 @@
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
         <activity
+            android:name=".Admin.AdminEquiposPrestadosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Admin.AdminPrestamosMarcaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Admin.AdminListClientesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Cliente.ClienteListDevicesActivity"
             android:exported="false">
             <meta-data
@@ -111,8 +132,8 @@
         <activity
             android:name=".Cliente.ClienteHomeActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="userPortrait" />
+            android:screenOrientation="userPortrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".TI.TISolicitudActivity"
             android:exported="false"

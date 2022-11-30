@@ -39,14 +39,14 @@ tools:context=".Admin.AdminCreateUserTiActivity">
     </LinearLayout>
 
     <TextView
-        style="@style/WhiteMedium16"
         android:id="@+id/tvCreateUserTiQueRol"
-        android:textAlignment="center"
+        style="@style/WhiteMedium16"
         android:layout_width="0dp"
-        android:layout_marginHorizontal="24dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="20dp"
         android:text="Llena el formulario para agregar un usuario TI"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llCreateUserTiTitle" />
@@ -56,7 +56,7 @@ tools:context=".Admin.AdminCreateUserTiActivity">
         style="@style/InputGrey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:drawableStart="@drawable/inputicon_name"
         android:hint="Nombre"
         android:inputType="textPersonName"

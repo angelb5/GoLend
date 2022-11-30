@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="8dp"
+    style="@style/Widget.Material3.CardView.Elevated"
+    app:cardElevation="4dp"
+    android:backgroundTint="@color/blue_light"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="24dp"
+        android:background="@color/grey3_25"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar_placeholder"
+            android:scaleType="fitCenter"
+            android:layout_marginEnd="24dp">
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
+
+            <View
+            style="@style/GreySemibold12"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="4dp"
+            android:textAllCaps="true"
+            android:background="@color/unfocused"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <View
+                    style="@style/GreySemibold12"
+                    android:layout_width="80dp"
+                    android:layout_height="15dp"
+                    android:layout_marginBottom="4dp"
+                    android:textAllCaps="true"
+                    android:background="@color/grey_slide_unselected"/>
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <View
+                        style="@style/GreySemibold12"
+                        android:layout_width="80dp"
+                        android:layout_height="15dp"
+                        android:textAllCaps="true"
+                        android:background="@color/grey_slide_unselected"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <View
+                    style="@style/GreySemibold12"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="4dp"
+                    android:textAllCaps="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/unfocused"/>
+
+                <View
+                    style="@style/GreySemibold12"
+                    android:layout_gravity="bottom"
+                    android:layout_width="80dp"
+                    android:layout_height="15dp"
+                    android:layout_marginBottom="4dp"
+                    android:textAllCaps="true"
+                    android:background="@color/unfocused"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
