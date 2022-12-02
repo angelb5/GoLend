@@ -78,10 +78,8 @@ public class ClienteListDevicesActivity extends AppCompatActivity {
         @Override
         public void run() {
             String searchTextFromEt = etSearch.getText().toString().trim();
-            if(!searchTextFromEt.isEmpty()){
-                searchText = searchTextFromEt;
-                ejecutarQuery();
-            }
+            searchText = searchTextFromEt;
+            ejecutarQuery();
         }
     };
 
