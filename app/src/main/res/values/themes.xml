@@ -66,6 +66,11 @@
         <item name="android:textColor">@color/green_main</item>
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="GreenBoldTitle">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/green_main</item>
+        <item name="android:textSize">24sp</item>
+    </style>
     <!-- Tamaño 14 -->
     <style name="WhiteBold14">
         <item name="android:fontFamily">@font/montserrat_bold</item>
