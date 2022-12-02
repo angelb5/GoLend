@@ -3,6 +3,7 @@ package pe.du.pucp.golend.Anonymus;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -106,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void accesoEnBaseARol(FirebaseUser firebaseUser){
+        sharedPreferences = getSharedPreferences(getString(R.string.preferences_key), Context.MODE_PRIVATE);
         usersRef.document(firebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {

@@ -29,6 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:onClick="goToListClientes"
         android:id="@+id/cvAdminlistaClientes"
         style="@style/BlueLightCard"
         android:layout_width="match_parent"

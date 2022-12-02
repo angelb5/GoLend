@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -57,5 +58,9 @@ public class AdminReportActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
         overridePendingTransition(0,0);
         finish();
+    }
+
+    public void goToListClientes(View view) {
+        startActivity(new Intent(AdminReportActivity.this, AdminListClientesActivity.class));
     }
 }

@@ -18,7 +18,7 @@
         android:layout_gravity="center_vertical">
         <ImageView
             android:layout_width="96dp"
-            android:layout_height="match_parent"
+            android:layout_height="96dp"
             android:src="@drawable/avatar_placeholder"
             android:scaleType="fitCenter"
             android:layout_marginEnd="24dp"/>
@@ -47,6 +47,13 @@
                     android:layout_marginEnd="16dp"
                     android:background="@color/unfocused"/>
             </LinearLayout>
+            <View
+                style="@style/GreySemibold12"
+                android:layout_width="120dp"
+                android:layout_height="14dp"
+                android:layout_marginBottom="4dp"
+                android:textAllCaps="true"
+                android:background="@color/unfocused"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

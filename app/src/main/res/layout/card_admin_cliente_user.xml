@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/ivUserClientePImage"
             android:layout_width="96dp"
-            android:layout_height="match_parent"
+            android:layout_height="96dp"
             android:src="@drawable/role_student"
             android:scaleType="fitCenter"
             android:layout_marginEnd="24dp"/>
@@ -42,7 +42,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:lines="2"
-                android:text="Oliver Bustamente"/>
+                android:textSize="22sp"
+                android:text="Oliver Bustamante"/>
+            <TextView
+                android:id="@+id/tvUserClienteCodigo"
+                style="@style/GreySemibold12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:text="20190981"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

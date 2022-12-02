@@ -50,7 +50,7 @@ public class AdminProfileActivity extends AppCompatActivity {
         etUpdateNombre = findViewById(R.id.etUpdateNombre);
         etUpdateCorreo = findViewById(R.id.etUpdateCorreo);
         tvcodigo = findViewById(R.id.tvcodigo);
-        ivPfp = findViewById(R.id.imageView);
+        ivPfp = findViewById(R.id.ivAdminProfilePfp);
         user = FirebaseFirestore.getInstance().collection("users");
 
         sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
@@ -58,11 +58,11 @@ public class AdminProfileActivity extends AppCompatActivity {
         userAdmin = gson.fromJson(sharedPreferences.getString("user",""),User.class);
         tvcodigo.setText(userAdmin.getCodigo());
 
-        userName= FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        userName= userAdmin.getNombre();
         userCorreo = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         etUpdateNombre.setText(userName);
         etUpdateCorreo.setText(userCorreo);
-        Glide.with(this).load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()).placeholder(R.drawable.avatar_placeholder).into(ivPfp);
+        Glide.with(this).load(userAdmin.getAvatarUrl()).placeholder(R.drawable.avatar_placeholder).into(ivPfp);
     }
 
     public void setBottomNavigationView(){

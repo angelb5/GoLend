@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:onClick="backButton"
             android:id="@+id/ibAdminListClientesBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -79,15 +80,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <include layout="@layout/card_admin__cliente_user_placeholder" />
+                    <include layout="@layout/card_admin_cliente_user_placeholder" />
 
-                    <include layout="@layout/card_admin__cliente_user_placeholder" />
+                    <include layout="@layout/card_admin_cliente_user_placeholder" />
 
-                    <include layout="@layout/card_admin__cliente_user_placeholder" />
+                    <include layout="@layout/card_admin_cliente_user_placeholder" />
 
-                    <include layout="@layout/card_admin__cliente_user_placeholder" />
+                    <include layout="@layout/card_admin_cliente_user_placeholder" />
 
-                    <include layout="@layout/card_admin__cliente_user_placeholder" />
+                    <include layout="@layout/card_admin_cliente_user_placeholder" />
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
 
