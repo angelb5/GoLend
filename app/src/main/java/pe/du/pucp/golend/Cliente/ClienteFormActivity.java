@@ -297,7 +297,7 @@ public class ClienteFormActivity extends AppCompatActivity {
     }
 
     public void subirImagenAFirebase(byte[] imageBytes) {
-        StorageReference photoChild = FirebaseStorage.getInstance().getReference().child("dniphotos/" + "photo_" + Timestamp.now().getSeconds() + ".jpg");
+        StorageReference photoChild = FirebaseStorage.getInstance().getReference().child("dniphotos/" + user.getUid() +"/"+"photo_" + Timestamp.now().getSeconds() + ".jpg");
         pbPhoto.setVisibility(View.VISIBLE);
         photoChild.putBytes(imageBytes).addOnSuccessListener(taskSnapshot -> {
             pbPhoto.setVisibility(View.GONE);

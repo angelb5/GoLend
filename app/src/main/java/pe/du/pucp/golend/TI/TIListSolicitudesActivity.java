@@ -68,7 +68,7 @@ public class TIListSolicitudesActivity extends AppCompatActivity {
                 tvTitle.setText(R.string.reservas_curso);
                 tvTxt.setText(R.string.reservas_curso_txt_TI);
                 tvEmpty.setText(R.string.reservas_curso_empty_TI);
-                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereGreaterThan("horaFinReserva", Timestamp.now()).whereEqualTo("estado","Solicitud aprobada");
+                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("estado","Solicitud aprobada").whereGreaterThan("horaFinReserva", Timestamp.now());
                 break;
             case "pendientes":
                 tvTitle.setText(R.string.solicitudes_pendientes);
@@ -80,7 +80,7 @@ public class TIListSolicitudesActivity extends AppCompatActivity {
                 tvTitle.setText(R.string.historial_reservas);
                 tvTxt.setText(R.string.reservas_pasadas_txt_TI);
                 tvEmpty.setText(R.string.reservas_pasadas_empty_TI);
-                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereLessThan("horaFinReserva",Timestamp.now()).whereEqualTo("estado","Solicitud aprobada");
+                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("estado","Solicitud aprobada").whereLessThan("horaFinReserva",Timestamp.now());
                 break;
             case "rechazadas":
                 tvTitle.setText(R.string.solicitudes_rechazadas);
