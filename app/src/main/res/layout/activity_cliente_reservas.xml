@@ -105,12 +105,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvClienteListReservas"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="9dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/card_cliente_reservas_placeholder" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="88dp"
+            android:background="@null"
+            android:nestedScrollingEnabled="false"
+            tools:itemCount="5"
+            tools:listitem="@layout/card_cliente_reservas" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
