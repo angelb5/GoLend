@@ -21,7 +21,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp">
             <LinearLayout
-                android:id="@+id/llCreateDeviceTitle"
+                android:id="@+id/llClienteFormTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -32,14 +32,15 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
-                    android:id="@+id/ibCreateUserTiBack"
+                    android:id="@+id/ibClienteFormBack"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginEnd="8dp"
                     android:background="?actionBarItemBackground"
                     android:onClick="backButton"
                     android:scaleType="center"
-                    android:src="@drawable/button_back" />
+                    android:src="@drawable/button_back"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     style="@style/GreenBoldTitle"
@@ -106,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:hint="Número de días del préstamo"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/tvClienteFormProgramas"
@@ -123,7 +124,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:hint="Programas que requiere en su equipo"
-                android:inputType="textMultiLine" />
+                android:nextFocusDown="@+id/etClienteFormProgramas"
+                android:inputType="text" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgClienteFormProgramas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/etClienteFormProgramas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="10dp">
+            </com.google.android.material.chip.ChipGroup>
 
             <TextView
                 android:id="@+id/tvClienteFormDNI"
@@ -131,41 +144,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="DNI" />
+                android:text="DNI"
+                app:layout_constraintTop_toBottomOf="@+id/cgClienteFormProgramas"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tvClienteDNI"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivClienteFormDNI"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="0.9"
-                android:focusable="true"
-                tools:itemCount="0"
-                tools:listitem="@layout/item_dni_upload" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/glClienteDNI"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_columnWeight="1"
-                android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/unfocused"
-                android:columnCount="2"
-                android:orientation="horizontal"
-                android:useDefaultMargins="true"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/etClienteFormDNI"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_photo" />
-            </androidx.cardview.widget.CardView>
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/white"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_image_placeholder_48"
+                app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
 
             <ProgressBar
                 android:id="@+id/pbClienteDNIPhoto"
@@ -190,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:onClick="uploadPhotoFromDocument"
                     android:src="@drawable/button_attachment" />
 
                 <ImageButton
@@ -197,6 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:onClick="uploadPhotoFromCamera"
                     android:src="@drawable/button_camera" />
             </LinearLayout>
 
@@ -225,6 +217,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:onClick="realizarSolicitud"
                 android:text="Enviar Solicitud" />
         </LinearLayout>
     </ScrollView>

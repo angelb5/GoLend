@@ -7,6 +7,30 @@
     tools:context=".TI.TIListSolicitudesActivity">
 
     <LinearLayout
+        android:id="@+id/llTIListSolicitudesEmptyView"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:layout_marginTop="112dp"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:src="@drawable/empty_search"/>
+        <TextView
+            android:id="@+id/tvTIReservasTxtEmpty"
+            style="@style/WhiteSemiBoldSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Aún no tienes solicictudes que hayan sido rechazadas"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/llTIListSolicitudesTitle"
         style="@style/LayoutTitle"
         android:layout_width="0dp"
@@ -30,6 +54,7 @@
                 android:layout_height="match_parent"
                 android:background="?actionBarItemBackground"
                 android:clickable="true"
+                android:onClick="backButton"
                 android:paddingStart="16dp"
                 android:paddingEnd="12dp"
                 android:src="@drawable/button_back" />
@@ -45,7 +70,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvTIListSolicitudesTitle"
+            android:id="@+id/tvTIListSolicitudesTxt"
             style="@style/WhiteRegular13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

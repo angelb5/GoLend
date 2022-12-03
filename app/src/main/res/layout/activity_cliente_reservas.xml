@@ -22,9 +22,10 @@
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
             android:clickable="true"
+            android:onClick="backButton"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
-            android:src="@drawable/button_back"/>
+            android:src="@drawable/button_back" />
 
         <TextView
             android:id="@+id/tvClienteReservasTittle"
@@ -48,15 +49,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llClienteReservasTitle" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvClienteListReservas"
+    <LinearLayout
+        android:id="@+id/llTiListSolicitudesEmptyView"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:layout_marginTop="112dp"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:src="@drawable/empty_search"/>
+        <TextView
+            android:id="@+id/tvClienteReservasTxtEmpty"
+            style="@style/WhiteSemiBoldSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Aún no tienes solicictudes que hayan sido rechazadas"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="9dp"
+        android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvClienteReservasTxt"
-        tools:listitem="@layout/card_cliente_reservas_placeholder" />
+        app:layout_constraintTop_toBottomOf="@+id/tvClienteReservasTxt">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerClienteListSolicitudes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:duration="800">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/card_cliente_reservas_placeholder" />
+                <include layout="@layout/card_cliente_reservas_placeholder" />
+                <include layout="@layout/card_cliente_reservas_placeholder" />
+                <include layout="@layout/card_cliente_reservas_placeholder" />
+                <include layout="@layout/card_cliente_reservas_placeholder" />
+                <include layout="@layout/card_cliente_reservas_placeholder" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvClienteListReservas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="9dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/card_cliente_reservas_placeholder" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

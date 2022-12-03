@@ -25,6 +25,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvTICardSolicitud"
                 style="@style/GreyRegular12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,6 +34,7 @@
                 android:textAllCaps="true" />
 
             <TextView
+                android:id="@+id/tvTICardCliente"
                 style="@style/WhiteBold14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,6 +42,7 @@
                 android:text="De Stuardo Lucho" />
 
             <TextView
+                android:id="@+id/tvTICardFechaReserva"
                 style="@style/GreyRegular12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,6 +53,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnDetallesSolicitudTI"
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

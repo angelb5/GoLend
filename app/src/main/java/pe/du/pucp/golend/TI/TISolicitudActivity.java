@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import pe.du.pucp.golend.Cliente.ClienteReservasActivity;
 import pe.du.pucp.golend.R;
 
 public class TISolicitudActivity extends AppCompatActivity {
@@ -58,4 +60,29 @@ public class TISolicitudActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
         finish();
     }
+
+    public void reservasEnCurso(View view){
+        Intent reservasIntent = new Intent(view.getContext(), TIListSolicitudesActivity.class);
+        reservasIntent.putExtra("reservasType", "enCurso");
+        view.getContext().startActivity(reservasIntent);
+    }
+
+    public void solicitudesPendientes(View view){
+        Intent reservasIntent = new Intent(view.getContext(),TIListSolicitudesActivity.class);
+        reservasIntent.putExtra("reservasType", "pendientes");
+        view.getContext().startActivity(reservasIntent);
+    }
+
+    public void reservasPasadas(View view){
+        Intent reservasIntent = new Intent(view.getContext(),TIListSolicitudesActivity.class);
+        reservasIntent.putExtra("reservasType", "pasadas");
+        view.getContext().startActivity(reservasIntent);
+    }
+
+    public void solicitudesRechazadas(View view){
+        Intent reservasIntent = new Intent(view.getContext(),TIListSolicitudesActivity.class);
+        reservasIntent.putExtra("reservasType", "rechazadas");
+        view.getContext().startActivity(reservasIntent);
+    }
+
 }

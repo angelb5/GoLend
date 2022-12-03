@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class ClienteDetalleDispActivity extends AppCompatActivity {
     TextView tvCategoria;
     ImageView ivCategoria;
     ImageSlider imgSlider;
+    Button btnReserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +82,18 @@ public class ClienteDetalleDispActivity extends AppCompatActivity {
                 ivCategoria.setImageResource(R.drawable.ic_otros_green);
         }
 
+        btnReserver = findViewById(R.id.btnReservar);
+        btnReserver.setOnClickListener(view -> {
+            Intent deviceIntent = new Intent(view.getContext(),ClienteFormActivity.class);
+            deviceIntent.putExtra("dispositivo", device);
+            view.getContext().startActivity(deviceIntent);
+        });
+
     }
 
     public void backButton(View view){
         onBackPressed();
     }
+
+
 }

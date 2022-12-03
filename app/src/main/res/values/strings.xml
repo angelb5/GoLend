@@ -8,6 +8,20 @@
     <string name="reservas_pasadas_txt">Encuentra aquí los equipos que ya ha te han sido prestados</string>
     <string name="solicitudes_pendientes_txt">Encuentra aquí tus solicitudes pendientes de aprobación</string>
     <string name="solicitudes_rechazadas_txt">Encuentra aquí tus solicitudes que han sido rechazadas</string>
+    <string name="reservas_curso_empty">Aún no tienes reservas que se encuentren en curso</string>
+    <string name="reservas_pasadas_empty">Aún no tienes reservas que hayan vencido</string>
+    <string name="solicitudes_pendientes_empty">Aún no tienes solicitudes pendientes de aprobación</string>
+    <string name="solicitudes_rechazadas_empty">Aún no tienes solicitudes que hayan sido rechazadas</string>
+
+    <string name="reservas_curso_txt_TI">Encuentra aquí las reservas en curso del alumnado</string>
+    <string name="reservas_pasadas_txt_TI">Encuentra aquí el historial de reservas de los alumnos</string>
+    <string name="solicitudes_pendientes_txt_TI">Encuentra aquí las solicitudes que aún no han sido respondidas</string>
+    <string name="solicitudes_rechazadas_txt_TI">Encuentra aquí las solicitudes que han sido rechazadas</string>
+    <string name="reservas_curso_empty_TI">No hay alumnos con reservas en curso</string>
+    <string name="reservas_pasadas_empty_TI">Los alumnos aún no han reservado equipos</string>
+    <string name="solicitudes_pendientes_empty_TI">Se han respondido todas las solicitudes del alumnado</string>
+    <string name="solicitudes_rechazadas_empty_TI">No se han rechazado solicitudes del alumnado</string>
+    
     <string name="onboarding_start">Comenzar</string>
     <string name="preferences_key">Settings</string>
     <string name="role_student">Estudiante</string>
@@ -20,6 +34,7 @@
     <string name="category_otros">Otros</string>
     <string name="reservas_curso">Reservas en curso</string>
     <string name="reservas_pasadas">Reservas pasadas</string>
+    <string name="historial_reservas">Historial de reservas</string>
     <string name="solicitudes_rechazadas">Solicitudes rechazadas</string>
     <string name="solicitudes_pendientes">Solicitudes pendientes</string>
 
