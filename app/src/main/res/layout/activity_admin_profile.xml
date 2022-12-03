@@ -51,7 +51,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvcodigo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAdminProfileCodigo" />
 
     <EditText
         android:id="@+id/etUpdateCorreo"
@@ -115,7 +115,10 @@
             android:layout_marginTop="6dp"
             tools:srcCompat="@drawable/avatar_placeholder" />
 
-        <ImageView
+        <ImageButton
+            android:onClick="goToChooseAvatar"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
             android:id="@+id/btnEditFoto"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -128,13 +131,24 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/tvcodigo"
+        style="@style/GreenSemiBoldSubtitle"
+        android:id="@+id/tvAdminProfileNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="Nombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rlFoto" />
+
+    <TextView
+        style="@style/GreyMedium16"
+        android:id="@+id/tvAdminProfileCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="codigo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAdminProfileNombre" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

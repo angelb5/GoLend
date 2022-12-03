@@ -25,6 +25,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ChooseAvatarActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Admin.AdminEquiposPrestadosActivity"
             android:exported="false">
             <meta-data
