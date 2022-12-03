@@ -68,10 +68,8 @@ public class AdminProfileActivity extends AppCompatActivity {
         tvCodigo.setText(userAdmin.getCodigo());
         tvNombre.setText(userAdmin.getNombre());
 
-        userName= userAdmin.getNombre();
-        userCorreo = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        etUpdateNombre.setText(userName);
-        etUpdateCorreo.setText(userCorreo);
+        etUpdateNombre.setText(userAdmin.getNombre());
+        etUpdateCorreo.setText(userAdmin.getCorreo());
         Glide.with(this).load(userAdmin.getAvatarUrl()).placeholder(R.drawable.avatar_placeholder).into(ivPfp);
     }
 
@@ -144,7 +142,7 @@ public class AdminProfileActivity extends AppCompatActivity {
             updates.put("nombre", newNombre);
             tvNombre.setText(newNombre);
             UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(String.valueOf(etUpdateNombre.getText())).build();
+                    .setDisplayName(newNombre).build();
             firebaseUser.updateProfile(userProfileChangeRequest);
         }
         if(!userAdmin.getCorreo().equals(newCorreo)) {
@@ -157,11 +155,8 @@ public class AdminProfileActivity extends AppCompatActivity {
             userAdmin.setNombre(newNombre);
             userAdmin.setCorreo(newCorreo);
             sharedPreferences.edit().putString("user", gson.toJson(userAdmin)).apply();
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AdminProfileActivity.this, "Hubo un error al actualizar los datos", Toast.LENGTH_SHORT).show();
-            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(AdminProfileActivity.this, "Hubo un error al actualizar los datos", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -174,6 +169,7 @@ public class AdminProfileActivity extends AppCompatActivity {
     public void cerrarSesionAdmin(View view) {
         FirebaseAuth.getInstance().signOut();
         Toast.makeText(AdminProfileActivity.this, "Has cerrado sesión", Toast.LENGTH_SHORT).show();
+        sharedPreferences.edit().remove("user").apply();
         startActivity(new Intent(AdminProfileActivity.this, LoginActivity.class));
         ActivityCompat.finishAffinity(AdminProfileActivity.this);
         finish();
