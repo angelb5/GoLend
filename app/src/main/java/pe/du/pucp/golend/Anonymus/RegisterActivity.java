@@ -23,6 +23,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +45,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -51,7 +60,7 @@ import pe.du.pucp.golend.ScreenMessage;
 import pe.du.pucp.golend.ScreenMessageActivity;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    String APIGATEWWAY_IP;
     final int IMAGE_SELECTOR_COLUMNS = 3;
     final int IMAGE_SELECTOR_MARGIN = 8;
     final List<Integer> ROLE_IMAGES =  Arrays.asList(R.drawable.role_student, R.drawable.role_administrator, R.drawable.role_teacher);
@@ -75,6 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        APIGATEWWAY_IP = getString(R.string.apigateway_ip);
         //Setea el selector de roles
         roleSelector = findViewById(R.id.rvRegisterImageSelector);
         //Setea los EditText, ProgressBar y Button
@@ -152,7 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
             isInvalid = true;
         }
 
-        if(!Patterns.PHONE.matcher(codigo).matches() || codigo.length()!=8){
+        if(!codigo.matches("\\d+") || codigo.length()!=8){
             etCodigo.setError("Ingrese un código válido");
             etCodigo.requestFocus();
             isInvalid = true;
@@ -167,13 +177,29 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Verifica que el codigo y correo sean únicos
         mostrarCargando();
-        //TODO: consultar microservicio para ver que no se repita el código
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = APIGATEWWAY_IP+"/api/goLend/user/"+codigo;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                if (response.getBoolean("found")) {
+                    ocultarCargando();
+                    etCodigo.setError("Ya existe una cuenta con este código");
+                    etCodigo.requestFocus();
+                    return;
+                }
+                User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
+                crearUsuario(user, contrasena);
+            } catch (JSONException e) {
+                ocultarCargando();
+                e.printStackTrace();
+            }
+        }, error -> {
+            ocultarCargando();
+            Log.d("msg", "error", error);
+            Toast.makeText(RegisterActivity.this, "Revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
+        });
 
-        //etCodigo.setError("Ya existe una cuenta con este código");
-        //etCodigo.requestFocus();
-        //return;
-        User user = new User(nombre,correo,codigo,rol,avatarUrl,"Cliente");
-        crearUsuario(user, contrasena);
+        queue.add(jsonObjectRequest);
     }
 
     public void crearUsuario(User user, String contrasena){

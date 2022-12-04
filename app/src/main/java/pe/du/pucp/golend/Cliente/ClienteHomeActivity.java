@@ -1,6 +1,8 @@
 package pe.du.pucp.golend.Cliente;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
 
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -30,6 +33,7 @@ import java.util.List;
 
 import pe.du.pucp.golend.Adapters.ImageSelectorCategoryAdapter;
 import pe.du.pucp.golend.Decorations.ImageSelectorCategoryMargin;
+import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.R;
 
 public class ClienteHomeActivity extends AppCompatActivity {
@@ -93,9 +97,12 @@ public class ClienteHomeActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        User user = gson.fromJson(sharedPreferences.getString("user",""), User.class);
 
-        tvNombre.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        Glide.with(this).load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()).placeholder(R.drawable.avatar_placeholder).into(ivPfp);
+        tvNombre.setText(user.getNombre());
+        Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.avatar_placeholder).into(ivPfp);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         ImageSelectorCategoryAdapter categoryAdapter = new ImageSelectorCategoryAdapter(this, CATEGORY_IMAGES, CATEGORY_TEXTS);
