@@ -21,7 +21,7 @@
     <string name="reservas_pasadas_empty_TI">Los alumnos aún no han reservado equipos</string>
     <string name="solicitudes_pendientes_empty_TI">Se han respondido todas las solicitudes del alumnado</string>
     <string name="solicitudes_rechazadas_empty_TI">No se han rechazado solicitudes del alumnado</string>
-    
+
     <string name="onboarding_start">Comenzar</string>
     <string name="preferences_key">Settings</string>
     <string name="role_student">Estudiante</string>

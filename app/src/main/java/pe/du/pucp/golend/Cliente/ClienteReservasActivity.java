@@ -131,7 +131,6 @@ public class ClienteReservasActivity extends AppCompatActivity {
         @Override
         public Reservas parseSnapshot(@NonNull DocumentSnapshot snapshot) {
             Reservas reservas = snapshot.toObject(Reservas.class);
-            Log.d("msg", reservas.getEstado());
             if (reservas !=null){
                 reservas.setKey(snapshot.getId());
                 return reservas;

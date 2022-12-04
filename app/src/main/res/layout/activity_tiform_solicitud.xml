@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Cliente.ClienteDetalleReservaActivity">
+    tools:context=".TI.TIFormSolicitudActivity">
 
     <LinearLayout
-        android:id="@+id/llClienteDetalleReservasTitle"
+        android:id="@+id/llTIFormSolicitudTitle"
         style="@style/LayoutTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,32 +18,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/ibClienteDetalleReservasBack"
+            android:id="@+id/ibTIFormSolicitudBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
             android:clickable="true"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
-            android:src="@drawable/button_back" />
+            android:src="@drawable/button_back"/>
 
         <TextView
             style="@style/GreenSemiBoldSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="16dp"
-            android:text="Detalle de reserva" />
+            android:text="Detalle de solicitud" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llClienteDetalleReservasTitle"
+        app:layout_constraintTop_toBottomOf="@+id/llTIFormSolicitudTitle"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
@@ -52,8 +51,48 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:id="@+id/ivTIFormSolicitudImageTI"
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/role_student" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTIFormSolicitudNombreCliente"
+                        style="@style/WhiteSemiBoldSubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Oliver Bustamente" />
+
+                    <TextView
+                        android:id="@+id/tvTIFormSolicitudFechaReservaCliente"
+                        style="@style/WhiteMedium16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="14 Oct 2022" />
+                </LinearLayout>
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/tvClienteDetalleReservasFechaReserva"
+                android:id="@+id/tvTIFormSolicitudFechaResponse"
                 style="@style/WhiteMedium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +101,7 @@
                 android:text="Enviada hoy" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasEstado"
+                android:id="@+id/tvTIFormSolicitudEstado"
                 style="@style/WhiteMedium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +116,7 @@
                 android:paddingVertical="16dp"
                 android:layout_gravity="center_vertical">
                 <ImageView
-                    android:id="@+id/ivClienteDetalleReservasCardImage"
+                    android:id="@+id/ivTIFormSolicituCardImageEquipo"
                     android:layout_width="96dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/role_student"
@@ -88,14 +127,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/tvClienteDetalleReservasCardMarca"
+                        android:id="@+id/tvTIFormSolicituCardMarca"
                         style="@style/WhiteMedium16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:text="MSI"/>
                     <TextView
-                        android:id="@+id/tvClienteDetalleReservasCardModelo"
+                        android:id="@+id/tvTIFormSolicituCardModelo"
                         style="@style/WhiteSemiBoldSubtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -108,13 +147,13 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:id="@+id/ivClienteDetalleReservasDispCategoria"
+                            android:id="@+id/ivTIFormSolicituDispCategoria"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_laptop_green" />
 
                         <TextView
-                            android:id="@+id/tvClienteDetalleReservasDispCategoria"
+                            android:id="@+id/tvTIFormSolicituDispCategoria"
                             style="@style/GreenMedium16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -124,73 +163,8 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/llClienteDetalleReservasLugarRecojo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvClienteDetalleReservasLugarRecojoTIttle"
-                    style="@style/WhiteSemiBoldSubtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Lugar de recojo" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/glClienteDetalleReservasRecojoLugar"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_columnWeight="1"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="@color/unfocused"
-                    android:columnCount="2"
-                    android:orientation="horizontal"
-                    android:useDefaultMargins="true"
-                    app:cardCornerRadius="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/ivClienteDetalleReservasRecojoLugar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_photo" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llClienteDetalleReservasMotivoRechazo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvClienteDetalleReservasMotivoRechazoTIttle"
-                    style="@style/WhiteSemiBoldSubtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Motivo de rechazo" />
-
-                <TextView
-                    android:id="@+id/tvClienteDetalleReservasMotivoRechazo"
-                    style="@style/InputGrey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp" />
-
-            </LinearLayout>
-
             <TextView
-                android:id="@+id/tvClienteDetalleReservasMotivoTIttle"
+                android:id="@+id/tvTIFormSolicituMotivoTIttle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,14 +173,14 @@
                 android:text="Motivo" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasMotivo"
+                android:id="@+id/tvTIFormSolicituMotivo"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasCursoTittle"
+                android:id="@+id/tvTIFormSolicituCursoTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -214,14 +188,14 @@
                 android:text="Curso" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasCurso"
+                android:id="@+id/tvTIFormSolicituCurso"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasTiempoTittle"
+                android:id="@+id/tvTIFormSolicituTiempoTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -229,14 +203,14 @@
                 android:text="Tiempo de reserva" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasTiempo"
+                android:id="@+id/tvTIFormSolicituTiempo"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasProgramasTittle"
+                android:id="@+id/tvTIFormSolicituProgramasTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -244,18 +218,19 @@
                 android:text="Programas" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cgClienteDetalleReservasProgramas"
+                android:id="@+id/cgTIFormSolicituProgramas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvClienteDetalleReservasProgramasTittle"
+                app:layout_constraintTop_toBottomOf="@+id/tvTIFormSolicituProgramasTittle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="10dp">
             </com.google.android.material.chip.ChipGroup>
 
+
             <TextView
-                android:id="@+id/tvClienteDetalleReservasDNItittle"
+                android:id="@+id/tvTIFormSolicituDNItittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -263,7 +238,7 @@
                 android:text="DNI" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tvClienteDetalleReservaDNI"
+                android:id="@+id/tvTIFormSolicituDNI"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -273,11 +248,11 @@
                 tools:listitem="@layout/item_dni_upload" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/glClienteDetalleReservaDNI"
+                android:id="@+id/glTIFormSolicituDNI"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_columnWeight="1"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/unfocused"
                 android:columnCount="2"
                 android:orientation="horizontal"
@@ -289,84 +264,67 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/ivClienteDetalleReservasDNI"
+                    android:id="@+id/ivTIFormSolicituDNI"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="center"
                     android:src="@drawable/ic_photo" />
             </androidx.cardview.widget.CardView>
 
+            <ProgressBar
+                android:id="@+id/pbTIFormSolicituDNIPhoto"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:max="100"
+                android:progress="0"
+                android:visibility="gone" />
+
             <TextView
-                android:id="@+id/tvClienteDetalleReservasOtrosTittle"
+                android:id="@+id/tvTIFormSolicituOtrosTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="Otros" />
 
-            <TextView
-                android:id="@+id/tvClienteDetalleReservasOtros"
+            <EditText
+                android:id="@+id/etTIFormSolicituOtros"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="19dp"
                 android:inputType="textMultiLine" />
 
             <LinearLayout
-                android:id="@+id/llClienteDetalleReservasResponse"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="5dp">
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
-                <TextView
-                    android:id="@+id/tvClienteDetalleReservasResponseTittle"
-                    style="@style/WhiteSemiBoldSubtitle"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnTIFormSolicituAceptarSoli"
+                    style="@style/BtnPrimary"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Respondido por" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="aceptarSolicitud"
+                    android:text="Aceptar" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnTIFormSolicituRechazarSoli"
+                    style="@style/BtnSecondary"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="16dp">
-
-                    <ImageView
-                        android:id="@+id/ivClienteDetalleReservaImageTI"
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="12dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/role_student" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvClienteDetalleReservaNombreTI"
-                            style="@style/GreenMedium16"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Oliver Bustamente" />
-
-                        <TextView
-                            android:id="@+id/tvClienteDetalleReservaFechaResponseTI"
-                            style="@style/GreySemibold12"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="14 Oct 2022" />
-                    </LinearLayout>
-                </LinearLayout>
-
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="rechazarSolicitud"
+                    android:text="Rechazar" />
             </LinearLayout>
 
         </LinearLayout>
@@ -374,7 +332,7 @@
 
     <ProgressBar
         android:visibility="gone"
-        android:id="@+id/pbClienteDetalleReservaLoading"
+        android:id="@+id/pbTIFormSolicituLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

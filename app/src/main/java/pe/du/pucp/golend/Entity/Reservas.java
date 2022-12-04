@@ -273,15 +273,17 @@ public class Reservas implements Serializable {
         private String marca;
         private String fotoPrincipal;
         private String categoria;
+        private String uid;
 
         public Device() {
         }
 
-        public Device(String modelo, String marca, String fotoPrincipal, String categoria) {
+        public Device(String modelo, String marca, String fotoPrincipal, String categoria, String uid) {
             this.modelo = modelo;
             this.marca = marca;
             this.fotoPrincipal = fotoPrincipal;
             this.categoria = categoria;
+            this.uid = uid;
         }
 
         public String getModelo() {
@@ -314,6 +316,14 @@ public class Reservas implements Serializable {
 
         public void setCategoria(String categoria) {
             this.categoria = categoria;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
         }
     }
 

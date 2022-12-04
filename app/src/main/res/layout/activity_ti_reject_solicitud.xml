@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TI.TIRejectSolicitudActivity">
+
+    <LinearLayout
+        android:id="@+id/llTIRejectSolicitudTitle"
+        style="@style/LayoutTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibTIRejectSolicitudBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?actionBarItemBackground"
+            android:clickable="true"
+            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
+            android:src="@drawable/button_back"/>
+
+        <TextView
+            style="@style/GreenSemiBoldSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="Rechazo de solicitud" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTIRejectSolicitudTitle">
+
+        <TextView
+            style="@style/WhiteSemiBoldSubtitle"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Motivo" />
+
+        <EditText
+            android:id="@+id/etTIRejectSolicitudMotivoRechazo"
+            style="@style/InputGrey"
+            android:hint="Especifique el motivo de rechazo de la solicitud de reserva"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnTIRejectSolicitudRechazarSoli"
+            style="@style/BtnPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="rechazarSolicitud"
+            android:text="Rechazar solicitud" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

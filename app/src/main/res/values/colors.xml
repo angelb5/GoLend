@@ -12,4 +12,6 @@
     <color name="font_light">#363D4E</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#E99C2A</color>
+    <color name="red">#FF3D4D</color>
 </resources>

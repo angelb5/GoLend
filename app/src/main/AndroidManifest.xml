@@ -18,6 +18,27 @@
         android:theme="@style/Theme.GoLend"
         tools:targetApi="32">
         <activity
+            android:name=".TI.TIRejectSolicitudActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".TI.TIAcceptSolicitudActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".TI.TIFormSolicitudActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".TI.TIDetalleSolicitudActivity"
             android:exported="false">
             <meta-data

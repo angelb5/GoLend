@@ -218,7 +218,7 @@ public class ClienteFormActivity extends AppCompatActivity {
 
         mostrarCargando();
 
-        crearSolicitudFirestore(new Reservas(new Reservas.ClienteUser(userG.getNombre(), user.getUid(), user.getPhotoUrl().toString(), userG.getRol()), new Reservas.TIUser(), new Reservas.Device(device.getModelo(),device.getMarca(), device.getFotosUrl().get(0),device.getCategoria()), motivo,curso, tiempoReserva, listProgramas, dni, otros,"","","Pendiente de aprobación",Timestamp.now(),null,null));
+        crearSolicitudFirestore(new Reservas(new Reservas.ClienteUser(userG.getNombre(), user.getUid(), user.getPhotoUrl().toString(), userG.getRol()), new Reservas.TIUser(), new Reservas.Device(device.getModelo(),device.getMarca(), device.getFotosUrl().get(0),device.getCategoria(), device.getKey()), motivo,curso, tiempoReserva, listProgramas, dni, otros,"","","Pendiente de aprobación",Timestamp.now(),null,null));
     }
 
     ActivityResultLauncher<Intent> launcherPhotoDocument = registerForActivityResult(

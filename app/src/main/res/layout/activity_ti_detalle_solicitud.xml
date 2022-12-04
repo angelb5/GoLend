@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Cliente.ClienteDetalleReservaActivity">
+    tools:context=".TI.TIDetalleSolicitudActivity">
 
     <LinearLayout
-        android:id="@+id/llClienteDetalleReservasTitle"
+        android:id="@+id/llTIDetalleSolicitudTitle"
         style="@style/LayoutTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,32 +18,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/ibClienteDetalleReservasBack"
+            android:id="@+id/ibTIDetalleSolicitudBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
             android:clickable="true"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
-            android:src="@drawable/button_back" />
+            android:src="@drawable/button_back"/>
 
         <TextView
             style="@style/GreenSemiBoldSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="16dp"
-            android:text="Detalle de reserva" />
+            android:text="Detalle de solicitud" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llClienteDetalleReservasTitle"
+        app:layout_constraintTop_toBottomOf="@+id/llTIDetalleSolicitudTitle"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
@@ -52,8 +51,48 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:id="@+id/ivTIDetalleSolicitudImageCliente"
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/role_student" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTIDetalleSolicitudNombreCliente"
+                        style="@style/WhiteSemiBoldSubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Oliver Bustamente" />
+
+                    <TextView
+                        android:id="@+id/tvTIDetalleSolicitudFechaReservaCliente"
+                        style="@style/WhiteMedium16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="14 Oct 2022" />
+                </LinearLayout>
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/tvClienteDetalleReservasFechaReserva"
+                android:id="@+id/tvTIDetalleSolicitudFechaResponse"
                 style="@style/WhiteMedium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +101,7 @@
                 android:text="Enviada hoy" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasEstado"
+                android:id="@+id/tvTIDetalleSolicitudEstado"
                 style="@style/WhiteMedium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +116,7 @@
                 android:paddingVertical="16dp"
                 android:layout_gravity="center_vertical">
                 <ImageView
-                    android:id="@+id/ivClienteDetalleReservasCardImage"
+                    android:id="@+id/ivTIDetalleSolicitudCardImage"
                     android:layout_width="96dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/role_student"
@@ -88,14 +127,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/tvClienteDetalleReservasCardMarca"
+                        android:id="@+id/tvTIDetalleSolicitudCardMarca"
                         style="@style/WhiteMedium16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:text="MSI"/>
                     <TextView
-                        android:id="@+id/tvClienteDetalleReservasCardModelo"
+                        android:id="@+id/tvTIDetalleSolicitudCardModelo"
                         style="@style/WhiteSemiBoldSubtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -108,13 +147,13 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:id="@+id/ivClienteDetalleReservasDispCategoria"
+                            android:id="@+id/ivTiDispCategoria"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_laptop_green" />
 
                         <TextView
-                            android:id="@+id/tvClienteDetalleReservasDispCategoria"
+                            android:id="@+id/tvTiDispCategoria"
                             style="@style/GreenMedium16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -125,13 +164,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llClienteDetalleReservasLugarRecojo"
+                android:id="@+id/llTIDetalleSolicitudLugarRecojo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvClienteDetalleReservasLugarRecojoTIttle"
+                    android:id="@+id/tvTIDetalleSolicitudLugarRecojoTIttle"
                     style="@style/WhiteSemiBoldSubtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,7 +179,7 @@
                     android:text="Lugar de recojo" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/glClienteDetalleReservasRecojoLugar"
+                    android:id="@+id/glTIDetalleSolicitudRecojoLugar"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_columnWeight="1"
@@ -156,7 +195,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/ivClienteDetalleReservasRecojoLugar"
+                        android:id="@+id/ivTIDetalleSolicitudRecojoLugar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="center"
@@ -166,7 +205,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llClienteDetalleReservasMotivoRechazo"
+                android:id="@+id/llTIDetalleSolicitudMotivoRechazo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -181,7 +220,7 @@
                     android:text="Motivo de rechazo" />
 
                 <TextView
-                    android:id="@+id/tvClienteDetalleReservasMotivoRechazo"
+                    android:id="@+id/tvTIDetalleSolicitudMotivoRechazo"
                     style="@style/InputGrey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -199,14 +238,14 @@
                 android:text="Motivo" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasMotivo"
+                android:id="@+id/tvTIDetalleSolicitudMotivo"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasCursoTittle"
+                android:id="@+id/tvTIDetalleSolicitudCursoTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -214,14 +253,14 @@
                 android:text="Curso" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasCurso"
+                android:id="@+id/tvTIDetalleSolicitudCurso"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasTiempoTittle"
+                android:id="@+id/tvTIDetalleSolicitudTiempoTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -229,14 +268,14 @@
                 android:text="Tiempo de reserva" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasTiempo"
+                android:id="@+id/tvTIDetalleSolicitudTiempo"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasProgramasTittle"
+                android:id="@+id/tvTIDetalleSolicitudProgramasTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -244,10 +283,10 @@
                 android:text="Programas" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cgClienteDetalleReservasProgramas"
+                android:id="@+id/cgTIDetalleSolicitudProgramas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvClienteDetalleReservasProgramasTittle"
+                app:layout_constraintTop_toBottomOf="@+id/tvTIDetalleSolicitudProgramasTittle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -255,7 +294,7 @@
             </com.google.android.material.chip.ChipGroup>
 
             <TextView
-                android:id="@+id/tvClienteDetalleReservasDNItittle"
+                android:id="@+id/tvTIDetalleSolicitudDNItittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -263,7 +302,7 @@
                 android:text="DNI" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tvClienteDetalleReservaDNI"
+                android:id="@+id/tvTIDetalleSolicitudDNI"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -273,11 +312,11 @@
                 tools:listitem="@layout/item_dni_upload" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/glClienteDetalleReservaDNI"
+                android:id="@+id/glTIDetalleSolicitudDNI"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_columnWeight="1"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/unfocused"
                 android:columnCount="2"
                 android:orientation="horizontal"
@@ -289,92 +328,45 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/ivClienteDetalleReservasDNI"
+                    android:id="@+id/ivTIDetalleSolicitudDNI"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="center"
                     android:src="@drawable/ic_photo" />
             </androidx.cardview.widget.CardView>
 
+            <ProgressBar
+                android:id="@+id/pbTIDetalleSolicitudDNIPhoto"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:max="100"
+                android:progress="0"
+                android:visibility="gone" />
+
             <TextView
-                android:id="@+id/tvClienteDetalleReservasOtrosTittle"
+                android:id="@+id/tvTIDetalleSolicitudOtrosTittle"
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="Otros" />
 
-            <TextView
-                android:id="@+id/tvClienteDetalleReservasOtros"
+            <EditText
+                android:id="@+id/etTIDetalleSolicitudOtros"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
                 android:inputType="textMultiLine" />
-
-            <LinearLayout
-                android:id="@+id/llClienteDetalleReservasResponse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:id="@+id/tvClienteDetalleReservasResponseTittle"
-                    style="@style/WhiteSemiBoldSubtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Respondido por" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="16dp">
-
-                    <ImageView
-                        android:id="@+id/ivClienteDetalleReservaImageTI"
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="12dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/role_student" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvClienteDetalleReservaNombreTI"
-                            style="@style/GreenMedium16"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Oliver Bustamente" />
-
-                        <TextView
-                            android:id="@+id/tvClienteDetalleReservaFechaResponseTI"
-                            style="@style/GreySemibold12"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="14 Oct 2022" />
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
     <ProgressBar
         android:visibility="gone"
-        android:id="@+id/pbClienteDetalleReservaLoading"
+        android:id="@+id/pbTIDetalleSolicitudLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
