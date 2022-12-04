@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -26,6 +31,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
 
 import java.util.Objects;
 
@@ -37,6 +44,7 @@ import pe.du.pucp.golend.TI.TIHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
+    String APIGATEWWAY_IP;
     SharedPreferences sharedPreferences;
     FirebaseAuth firebaseAuth;
     CollectionReference usersRef;
@@ -51,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        APIGATEWWAY_IP = getString(R.string.apigateway_ip);
         //Setea los EditText, ProgressBar y Button
         etCorreo = findViewById(R.id.etLoginCorreo);
         etContrasena = findViewById(R.id.etLoginContrasena);
@@ -88,8 +96,34 @@ public class LoginActivity extends AppCompatActivity {
             correo = correoOCodigo;
             mostrarCargando();
             firebaseSignIn(correo, contrasena);
-        }else{
-            etCorreo.setError("No es un correo válido");
+        }else if (correoOCodigo.matches("\\d+") && correoOCodigo.length()==8) {
+            mostrarCargando();
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = APIGATEWWAY_IP+"/api/goLend/user/"+correoOCodigo;
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+                try {
+                    if (response.getBoolean("found")) {
+                        String correo1 = response.getString("correo");
+                        firebaseSignIn(correo1, contrasena);
+                    } else {
+                        ocultarCargando();
+                        etCorreo.setError("No se ha podido iniciar sesión");
+                        etCorreo.requestFocus();
+                    }
+                } catch (JSONException e) {
+                    ocultarCargando();
+                    e.printStackTrace();
+                }
+            }, error -> {
+                ocultarCargando();
+                Log.d("msg", "error", error);
+                Toast.makeText(LoginActivity.this, "Revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
+            });
+
+            queue.add(jsonObjectRequest);
+        }
+        else {
+            etCorreo.setError("No es un correo o código válido");
             etCorreo.requestFocus();
         }
     }

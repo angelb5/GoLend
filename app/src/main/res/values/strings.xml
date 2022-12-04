@@ -37,6 +37,7 @@
     <string name="historial_reservas">Historial de reservas</string>
     <string name="solicitudes_rechazadas">Solicitudes rechazadas</string>
     <string name="solicitudes_pendientes">Solicitudes pendientes</string>
+    <string name="apigateway_ip">http://eureka-eli.brazilsouth.cloudapp.azure.com:8090</string>
 
     <string-array name="avatars">
         <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_student.png?alt=media&amp;token=fc83e656-00d2-4e16-aaaf-449778d7715d</item>
