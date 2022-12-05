@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
     app:strokeWidth="0dp"
@@ -50,6 +51,7 @@
                 android:orientation="horizontal"
                 android:gravity="end">
                 <Button
+                    android:clickable="false"
                     android:id="@+id/btnUserTiActualizar"
                     style="@style/Widget.Material3.Button.TextButton"
                     android:textColor="@color/green_main"

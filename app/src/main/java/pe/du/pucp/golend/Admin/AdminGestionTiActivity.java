@@ -112,33 +112,9 @@ public class AdminGestionTiActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        usersTIAdapter.startListening();
-    }
-
-    @Override
     protected void onRestart() {
         super.onRestart();
         usersTIAdapter.refresh();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        usersTIAdapter.stopListening();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        usersTIAdapter.startListening();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        usersTIAdapter.stopListening();
     }
 
     @Override

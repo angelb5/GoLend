@@ -50,19 +50,30 @@ tools:context=".Admin.AdminCreateUserTiActivity">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llCreateUserTiTitle" />
+    <ImageView
+        android:id="@+id/ivCrerateTiPfp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreateUserTiQueRol"
+        tools:srcCompat="@drawable/avatar_placeholder" />
 
     <EditText
         android:id="@+id/etCreateUserTiNombre"
         style="@style/InputGrey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:drawableStart="@drawable/inputicon_name"
         android:hint="Nombre"
+        android:layout_marginTop="24dp"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreateUserTiQueRol" />
+        app:layout_constraintTop_toBottomOf="@+id/ivCrerateTiPfp" />
 
     <EditText
         android:id="@+id/etCreateUserTiCorreo"

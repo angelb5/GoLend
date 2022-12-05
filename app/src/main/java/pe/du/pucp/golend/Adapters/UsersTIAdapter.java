@@ -1,5 +1,6 @@
 package pe.du.pucp.golend.Adapters;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +15,12 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 
+import pe.du.pucp.golend.Admin.AdminUpdateUserTiActivity;
 import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.R;
 
 public class UsersTIAdapter extends FirestorePagingAdapter<User, UsersTIAdapter.UserTIViewHolder>  {
-    /**
-     * Construct a new FirestorePagingAdapter from the given {@link FirestorePagingOptions}.
-     *
-     * @param options
-     */
+
     public UsersTIAdapter(@NonNull FirestorePagingOptions options) {
         super(options);
     }
@@ -55,8 +53,11 @@ public class UsersTIAdapter extends FirestorePagingAdapter<User, UsersTIAdapter.
             ivProfilePic = itemView.findViewById(R.id.ivUserTiPImage);
             tvCodigo = itemView.findViewById(R.id.tvUserTiCodigo);
             tvNombre = itemView.findViewById(R.id.tvUserTiNombre);
-            itemView.findViewById(R.id.btnUserTiActualizar).setOnClickListener(view -> {
+            itemView.setOnClickListener(view -> {
                 Log.d("msg", "hola desde el usuario "+userTi.getNombre());
+                Intent intent = new Intent(itemView.getContext(), AdminUpdateUserTiActivity.class);
+                intent.putExtra("userTi", userTi);
+                itemView.getContext().startActivity(intent);
             });
         }
 

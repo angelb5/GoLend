@@ -8,7 +8,6 @@
     <uses-feature android:name="android.hardware.screen.portrait" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GoLend"
+        android:usesCleartextTraffic="true"
         tools:targetApi="32">
+
         <activity
             android:name=".TI.TIRejectSolicitudActivity"
             android:exported="false">
@@ -53,27 +54,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".Admin.AdminEquiposPrestadosActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Admin.AdminPrestamosMarcaActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Admin.AdminListClientesActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".Cliente.ClienteListDevicesActivity"
             android:exported="false">
@@ -137,6 +118,22 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".Admin.AdminUpdateUserTiActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait"/>
+        <activity
+            android:name=".Admin.AdminEquiposPrestadosActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait" />
+        <activity
+            android:name=".Admin.AdminPrestamosMarcaActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait" />
+        <activity
+            android:name=".Admin.AdminListClientesActivity"
+            android:exported="false"
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Admin.AdminCreateUserTiActivity"
             android:exported="false"

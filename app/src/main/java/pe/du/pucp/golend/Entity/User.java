@@ -2,7 +2,9 @@ package pe.du.pucp.golend.Entity;
 
 import com.google.firebase.firestore.Exclude;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     @Exclude
     private String uid;
     private String nombre;
