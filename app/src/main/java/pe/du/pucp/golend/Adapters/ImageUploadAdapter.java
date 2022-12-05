@@ -17,6 +17,7 @@ import java.util.List;
 
 import pe.du.pucp.golend.R;
 import pe.du.pucp.golend.TI.TICreateDeviceActivity;
+import pe.du.pucp.golend.TI.TIUpdateDeviceActivity;
 
 
 public class ImageUploadAdapter extends RecyclerView.Adapter<ImageUploadAdapter.ViewHolder>{
@@ -56,7 +57,12 @@ public class ImageUploadAdapter extends RecyclerView.Adapter<ImageUploadAdapter.
             super(itemView);
             ivImage = itemView.findViewById(R.id.ivItemImageUpload);
             itemView.findViewById(R.id.btnRemovemImageUpload).setOnClickListener(v ->{
-                ((TICreateDeviceActivity)  activity).removerFoto(position);
+                if (activity instanceof TICreateDeviceActivity) {
+                    ((TICreateDeviceActivity)  activity).removerFoto(position);
+                } else if (activity instanceof TIUpdateDeviceActivity) {
+                    ((TIUpdateDeviceActivity)  activity).removerFoto(position);
+                }
+
             });
         }
     }

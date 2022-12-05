@@ -18,6 +18,7 @@ public class Device implements Serializable {
     private int stock;
     private int disponibles;
     private int enPrestamo;
+    private int totalPrestamo;
     private List<String> searchKeywords;
     private String searchCategoria;
     private String searchMarca; //estará en lowercase
@@ -38,6 +39,7 @@ public class Device implements Serializable {
         searchMarca = marca.toLowerCase(Locale.ROOT);
         disponibles = stock;
         enPrestamo = 0;
+        totalPrestamo = 0;
     }
 
     public String getCategoria() {
@@ -144,5 +146,13 @@ public class Device implements Serializable {
 
     public void setSearchMarca(String searchMarca) {
         this.searchMarca = searchMarca;
+    }
+
+    public int getTotalPrestamo() {
+        return totalPrestamo;
+    }
+
+    public void setTotalPrestamo(int totalPrestamo) {
+        this.totalPrestamo = totalPrestamo;
     }
 }

@@ -124,6 +124,7 @@ public class TIDevicesActivity extends AppCompatActivity {
                 .setQuery(devicesQuery, config, deviceSnapshotParser)
                 .build();
         deviceCardAdapter = new DeviceCardAdapter(options, TIDetalleDispActivity.class);
+        deviceCardAdapter.setCrudResultLauncher(crudResultLauncher);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -236,7 +237,7 @@ public class TIDevicesActivity extends AppCompatActivity {
 
     public void goToCreateDevice(View view){
         Intent createIntent = new Intent(TIDevicesActivity.this,TICreateDeviceActivity.class);
-        createActivityResultLauncher.launch(createIntent);
+        crudResultLauncher.launch(createIntent);
     }
 
 
@@ -280,12 +281,13 @@ public class TIDevicesActivity extends AppCompatActivity {
         }
     };
 
-    ActivityResultLauncher<Intent> createActivityResultLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> crudResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if(deviceCardAdapter!=null) deviceCardAdapter.refresh(); //solo se refrescara el listado si viene de crear un dispositivo
+                    Log.d("msg", "resultcode "+result.getResultCode());
+                    if(deviceCardAdapter!=null && result.getResultCode() == RESULT_OK) deviceCardAdapter.refresh(); //solo se refrescara el listado si viene de crear un dispositivo
                 }
             });
 }

@@ -51,19 +51,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
+                <TextView
+                    style="@style/WhiteSemiBoldSubtitle"
+                    android:layout_gravity="center"
+                    android:id="@+id/tvRegisterQueRol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Categoría"/>
                 <ImageView
-                    android:id="@+id/rvUpdateDeviceCategorySelector"
+                    android:id="@+id/ivUpdateDeviceCategory"
                     android:layout_width="108dp"
                     android:layout_height="108dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="12dp"
                     android:src="@drawable/category_laptop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:layout_marginTop="8dp"
                     android:layout_gravity="center"
                     style="@style/WhiteMedium14"
                     android:id="@+id/tvUpdateDeviceCategory"
@@ -78,15 +86,6 @@
 
             </LinearLayout>
 
-            <EditText
-                android:visibility="visible"
-                android:id="@+id/etUpdateDeviceOtrosCategoria"
-                style="@style/InputGrey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:inputType="textPersonName" />
-
             <TextView
                 style="@style/WhiteSemiBoldSubtitle"
                 android:layout_width="match_parent"
@@ -95,6 +94,7 @@
                 android:text="Marca" />
 
             <EditText
+                android:hint="Marca del dispositivo"
                 android:id="@+id/etUpdateDeviceMarca"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
@@ -110,6 +110,7 @@
                 android:text="Modelo" />
 
             <EditText
+                android:hint="Modelo del dispositivo"
                 android:id="@+id/etUpdateDeviceModelo"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
@@ -124,6 +125,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Descripción" />
             <EditText
+                android:hint="Escribe una descripción del dispositivo"
                 android:id="@+id/etUpdateDeviceDescripcion"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
@@ -202,7 +204,7 @@
             </GridLayout>
 
             <ProgressBar
-                android:id="@+id/pbAdminUpdateDevicePhoto"
+                android:id="@+id/pbUpdateDevicePhoto"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -218,6 +220,7 @@
                 android:gravity="end">
 
                 <ImageButton
+                    android:onClick="uploadPhotoFromDocument"
                     android:id="@+id/ibUpdateDevicePhotoAttach"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -226,6 +229,7 @@
                     android:src="@drawable/button_attachment" />
 
                 <ImageButton
+                    android:onClick="uploadPhotoFromCamera"
                     android:id="@+id/ibUpdateDevicePhotoCam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -240,6 +244,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Accesorios" />
             <EditText
+                android:hint="Accesorios que incluye el dispositivo"
                 android:id="@+id/etUpdateDeviceAccesorios"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
@@ -254,21 +259,31 @@
                 android:layout_marginBottom="8dp"
                 android:text="Stock" />
             <EditText
+                android:hint="Número de los dispositivos"
                 android:id="@+id/etUpdateDeviceStock"
                 style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="8dp"
                 android:inputType="number" />
+            <TextView
+                android:layout_marginStart="16dp"
+                android:id="@+id/tvUpdateDeviceEnPrestamo"
+                style="@style/WhiteRegular16"
+                android:text="3 en préstamo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"/>
 
             <Button
-                android:id="@+id/btnUpdateDeviceAnadir"
+                android:onClick="actualizarDispositivo"
+                android:id="@+id/btnUpdateDeviceActualizar"
                 style="@style/BtnPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:text="Acttualizar" />
+                android:text="Actualizar" />
         </LinearLayout>
     </ScrollView>
 

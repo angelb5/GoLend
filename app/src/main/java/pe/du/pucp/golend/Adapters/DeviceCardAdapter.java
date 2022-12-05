@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
@@ -21,19 +22,17 @@ import java.util.Locale;
 
 import pe.du.pucp.golend.Entity.Device;
 import pe.du.pucp.golend.R;
+import pe.du.pucp.golend.TI.TIDetalleDispActivity;
 
 public class DeviceCardAdapter extends FirestorePagingAdapter<Device, DeviceCardAdapter.DeviceViewHolder>  {
-    /**
-     * Construct a new FirestorePagingAdapter from the given {@link FirestorePagingOptions}.
-     *
-     * @param options
-     */
+
     public DeviceCardAdapter(@NonNull FirestorePagingOptions options, Class activity) {
         super(options);
         nextActivity = activity;
     }
 
     Class nextActivity;
+    ActivityResultLauncher<Intent> crudResultLauncher;
 
 
     @NonNull
@@ -89,9 +88,16 @@ public class DeviceCardAdapter extends FirestorePagingAdapter<Device, DeviceCard
             itemView.setOnClickListener(view -> {
                 Intent deviceIntent = new Intent(itemView.getContext(), nextActivity);
                 deviceIntent.putExtra("dispositivo", device);
+                if (nextActivity == TIDetalleDispActivity.class) {
+                    crudResultLauncher.launch(deviceIntent);
+                    return;
+                }
                 itemView.getContext().startActivity(deviceIntent);
             });
         }
     }
 
+    public void setCrudResultLauncher(ActivityResultLauncher<Intent> crudResultLauncher) {
+        this.crudResultLauncher = crudResultLauncher;
+    }
 }

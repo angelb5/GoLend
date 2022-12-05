@@ -7,11 +7,12 @@
     tools:context=".TI.TIDetalleDispActivity">
 
     <Button
+        android:onClick="goToUpdateDevice"
         android:id="@+id/btnActualizar"
         style="@style/BtnPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="33dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="35dp"
         android:text="Actualizar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,18 +96,33 @@
                 android:text="Cargador" />
 
         </LinearLayout>
-
         <LinearLayout
+            android:layout_marginBottom="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <TextView
+                style="@style/WhiteSemibold16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stock:" />
+            <TextView
+                android:id="@+id/tvTIDispStock"
+                style="@style/WhiteRegular16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tvDisponibilidadText"
                 style="@style/WhiteSemibold16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Disponibles:" />
-
             <TextView
                 android:id="@+id/tvTIDispDisponibilidad"
                 style="@style/WhiteRegular16"
@@ -114,7 +130,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="1" />
-
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/WhiteSemibold16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En préstamo:" />
+            <TextView
+                android:id="@+id/tvTIDispEnPrestamo"
+                style="@style/WhiteRegular16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="0" />
         </LinearLayout>
 
     </LinearLayout>
@@ -168,7 +199,7 @@
         style="@style/BtnSecondary"
         android:layout_width="123dp"
         android:layout_height="49dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="35dp"
         android:drawableBottom="@drawable/ic_trash"
         app:layout_constraintBottom_toBottomOf="parent"

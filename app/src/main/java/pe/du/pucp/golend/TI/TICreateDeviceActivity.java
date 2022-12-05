@@ -184,6 +184,7 @@ public class TICreateDeviceActivity extends AppCompatActivity {
         String strStock = etStock.getText().toString().trim();
         String searchCategoria = getResources().getString(CATEGORY_TEXTS.get(selectedCategory)); //Search categoria será el campo por el que se hará la búsqueda mientras que categoría podrá ser cualquier string
         String categoria;
+        int stock = 1;
         String otrosCategoria = etOtros.getText().toString().trim();
 
         if(marca.isEmpty()){
@@ -244,6 +245,14 @@ public class TICreateDeviceActivity extends AppCompatActivity {
             etStock.setError("Ingrese el número de equipos");
             etStock.requestFocus();
             isInvalid = true;
+        } else {
+            stock = Integer.parseInt(strStock);
+
+            if (stock<=0) {
+                etStock.setError("El stock debe ser mayor a 0");
+                etStock.requestFocus();
+                isInvalid = true;
+            }
         }
 
         if(listFotos.size()<3 || listFotos.size()>6){
@@ -274,7 +283,7 @@ public class TICreateDeviceActivity extends AppCompatActivity {
 
         mostrarCargando();
 
-        crearDispositivoFirestore(new Device(modelo, marca, categoria, descripcion, accesorios, listFotos, Integer.parseInt(strStock), generateKeywords(marca + " " +modelo), searchCategoria));
+        crearDispositivoFirestore(new Device(modelo, marca, categoria, descripcion, accesorios, listFotos, stock, generateKeywords(marca + " " +modelo), searchCategoria));
     }
 
     public void compressImageAndUpload(Uri uri, int quality){
@@ -292,6 +301,7 @@ public class TICreateDeviceActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("devices").add(device).addOnSuccessListener(unused -> {
             ocultarCargando();
             Toast.makeText(TICreateDeviceActivity.this, "Se añadió el dispositivo "+device.getModelo(), Toast.LENGTH_SHORT).show();
+            setResult(RESULT_OK);
             finish();
         }).addOnFailureListener(e->{
             ocultarCargando();
