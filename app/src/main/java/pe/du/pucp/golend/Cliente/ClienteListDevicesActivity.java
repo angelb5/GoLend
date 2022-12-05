@@ -67,7 +67,7 @@ public class ClienteListDevicesActivity extends AppCompatActivity {
     private String marcasFilter = "";
     private String searchText = "";
 
-    private String getMarcasUrl = "https://us-central1-golend-e961f.cloudfunctions.net/getMarcas"; //TODO: Reemplazar por microservicio!!
+    private String getMarcasUrl;
 
     private ModalBottomSheetFilter modalBottomSheet = new ModalBottomSheetFilter();
     //Text Typing
@@ -89,6 +89,8 @@ public class ClienteListDevicesActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setContentView(R.layout.activity_cliente_list_devices);
+
+        getMarcasUrl = getString(R.string.apigateway_ip)+"/api/goLend/marcas";
 
         recyclerView = findViewById(R.id.rvClienteListDevices);
         shimmerFrameLayout = findViewById(R.id.shimmerClienteListDevices);

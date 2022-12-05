@@ -70,7 +70,7 @@ public class TIDevicesActivity extends AppCompatActivity {
     private String marcasFilter = "";
     private String searchText = "";
 
-    private String getMarcasUrl = "https://us-central1-golend-e961f.cloudfunctions.net/getMarcas"; //TODO: Reemplazar por microservicio!!
+    private String getMarcasUrl;
 
     private ModalBottomSheetFilter modalBottomSheet = new ModalBottomSheetFilter();
     //Text Typing
@@ -93,6 +93,7 @@ public class TIDevicesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ti_devices);
 
+        getMarcasUrl = getString(R.string.apigateway_ip)+"/api/goLend/marcas";
         setBottomNavigationView();
 
         recyclerView = findViewById(R.id.rvTiListDevices);
@@ -127,7 +128,6 @@ public class TIDevicesActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(deviceCardAdapter);
-        deviceCardAdapter.startListening();
 
         deviceCardAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
             @Override
@@ -152,29 +152,6 @@ public class TIDevicesActivity extends AppCompatActivity {
                 return null;
             }
         });
-
-
-        //Llenando el filtro de marcas
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                getMarcasUrl,
-                response -> {
-                    try {
-                        JSONObject responseJson = new JSONObject(response);
-                        JSONArray jsonArray = responseJson.getJSONArray("marcas");
-                        List<String> listMarcasJson = new ArrayList<>();
-                        listMarcasJson.add("Todas las marcas");
-                        for (int i=0; i<jsonArray.length(); i++) {
-                            listMarcasJson.add( jsonArray.getString(i) );
-                        }
-                        modalBottomSheet.setMarcasList(listMarcasJson);
-                    } catch (JSONException e) {
-                        Log.d("msg", "error", e);
-                    }
-                },
-                error -> Log.e("msg","error", error));
-        requestQueue.add(stringRequest);
-
     }
 
 
@@ -262,23 +239,33 @@ public class TIDevicesActivity extends AppCompatActivity {
         createActivityResultLauncher.launch(createIntent);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(deviceCardAdapter!=null) deviceCardAdapter.stopListening();
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(deviceCardAdapter!=null)  deviceCardAdapter.startListening();
+        //Llenando el filtro de marcas
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                getMarcasUrl,
+                response -> {
+                    try {
+                        JSONObject responseJson = new JSONObject(response);
+                        JSONArray jsonArray = responseJson.getJSONArray("marcas");
+                        List<String> listMarcasJson = new ArrayList<>();
+                        listMarcasJson.add("Todas las marcas");
+                        for (int i=0; i<jsonArray.length(); i++) {
+                            listMarcasJson.add( jsonArray.getString(i) );
+                        }
+                        modalBottomSheet.setMarcasList(listMarcasJson);
+                    } catch (JSONException e) {
+                        Log.d("msg", "error", e);
+                    }
+                },
+                error -> Log.e("msg","error", error));
+        requestQueue.add(stringRequest);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(deviceCardAdapter!=null) deviceCardAdapter.stopListening();
-    }
+
 
     public SnapshotParser<Device> deviceSnapshotParser = new SnapshotParser<Device>() {
         @NonNull
