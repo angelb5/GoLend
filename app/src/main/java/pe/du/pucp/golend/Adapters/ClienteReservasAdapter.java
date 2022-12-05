@@ -1,5 +1,6 @@
 package pe.du.pucp.golend.Adapters;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
+import com.google.firebase.Timestamp;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -42,8 +44,13 @@ public class ClienteReservasAdapter extends FirestorePagingAdapter<Reservas, Cli
     @Override
     protected void onBindViewHolder(@NonNull ReservasViewHolder holder, int position, @NonNull Reservas model) {
         holder.tvModelo.setText(model.getDevice().getModelo());
-        String fecha = df.format(model.getHoraReserva().toDate());
-        holder.tvFechaRealizado.setText(fecha);
+        String fechaReserva = df.format(model.getHoraReserva().toDate());
+        String fechaFin = df.format(model.getHoraReserva().toDate());
+        if(model.getHoraFinReserva()==null){
+            holder.tvFechaRealizado.setText(fechaReserva);
+        }else{
+            holder.tvFechaRealizado.setText(fechaFin);
+        }
         holder.reservas = model;
         Glide.with(holder.itemView.getContext()).load(model.getDevice().getFotoPrincipal())
                 .placeholder(AppCompatResources.getDrawable(holder.itemView.getContext(), R.drawable.image_device_placeholder)).dontAnimate()
@@ -67,11 +74,31 @@ public class ClienteReservasAdapter extends FirestorePagingAdapter<Reservas, Cli
             itemView.setOnClickListener(view -> {
                 Intent reservaIntent = new Intent(itemView.getContext(), nextActivity);
                 reservaIntent.putExtra("reservas", reservas);
+                reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
+                reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
+                if(reservas.getHoraRespuesta()!=null) {
+                    reservaIntent.putExtra("horaRespNano", reservas.getHoraRespuesta().getNanoseconds());
+                    reservaIntent.putExtra("horaRespSec", reservas.getHoraRespuesta().getSeconds());
+                }
+                if(reservas.getEstado().equals("Solicitud aceptada")){
+                    reservaIntent.putExtra("lati", reservas.getLugarRecojo().getLatitude());
+                    reservaIntent.putExtra("long", reservas.getLugarRecojo().getLongitude());
+                }
                 itemView.getContext().startActivity(reservaIntent);
             });
             btnDetalle.setOnClickListener(v -> {
                 Intent reservaIntent = new Intent(itemView.getContext(), nextActivity);
                 reservaIntent.putExtra("reservas", reservas);
+                reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
+                reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
+                if(reservas.getHoraRespuesta()!=null) {
+                    reservaIntent.putExtra("horaRespNano", reservas.getHoraRespuesta().getNanoseconds());
+                    reservaIntent.putExtra("horaRespSec", reservas.getHoraRespuesta().getSeconds());
+                }
+                if(reservas.getEstado().equals("Solicitud aceptada")){
+                    reservaIntent.putExtra("lati", reservas.getLugarRecojo().getLatitude());
+                    reservaIntent.putExtra("long", reservas.getLugarRecojo().getLongitude());
+                }
                 itemView.getContext().startActivity(reservaIntent);
             });
 

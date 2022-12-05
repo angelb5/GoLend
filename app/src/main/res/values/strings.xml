@@ -39,6 +39,8 @@
     <string name="solicitudes_pendientes">Solicitudes pendientes</string>
     <string name="apigateway_ip">http://eureka-eli.brazilsouth.cloudapp.azure.com:8090</string>
 
+    <string name="mapbox_access_token">pk.eyJ1IjoiYXptb3JhbGVzbSIsImEiOiJjbGI5cXg0MnQwd2ZvM3NvMm5ob2hwbmx3In0.sm8hti-UFQfyS1_7RAt_8w</string>
+
     <string-array name="avatars">
         <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Frole_student.png?alt=media&amp;token=fc83e656-00d2-4e16-aaaf-449778d7715d</item>
         <item>https://firebasestorage.googleapis.com/v0/b/golend-e961f.appspot.com/o/avatars%2Fpfp2.png?alt=media&amp;token=de80952d-f935-402e-a5b4-559e543b0c54</item>

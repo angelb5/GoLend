@@ -8,10 +8,8 @@ import androidx.paging.PagingConfig;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,8 +17,6 @@ import android.widget.TextView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.SnapshotParser;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,10 +24,7 @@ import com.google.firebase.firestore.Query;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import pe.du.pucp.golend.Adapters.ClienteReservasAdapter;
 import pe.du.pucp.golend.Adapters.TISolicitudesAdapter;
-import pe.du.pucp.golend.Cliente.ClienteDetalleReservaActivity;
-import pe.du.pucp.golend.Cliente.ClienteReservasActivity;
 import pe.du.pucp.golend.Entity.Reservas;
 import pe.du.pucp.golend.R;
 
@@ -68,7 +61,7 @@ public class TIListSolicitudesActivity extends AppCompatActivity {
                 tvTitle.setText(R.string.reservas_curso);
                 tvTxt.setText(R.string.reservas_curso_txt_TI);
                 tvEmpty.setText(R.string.reservas_curso_empty_TI);
-                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("estado","Solicitud aprobada").whereGreaterThan("horaFinReserva", Timestamp.now());
+                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("estado","Solicitud aceptada").whereGreaterThan("horaFinReserva", Timestamp.now());
                 break;
             case "pendientes":
                 tvTitle.setText(R.string.solicitudes_pendientes);
@@ -80,7 +73,7 @@ public class TIListSolicitudesActivity extends AppCompatActivity {
                 tvTitle.setText(R.string.historial_reservas);
                 tvTxt.setText(R.string.reservas_pasadas_txt_TI);
                 tvEmpty.setText(R.string.reservas_pasadas_empty_TI);
-                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("estado","Solicitud aprobada").whereLessThan("horaFinReserva",Timestamp.now());
+                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("estado","Solicitud aceptada").whereLessThan("horaFinReserva",Timestamp.now());
                 break;
             case "rechazadas":
                 tvTitle.setText(R.string.solicitudes_rechazadas);
@@ -103,7 +96,6 @@ public class TIListSolicitudesActivity extends AppCompatActivity {
         tiSolicitudesAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
             @Override
             public Unit invoke(CombinedLoadStates combinedLoadStates) {
-                Log.d("msg", tiSolicitudesAdapter.getItemCount()+"");
                 LoadState refresh = combinedLoadStates.getRefresh();
                 if (refresh instanceof LoadState.Loading) {
                     rvListReservas.setVisibility(View.GONE);

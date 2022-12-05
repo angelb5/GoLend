@@ -5,14 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 
@@ -43,8 +40,13 @@ public class TISolicitudesAdapter extends FirestorePagingAdapter<Reservas, TISol
     @Override
     protected void onBindViewHolder(@NonNull TISolicitudesAdapter.ReservasViewHolder holder, int position, @NonNull Reservas model) {
         holder.tvSolicitud.setText(("Solicitud "+model.getKey()).toUpperCase(Locale.ROOT));
-        String fecha = df.format(model.getHoraReserva().toDate());
-        holder.tvFechaRealizado.setText(fecha);
+        String fechaReserva = df.format(model.getHoraReserva().toDate());
+        String fechaFin = df.format(model.getHoraReserva().toDate());
+        if(model.getHoraFinReserva()==null){
+            holder.tvFechaRealizado.setText(fechaReserva);
+        }else{
+            holder.tvFechaRealizado.setText(fechaFin);
+        }
         holder.tvCliente.setText(model.getClienteUser().getNombre());
         holder.reservas = model;
     }
@@ -66,11 +68,31 @@ public class TISolicitudesAdapter extends FirestorePagingAdapter<Reservas, TISol
             itemView.setOnClickListener(view -> {
                 Intent reservaIntent = new Intent(itemView.getContext(), nextActivity);
                 reservaIntent.putExtra("reservas", reservas);
+                reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
+                reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
+                if(reservas.getHoraRespuesta()!=null) {
+                    reservaIntent.putExtra("horaRespNano", reservas.getHoraRespuesta().getNanoseconds());
+                    reservaIntent.putExtra("horaRespSec", reservas.getHoraRespuesta().getSeconds());
+                }
+                if(reservas.getEstado().equals("Solicitud aceptada")){
+                    reservaIntent.putExtra("lati", reservas.getLugarRecojo().getLatitude());
+                    reservaIntent.putExtra("long", reservas.getLugarRecojo().getLongitude());
+                }
                 itemView.getContext().startActivity(reservaIntent);
             });
             btnDetalleTI.setOnClickListener(v -> {
                 Intent reservaIntent = new Intent(itemView.getContext(), nextActivity);
                 reservaIntent.putExtra("reservas", reservas);
+                reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
+                reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
+                if(reservas.getHoraRespuesta()!=null) {
+                    reservaIntent.putExtra("horaRespNano", reservas.getHoraRespuesta().getNanoseconds());
+                    reservaIntent.putExtra("horaRespSec", reservas.getHoraRespuesta().getSeconds());
+                }
+                if(reservas.getEstado().equals("Solicitud aceptada")){
+                    reservaIntent.putExtra("lati", reservas.getLugarRecojo().getLatitude());
+                    reservaIntent.putExtra("long", reservas.getLugarRecojo().getLongitude());
+                }
                 itemView.getContext().startActivity(reservaIntent);
             });
         }

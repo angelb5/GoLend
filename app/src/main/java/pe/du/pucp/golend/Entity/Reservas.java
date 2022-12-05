@@ -4,6 +4,8 @@ import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.GeoPoint;
+
 import java.util.ArrayList;
 
 public class Reservas implements Serializable {
@@ -19,7 +21,8 @@ public class Reservas implements Serializable {
     private ArrayList<String> Programas;
     private String dni;
     private String otros;
-    private String lugarRecojo;
+    private transient GeoPoint lugarRecojo;
+    private String nombreLugarRecojo;
     private String motivoRechazo;
     private String estado;
     private transient Timestamp horaReserva;
@@ -29,7 +32,7 @@ public class Reservas implements Serializable {
     public Reservas() {
     }
 
-    public Reservas(ClienteUser clienteUser, TIUser tiUser, Device device, String motivoReserva, String curso, Integer tiempoReserva, ArrayList<String> programas, String dni, String otros, String lugarRecojo, String motivoRechazo, String estado, Timestamp horaReserva, Timestamp horaFinReserva, Timestamp horaRespuesta) {
+    public Reservas(ClienteUser clienteUser, TIUser tiUser, Device device, String motivoReserva, String curso, Integer tiempoReserva, ArrayList<String> programas, String dni, String otros, GeoPoint lugarRecojo,String nombreLugarRecojo, String motivoRechazo, String estado, Timestamp horaReserva, Timestamp horaFinReserva, Timestamp horaRespuesta) {
         this.clienteUser = clienteUser;
         this.tiUser = tiUser;
         this.device = device;
@@ -40,6 +43,7 @@ public class Reservas implements Serializable {
         this.dni = dni;
         this.otros = otros;
         this.lugarRecojo = lugarRecojo;
+        this.nombreLugarRecojo = nombreLugarRecojo;
         this.motivoRechazo = motivoRechazo;
         this.estado = estado;
         this.horaReserva = horaReserva;
@@ -129,11 +133,11 @@ public class Reservas implements Serializable {
         this.otros = otros;
     }
 
-    public String getLugarRecojo() {
+    public GeoPoint getLugarRecojo() {
         return lugarRecojo;
     }
 
-    public void setLugarRecojo(String lugarRecojo) {
+    public void setLugarRecojo(GeoPoint lugarRecojo) {
         this.lugarRecojo = lugarRecojo;
     }
 
@@ -175,6 +179,14 @@ public class Reservas implements Serializable {
 
     public void setHoraRespuesta(Timestamp horaRespuesta) {
         this.horaRespuesta = horaRespuesta;
+    }
+
+    public String getNombreLugarRecojo() {
+        return nombreLugarRecojo;
+    }
+
+    public void setNombreLugarRecojo(String nombreLugarRecojo) {
+        this.nombreLugarRecojo = nombreLugarRecojo;
     }
 
     public static class ClienteUser implements Serializable {

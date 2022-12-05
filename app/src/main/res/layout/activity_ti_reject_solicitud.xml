@@ -23,9 +23,10 @@
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
             android:clickable="true"
+            android:onClick="backButton"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
-            android:src="@drawable/button_back"/>
+            android:src="@drawable/button_back" />
 
         <TextView
             style="@style/GreenSemiBoldSubtitle"
@@ -71,7 +72,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:onClick="rechazarSolicitud"
             android:text="Rechazar solicitud" />
 
     </LinearLayout>

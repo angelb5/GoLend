@@ -67,7 +67,7 @@ public class ClienteReservasActivity extends AppCompatActivity {
                 tvTitle.setText(R.string.reservas_curso);
                 tvTxt.setText(R.string.reservas_curso_txt);
                 tvEmpty.setText(R.string.reservas_curso_empty);
-                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("clienteUser.uid",user.getUid()).whereEqualTo("estado","Solicitud aprobada").whereGreaterThan("horaFinReserva", Timestamp.now());
+                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("clienteUser.uid",user.getUid()).whereEqualTo("estado","Solicitud aceptada").whereGreaterThan("horaFinReserva", Timestamp.now());
                 break;
             case "pendientes":
                 tvTitle.setText(R.string.solicitudes_pendientes);
@@ -79,7 +79,7 @@ public class ClienteReservasActivity extends AppCompatActivity {
                 tvTitle.setText(R.string.reservas_pasadas);
                 tvTxt.setText(R.string.reservas_pasadas_txt);
                 tvEmpty.setText(R.string.reservas_pasadas_empty);
-                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("clienteUser.uid",user.getUid()).whereEqualTo("estado","Solicitud aprobada").whereLessThan("horaFinReserva",Timestamp.now());
+                reservasQuery = FirebaseFirestore.getInstance().collection("reservas").whereEqualTo("clienteUser.uid",user.getUid()).whereEqualTo("estado","Solicitud aceptada").whereLessThan("horaFinReserva",Timestamp.now());
                 break;
             case "rechazadas":
                 tvTitle.setText(R.string.solicitudes_rechazadas);

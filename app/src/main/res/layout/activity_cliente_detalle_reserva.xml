@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context=".Cliente.ClienteDetalleReservaActivity">
 
@@ -23,6 +24,7 @@
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
             android:clickable="true"
+            android:onClick="backButton"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
             android:src="@drawable/button_back" />
@@ -41,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llClienteDetalleReservasTitle"
         app:layout_constraintVertical_bias="1.0">
@@ -73,39 +75,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingVertical="16dp"
-                android:layout_gravity="center_vertical">
+                android:paddingVertical="16dp">
+
                 <ImageView
                     android:id="@+id/ivClienteDetalleReservasCardImage"
                     android:layout_width="96dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/role_student"
+                    android:layout_marginEnd="24dp"
                     android:scaleType="fitCenter"
-                    android:layout_marginEnd="24dp"/>
+                    android:src="@drawable/role_student" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/tvClienteDetalleReservasCardMarca"
                         style="@style/WhiteMedium16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:text="MSI"/>
+                        android:text="MSI" />
+
                     <TextView
                         android:id="@+id/tvClienteDetalleReservasCardModelo"
                         style="@style/WhiteSemiBoldSubtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:textAllCaps="true"
-                        android:text="Katana GF76"/>
+                        android:text="Katana GF76"
+                        android:textAllCaps="true" />
+
                     <LinearLayout
-                        android:gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/ivClienteDetalleReservasDispCategoria"
@@ -140,7 +147,7 @@
                     android:text="Lugar de recojo" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/glClienteDetalleReservasRecojoLugar"
+                    android:id="@+id/glClienteDetalleReservasLugarRecojo"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_columnWeight="1"
@@ -155,13 +162,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/ivClienteDetalleReservasRecojoLugar"
+                    <com.mapbox.mapboxsdk.maps.MapView
+                        android:id="@+id/mvTIDetalleSolicMap"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_photo" />
+                        mapbox:mapbox_cameraTargetLng="-77.02824"
+                        mapbox:mapbox_cameraZoom="11" />
                 </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvClienteDetalleReservasLugarRecojoNombre"
+                    style="@style/GreenSemiBoldSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="Lugar de recojo" />
 
             </LinearLayout>
 
@@ -182,7 +200,6 @@
 
                 <TextView
                     android:id="@+id/tvClienteDetalleReservasMotivoRechazo"
-                    style="@style/InputGrey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp" />
@@ -200,7 +217,6 @@
 
             <TextView
                 android:id="@+id/tvClienteDetalleReservasMotivo"
-                style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
@@ -215,7 +231,6 @@
 
             <TextView
                 android:id="@+id/tvClienteDetalleReservasCurso"
-                style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
@@ -230,7 +245,6 @@
 
             <TextView
                 android:id="@+id/tvClienteDetalleReservasTiempo"
-                style="@style/InputGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
@@ -247,12 +261,11 @@
                 android:id="@+id/cgClienteDetalleReservasProgramas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvClienteDetalleReservasProgramasTittle"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginBottom="10dp">
-            </com.google.android.material.chip.ChipGroup>
+                app:layout_constraintTop_toBottomOf="@+id/tvClienteDetalleReservasProgramasTittle"
+                app:layout_constraintTop_toTopOf="parent"></com.google.android.material.chip.ChipGroup>
 
             <TextView
                 android:id="@+id/tvClienteDetalleReservasDNItittle"
@@ -296,28 +309,35 @@
                     android:src="@drawable/ic_photo" />
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tvClienteDetalleReservasOtrosTittle"
-                style="@style/WhiteSemiBoldSubtitle"
+            <LinearLayout
+                android:id="@+id/llClienteDetalleReservasOtros"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Otros" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvClienteDetalleReservasOtros"
-                style="@style/InputGrey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:inputType="textMultiLine" />
+                <TextView
+                    android:id="@+id/tvClienteDetalleReservasOtrosTittle"
+                    style="@style/WhiteSemiBoldSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Otros" />
+
+                <TextView
+                    android:id="@+id/tvClienteDetalleReservasOtros"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:inputType="textMultiLine" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llClienteDetalleReservasResponse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvClienteDetalleReservasResponseTittle"

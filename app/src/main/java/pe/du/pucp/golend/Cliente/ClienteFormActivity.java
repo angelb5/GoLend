@@ -13,10 +13,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.media.RatingCompat;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,6 +71,30 @@ public class ClienteFormActivity extends AppCompatActivity {
     boolean isBusy = false;
     User userG;
     String fotoUrl = "";
+
+
+    ActivityResultLauncher<Intent> launcherPhotoDocument = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Uri uri = result.getData().getData();
+                    compressImageAndUpload(uri,50);
+                } else {
+                    Toast.makeText(ClienteFormActivity.this, "Debe seleccionar un archivo", Toast.LENGTH_SHORT).show();
+                }
+            }
+    );
+
+    ActivityResultLauncher<Intent> launcherPhotoCamera = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    compressImageAndUpload(cameraUri,25);
+                } else {
+                    Toast.makeText(ClienteFormActivity.this, "Debe seleccionar un archivo", Toast.LENGTH_SHORT).show();
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +183,7 @@ public class ClienteFormActivity extends AppCompatActivity {
             tiempoReserva=0;
         }
 
-        String dni = "";
+        String dni = fotoUrl;
         String otros = etOtros.getText().toString().trim();
 
         if(motivo.isEmpty()){
@@ -213,36 +235,17 @@ public class ClienteFormActivity extends AppCompatActivity {
             isInvalid = true;
         }
 
+        if(fotoUrl.isEmpty()){
+            isInvalid = true;
+        }
+
 
         if(isInvalid) return;
 
         mostrarCargando();
 
-        crearSolicitudFirestore(new Reservas(new Reservas.ClienteUser(userG.getNombre(), user.getUid(), user.getPhotoUrl().toString(), userG.getRol()), new Reservas.TIUser(), new Reservas.Device(device.getModelo(),device.getMarca(), device.getFotosUrl().get(0),device.getCategoria(), device.getKey()), motivo,curso, tiempoReserva, listProgramas, dni, otros,"","","Pendiente de aprobación",Timestamp.now(),null,null));
+        crearSolicitudFirestore(new Reservas(new Reservas.ClienteUser(userG.getNombre(), user.getUid(), user.getPhotoUrl().toString(), userG.getRol()), new Reservas.TIUser(), new Reservas.Device(device.getModelo(),device.getMarca(), device.getFotosUrl().get(0),device.getCategoria(), device.getKey()), motivo,curso, tiempoReserva, listProgramas, dni, otros,null,"","","Pendiente de aprobación",Timestamp.now(),null,null));
     }
-
-    ActivityResultLauncher<Intent> launcherPhotoDocument = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    Uri uri = result.getData().getData();
-                    compressImageAndUpload(uri,50);
-                } else {
-                    Toast.makeText(ClienteFormActivity.this, "Debe seleccionar un archivo", Toast.LENGTH_SHORT).show();
-                }
-            }
-    );
-
-    ActivityResultLauncher<Intent> launcherPhotoCamera = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    compressImageAndUpload(cameraUri,25);
-                } else {
-                    Toast.makeText(ClienteFormActivity.this, "Debe seleccionar un archivo", Toast.LENGTH_SHORT).show();
-                }
-            }
-    );
 
     public void compressImageAndUpload(Uri uri, int quality){
         try{
