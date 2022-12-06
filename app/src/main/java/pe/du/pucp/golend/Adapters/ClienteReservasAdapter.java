@@ -45,10 +45,10 @@ public class ClienteReservasAdapter extends FirestorePagingAdapter<Reservas, Cli
     protected void onBindViewHolder(@NonNull ReservasViewHolder holder, int position, @NonNull Reservas model) {
         holder.tvModelo.setText(model.getDevice().getModelo());
         String fechaReserva = df.format(model.getHoraReserva().toDate());
-        String fechaFin = df.format(model.getHoraReserva().toDate());
         if(model.getHoraFinReserva()==null){
             holder.tvFechaRealizado.setText(fechaReserva);
         }else{
+            String fechaFin = df.format(model.getHoraFinReserva().toDate());
             holder.tvFechaRealizado.setText(fechaFin);
         }
         holder.reservas = model;
@@ -76,6 +76,10 @@ public class ClienteReservasAdapter extends FirestorePagingAdapter<Reservas, Cli
                 reservaIntent.putExtra("reservas", reservas);
                 reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
                 reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
+                if(reservas.getHoraFinReserva() != null){
+                    reservaIntent.putExtra("horaFinNano", reservas.getHoraFinReserva().getNanoseconds());
+                    reservaIntent.putExtra("horaFinSec", reservas.getHoraFinReserva().getSeconds());
+                }
                 if(reservas.getHoraRespuesta()!=null) {
                     reservaIntent.putExtra("horaRespNano", reservas.getHoraRespuesta().getNanoseconds());
                     reservaIntent.putExtra("horaRespSec", reservas.getHoraRespuesta().getSeconds());
@@ -91,11 +95,17 @@ public class ClienteReservasAdapter extends FirestorePagingAdapter<Reservas, Cli
                 reservaIntent.putExtra("reservas", reservas);
                 reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
                 reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
+                if(reservas.getHoraFinReserva() != null){
+                    reservaIntent.putExtra("horaFinNano", reservas.getHoraFinReserva().getNanoseconds());
+                    reservaIntent.putExtra("horaFinSec", reservas.getHoraFinReserva().getSeconds());
+                }
                 if(reservas.getHoraRespuesta()!=null) {
                     reservaIntent.putExtra("horaRespNano", reservas.getHoraRespuesta().getNanoseconds());
                     reservaIntent.putExtra("horaRespSec", reservas.getHoraRespuesta().getSeconds());
                 }
                 if(reservas.getEstado().equals("Solicitud aceptada")){
+                    reservaIntent.putExtra("lati", reservas.getLugarRecojo().getLatitude());
+                    reservaIntent.putExtra("long", reservas.getLugarRecojo().getLongitude());
                     reservaIntent.putExtra("lati", reservas.getLugarRecojo().getLatitude());
                     reservaIntent.putExtra("long", reservas.getLugarRecojo().getLongitude());
                 }

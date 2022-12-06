@@ -4,18 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -28,8 +31,13 @@ import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import pe.du.pucp.golend.Entity.Reservas;
 import pe.du.pucp.golend.R;
@@ -70,6 +78,8 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
     Button btnAccept;
     Button btnReject;
     TextView nombreLugar;
+    Integer horaFinNano;
+    Long horaFinSec;
     private ArrayList<String> listProgramas = new ArrayList<>();
     ProgressBar pbLoading;
     private MapView mapView;
@@ -77,6 +87,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
     private SymbolManager symbolManager;
     private Double latitude;
     private  Double longitud;
+    Button btnDevuelto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +136,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         btnAccept = findViewById(R.id.btnTIDetalleSolicitudAceptarSoli);
         btnReject = findViewById(R.id.btnTIDetalleSolicitudRechazarSoli);
         nombreLugar = findViewById(R.id.tvTIDetalleSolicitudLugarRecojoNombre);
+        btnDevuelto = findViewById(R.id.btnTIDetalleSoliDevolver);
 
         if(horaReservaNano!=null && horaReservaSec!=null){
             String fechaReserva = df.format(new Timestamp(horaReservaSec,horaReservaNano).toDate());
@@ -187,6 +199,18 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         tvRolCliente.setText(reservas.getClienteUser().getRol());
         Glide.with(this).load(reservas.getClienteUser().getAvatarUrl()).placeholder(R.drawable.avatar_placeholder).into(ivCliente);
 
+        btnDevuelto.setOnClickListener(v -> {
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("horaFinReserva",Timestamp.now());
+            FirebaseFirestore.getInstance().collection("reservas").document(reservas.getKey()).update(updates).addOnSuccessListener(unused -> {
+                Toast.makeText(TIDetalleSolicitudActivity.this, "Se realizó la act con éxito", Toast.LENGTH_SHORT).show();
+                finish();
+            }).addOnFailureListener(e->{
+                Log.d("msg",e.getMessage());
+                Toast.makeText(TIDetalleSolicitudActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
+            });
+        });
+
         if(!reservas.getEstado().equals("Pendiente de aprobación")){
             llResponseInfo.setVisibility(View.VISIBLE);
             llButtons.setVisibility(View.GONE);
@@ -208,6 +232,19 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
                 case "Solicitud aceptada":
                     llAcceptInfo.setVisibility(View.VISIBLE);
                     llRejectInfo.setVisibility(View.GONE);
+                    horaFinNano = (Integer) intent.getSerializableExtra("horaFinNano");
+                    horaFinSec = (Long) intent.getSerializableExtra("horaFinSec");
+                    if(horaFinNano==null && horaFinSec==null){
+                        btnDevuelto.setVisibility(View.VISIBLE);
+                        LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
+                        Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
+                        String fechaFin = df.format(date);
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finaliza " + fechaFin);
+                    }else{
+                        btnDevuelto.setVisibility(View.GONE);
+                        String fechafin= df.format(new Timestamp(horaFinSec,horaFinNano).toDate());
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finalizó " + fechafin);
+                    }
                     tvEstado.setTextColor(getResources().getColor(R.color.green_main));
                     mapView = findViewById(R.id.mvTIDetalleSolicMap);
                     mapView.onCreate(savedInstanceState);

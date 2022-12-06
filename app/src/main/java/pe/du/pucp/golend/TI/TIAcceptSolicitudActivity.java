@@ -121,14 +121,11 @@ public class TIAcceptSolicitudActivity extends AppCompatActivity {
         Map<String, Object> updates = new HashMap<>();
         btnAccept = findViewById(R.id.btnTIAcceptSolicitudAceptarSoli);
         btnAccept.setOnClickListener(v -> {
-            if(lugarRecojo.isEmpty()){
+            if(!lugarRecojo.isEmpty()){
                 updates.put("tiUser.avatarUrl",user.getPhotoUrl().toString());
                 updates.put("tiUser.nombre",user.getDisplayName());
                 updates.put("tiUser.uid",user.getUid());
                 updates.put("estado","Solicitud aceptada");
-                LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
-                Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
-                updates.put("horaFinReserva",new Timestamp(date));
                 updates.put("horaRespuesta",Timestamp.now());
                 updates.put("lugarRecojo", new GeoPoint(lugarRecojoLat,lugarRecojoLong));
                 updates.put("nombreLugarRecojo",lugarRecojo);

@@ -27,7 +27,10 @@ import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -61,6 +64,8 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
     ImageView ivFotoEquipo;
     Integer horaReservaNano;
     Long horaReservaSec;
+    Integer horaFinNano;
+    Long horaFinSec;
     Integer horaRespNano;
     Long horaRespSec;
     TextView nombreLugar;
@@ -124,7 +129,6 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
         tvEstado.setText(reservas.getEstado());
         tvMotivo.setText(reservas.getMotivoReserva());
         tvCurso.setText(reservas.getCurso());
-        tvTiempoReserva.setText(reservas.getTiempoReserva().toString());
 
         if(reservas.getOtros().isEmpty()){
             llOtros.setVisibility(View.GONE);
@@ -196,6 +200,17 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
                     tvEstado.setTextColor(getResources().getColor(R.color.green_main));
                     mapView = findViewById(R.id.mvTIDetalleSolicMap);
                     mapView.onCreate(savedInstanceState);
+                    horaFinNano = (Integer) intent.getSerializableExtra("horaFinNano");
+                    horaFinSec = (Long) intent.getSerializableExtra("horaFinSec");
+                    if(horaFinNano==null && horaFinSec==null){
+                        LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
+                        Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
+                        String fechaFin = df.format(date);
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finaliza " + fechaFin);
+                    }else{
+                        String fechafin= df.format(new Timestamp(horaFinSec,horaFinNano).toDate());
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finalizó " + fechafin);
+                    }
                     LatLng coord = new LatLng(latitude,longitud);
                     if(latitude != null && longitud != null){
                         mapView.getMapAsync(mapboxMap -> mapboxMap.setStyle(Style.OUTDOORS, style -> {
@@ -215,6 +230,7 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
             }
 
         }else{
+            tvTiempoReserva.setText(reservas.getTiempoReserva().toString());
             tvEstado.setTextColor(getResources().getColor(R.color.yellow));
             llResponseInfo.setVisibility(View.GONE);
             llAcceptInfo.setVisibility(View.GONE);

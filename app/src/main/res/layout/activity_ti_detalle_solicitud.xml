@@ -377,6 +377,20 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnTIDetalleSoliDevolver"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green_main"
+                android:text="Marcar como equipo devuelto"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:drawableLeft="@drawable/ic_baseline_check_circle_24"
+                android:drawableRight="@drawable/ic_baseline_check_circle_24">
+            </Button>
 
             <LinearLayout
                 android:id="@+id/llTIDetalleSolicitudButtons"

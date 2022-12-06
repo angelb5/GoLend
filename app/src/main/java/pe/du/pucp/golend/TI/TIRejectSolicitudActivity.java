@@ -60,11 +60,8 @@ public class TIRejectSolicitudActivity extends AppCompatActivity {
             updates.put("tiUser.nombre",user.getDisplayName());
             updates.put("tiUser.uid",user.getUid());
             updates.put("estado","Solicitud rechazada");
-            LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
-            Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
-            updates.put("horaFinReserva",new Timestamp(date));
             updates.put("horaRespuesta",Timestamp.now());
-            updates.put("motivoRechazo",etMotivoRechazo.getText());
+            updates.put("motivoRechazo",etMotivoRechazo.getText().toString().trim());
             FirebaseFirestore.getInstance().collection("reservas").document(reservas.getKey()).update(updates).addOnSuccessListener(unused -> {
                 Toast.makeText(TIRejectSolicitudActivity.this, "Se realizó la act con éxito", Toast.LENGTH_SHORT).show();
                 finish();

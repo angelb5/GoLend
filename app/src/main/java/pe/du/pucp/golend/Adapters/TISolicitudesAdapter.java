@@ -41,10 +41,10 @@ public class TISolicitudesAdapter extends FirestorePagingAdapter<Reservas, TISol
     protected void onBindViewHolder(@NonNull TISolicitudesAdapter.ReservasViewHolder holder, int position, @NonNull Reservas model) {
         holder.tvSolicitud.setText(("Solicitud "+model.getKey()).toUpperCase(Locale.ROOT));
         String fechaReserva = df.format(model.getHoraReserva().toDate());
-        String fechaFin = df.format(model.getHoraReserva().toDate());
         if(model.getHoraFinReserva()==null){
             holder.tvFechaRealizado.setText(fechaReserva);
         }else{
+            String fechaFin = df.format(model.getHoraFinReserva().toDate());
             holder.tvFechaRealizado.setText(fechaFin);
         }
         holder.tvCliente.setText(model.getClienteUser().getNombre());
@@ -68,6 +68,10 @@ public class TISolicitudesAdapter extends FirestorePagingAdapter<Reservas, TISol
             itemView.setOnClickListener(view -> {
                 Intent reservaIntent = new Intent(itemView.getContext(), nextActivity);
                 reservaIntent.putExtra("reservas", reservas);
+                if(reservas.getHoraFinReserva() != null){
+                    reservaIntent.putExtra("horaFinNano", reservas.getHoraFinReserva().getNanoseconds());
+                    reservaIntent.putExtra("horaFinSec", reservas.getHoraFinReserva().getSeconds());
+                }
                 reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
                 reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
                 if(reservas.getHoraRespuesta()!=null) {
@@ -83,6 +87,10 @@ public class TISolicitudesAdapter extends FirestorePagingAdapter<Reservas, TISol
             btnDetalleTI.setOnClickListener(v -> {
                 Intent reservaIntent = new Intent(itemView.getContext(), nextActivity);
                 reservaIntent.putExtra("reservas", reservas);
+                if(reservas.getHoraFinReserva() != null){
+                    reservaIntent.putExtra("horaFinNano", reservas.getHoraFinReserva().getNanoseconds());
+                    reservaIntent.putExtra("horaFinSec", reservas.getHoraFinReserva().getSeconds());
+                }
                 reservaIntent.putExtra("horaReservaNano",reservas.getHoraReserva().getNanoseconds());
                 reservaIntent.putExtra("horaReservaSec",reservas.getHoraReserva().getSeconds());
                 if(reservas.getHoraRespuesta()!=null) {
