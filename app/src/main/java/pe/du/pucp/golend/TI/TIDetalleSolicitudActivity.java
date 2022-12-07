@@ -285,6 +285,11 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
     public void backButton(View view){
         onBackPressed();
     }

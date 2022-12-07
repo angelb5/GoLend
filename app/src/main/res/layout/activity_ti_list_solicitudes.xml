@@ -86,45 +86,57 @@
             app:dividerInsetStart="16dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:visibility="visible"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llTIListSolicitudesTitle">
+        app:layout_constraintTop_toBottomOf="@+id/llTIListSolicitudesTitle"
+        app:layout_constraintVertical_bias="0.0">
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmerTiListSolicitudes"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            app:duration="800">
-            <LinearLayout
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llTIListSolicitudesTitle">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerTiListSolicitudes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include layout="@layout/card_ti_solicitud_placeholder" />
-                <include layout="@layout/card_ti_solicitud_placeholder" />
-                <include layout="@layout/card_ti_solicitud_placeholder" />
-                <include layout="@layout/card_ti_solicitud_placeholder" />
-                <include layout="@layout/card_ti_solicitud_placeholder" />
-                <include layout="@layout/card_ti_solicitud_placeholder" />
-                <include layout="@layout/card_ti_solicitud_placeholder" />
-            </LinearLayout>
-        </com.facebook.shimmer.ShimmerFrameLayout>
+                android:orientation="vertical"
+                app:duration="800">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+                    <include layout="@layout/card_ti_solicitud_placeholder" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTIListSolicitudes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="88dp"
-            android:background="@null"
-            android:nestedScrollingEnabled="false"
-            tools:itemCount="5"
-            tools:listitem="@layout/card_ti_solicitud" />
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTIListSolicitudes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="88dp"
+                android:background="@null"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="5"
+                tools:listitem="@layout/card_ti_solicitud" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
