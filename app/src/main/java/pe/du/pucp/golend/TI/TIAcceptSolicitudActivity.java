@@ -124,7 +124,8 @@ public class TIAcceptSolicitudActivity extends AppCompatActivity {
             updates.put("tiUser.nombre",user.getDisplayName());
             updates.put("tiUser.uid",user.getUid());
             updates.put("estado","Solicitud aceptada");
-            updates.put("horaRespuesta",Timestamp.now());
+            Timestamp horaRespuesta = Timestamp.now();
+            updates.put("horaRespuesta", horaRespuesta);
             updates.put("lugarRecojo", new GeoPoint(lugarRecojoLat,lugarRecojoLong));
             updates.put("nombreLugarRecojo",lugarRecojo);
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -152,6 +153,13 @@ public class TIAcceptSolicitudActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void unused) {
                     Toast.makeText(TIAcceptSolicitudActivity.this, "Se realizó la act con éxito", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.putExtra("horaRespNano", horaRespuesta.getNanoseconds());
+                    intent.putExtra("horaRespSec", horaRespuesta.getSeconds());
+                    intent.putExtra("lati", lugarRecojoLat);
+                    intent.putExtra("long", lugarRecojoLong);
+                    intent.putExtra("nombreLugarRecojo", lugarRecojo);
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
             }).addOnFailureListener(e -> {

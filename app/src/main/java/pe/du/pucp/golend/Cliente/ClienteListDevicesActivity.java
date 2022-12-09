@@ -141,7 +141,6 @@ public class ClienteListDevicesActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(deviceCardAdapter);
-        deviceCardAdapter.startListening();
 
         deviceCardAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
             @Override
@@ -230,24 +229,6 @@ public class ClienteListDevicesActivity extends AppCompatActivity {
 
     public void backButton(View view){
         onBackPressed();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(deviceCardAdapter!=null) deviceCardAdapter.stopListening();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(deviceCardAdapter!=null)  deviceCardAdapter.startListening();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(deviceCardAdapter!=null) deviceCardAdapter.stopListening();
     }
 
     public SnapshotParser<Device> deviceSnapshotParser = new SnapshotParser<Device>() {

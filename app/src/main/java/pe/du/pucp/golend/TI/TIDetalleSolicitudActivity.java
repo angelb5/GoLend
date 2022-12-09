@@ -1,5 +1,9 @@
 package pe.du.pucp.golend.TI;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,12 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -40,6 +52,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import pe.du.pucp.golend.Entity.Device;
 import pe.du.pucp.golend.Entity.Reservas;
 import pe.du.pucp.golend.R;
 
@@ -89,6 +102,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
     private Double latitude;
     private  Double longitud;
     Button btnDevuelto;
+    Reservas reservas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +116,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
             return;
         }
 
-        Reservas reservas = (Reservas) intent.getSerializableExtra("reservas");
+        reservas = (Reservas) intent.getSerializableExtra("reservas");
         horaReservaNano = (Integer) intent.getSerializableExtra("horaReservaNano");
         horaReservaSec = (Long) intent.getSerializableExtra("horaReservaSec");
         latitude = (Double) intent.getSerializableExtra("lati");
@@ -138,6 +152,8 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         btnReject = findViewById(R.id.btnTIDetalleSolicitudRechazarSoli);
         nombreLugar = findViewById(R.id.tvTIDetalleSolicitudLugarRecojoNombre);
         btnDevuelto = findViewById(R.id.btnTIDetalleSoliDevolver);
+        mapView = findViewById(R.id.mvTIDetalleSolicMap);
+        mapView.onCreate(savedInstanceState);
 
         if(horaReservaNano!=null && horaReservaSec!=null){
             String fechaReserva = df.format(new Timestamp(horaReservaSec,horaReservaNano).toDate());
@@ -202,13 +218,38 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
 
         btnDevuelto.setOnClickListener(v -> {
             Map<String, Object> updates = new HashMap<>();
-            updates.put("horaFinReserva",Timestamp.now());
-            FirebaseFirestore.getInstance().collection("reservas").document(reservas.getKey()).update(updates).addOnSuccessListener(unused -> {
-                Toast.makeText(TIDetalleSolicitudActivity.this, "Se realizó la act con éxito", Toast.LENGTH_SHORT).show();
-                finish();
-            }).addOnFailureListener(e->{
-                Log.d("msg",e.getMessage());
-                Toast.makeText(TIDetalleSolicitudActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
+            Timestamp finReservaTimestamp = Timestamp.now();
+            updates.put("horaFinReserva", finReservaTimestamp);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            final DocumentReference reservaRef = db.collection("reservas").document(reservas.getKey());
+            final DocumentReference deviceRef = db.collection("devices").document(reservas.getDevice().getUid());
+            db.runTransaction(new Transaction.Function<Void>() {
+                @Nullable
+                @Override
+                public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                    DocumentSnapshot snapshot = transaction.get(deviceRef);
+                    Device device = snapshot.toObject(Device.class);
+                    Map<String, Object> deviceUpdates = new HashMap<>();
+                    deviceUpdates.put("enPrestamo", device.getEnPrestamo()-1);
+                    deviceUpdates.put("disponibles", device.getDisponibles()+1);
+                    transaction.update(deviceRef, deviceUpdates);
+                    transaction.update(reservaRef, updates);
+                    return null;
+                }
+            }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(TIDetalleSolicitudActivity.this, "Se marcó el equipo como devuelto", Toast.LENGTH_SHORT).show();
+                    btnDevuelto.setVisibility(View.GONE);
+                    String fechafin= df.format(finReservaTimestamp.toDate());
+                    tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finalizó " + fechafin);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("msg",e.getMessage());
+                    Toast.makeText(TIDetalleSolicitudActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
+                }
             });
         });
 
@@ -247,8 +288,6 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
                         tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finalizó " + fechafin);
                     }
                     tvEstado.setTextColor(getResources().getColor(R.color.green_main));
-                    mapView = findViewById(R.id.mvTIDetalleSolicMap);
-                    mapView.onCreate(savedInstanceState);
                     LatLng coord = new LatLng(latitude,longitud);
                     if(latitude != null && longitud != null){
                         mapView.getMapAsync(mapboxMap -> mapboxMap.setStyle(Style.OUTDOORS, style -> {
@@ -276,20 +315,88 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
             btnAccept.setOnClickListener(view -> {
                 Intent reservasIntent = new Intent(view.getContext(), TIAcceptSolicitudActivity.class);
                 reservasIntent.putExtra("reservas",reservas);
-                view.getContext().startActivity(reservasIntent);
+                acceptlauncher.launch(reservasIntent);
             });
             btnReject.setOnClickListener(view -> {
                 Intent reservasIntent = new Intent(view.getContext(), TIRejectSolicitudActivity.class);
                 reservasIntent.putExtra("reservas",reservas);
-                view.getContext().startActivity(reservasIntent);
+                rejectlauncher.launch(reservasIntent);
             });
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
+    ActivityResultLauncher<Intent> acceptlauncher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+            if (result.getResultCode() != RESULT_OK || result.getData() == null) return;
+            Intent data = result.getData();
+            horaRespNano = data.getIntExtra("horaRespNano",0);
+            horaRespSec = data.getLongExtra("horaRespSec",0);
+            latitude = data.getDoubleExtra("lati", 0);
+            longitud = data.getDoubleExtra("long",0);
+            String lugarRecojo = data.getStringExtra("nombreLugarRecojo");
+            FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+            llResponseInfo.setVisibility(View.VISIBLE);
+            llButtons.setVisibility(View.GONE);
+            if(horaRespNano!=null && horaRespSec!=null){
+                String fechaResp = df.format(new Timestamp(horaRespSec,horaRespNano).toDate());
+                tvFechaResponse.setText(fechaResp);
+            }
+            tvNombreTI.setText(fUser.getDisplayName());
+            Glide.with(this).load(fUser.getPhotoUrl()).placeholder(R.drawable.avatar_placeholder).into(ivti);
+
+            llAcceptInfo.setVisibility(View.VISIBLE);
+            llRejectInfo.setVisibility(View.GONE);
+            btnDevuelto.setVisibility(View.VISIBLE);
+            LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
+            Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
+            String fechaFin = df.format(date);
+            tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finaliza " + fechaFin);
+
+            tvEstado.setText("Solicitud aceptada");
+            tvEstado.setTextColor(getResources().getColor(R.color.green_main));
+
+            LatLng coord = new LatLng(latitude,longitud);
+            if(latitude != null && longitud != null){
+                mapView.getMapAsync(mapboxMap -> mapboxMap.setStyle(Style.OUTDOORS, style -> {
+                    this.mapboxMap = mapboxMap;
+                    mapboxMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitud)).setTitle(lugarRecojo));
+                    symbolManager = new SymbolManager(mapView, mapboxMap, style, null);
+                    SymbolOptions symbolOptions = new SymbolOptions()
+                            .withLatLng(coord)
+                            .withIconImage(ICON_ID)
+                            .withIconSize(0.5f);
+                    symbolManager.create(symbolOptions);
+                    mapboxMap.setCameraPosition(new CameraPosition.Builder().target(new LatLng(latitude,longitud)).zoom(15).build());
+                }));
+            }
+            nombreLugar.setText(lugarRecojo);
+        });
+
+    ActivityResultLauncher<Intent> rejectlauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() != RESULT_OK || result.getData() == null) return;
+                Intent data = result.getData();
+                horaRespNano = data.getIntExtra("horaRespNano",0);
+                horaRespSec = data.getLongExtra("horaRespSec",0);
+                String motivoRechazo = data.getStringExtra("motivoRechazo");
+                FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+                llResponseInfo.setVisibility(View.VISIBLE);
+                llButtons.setVisibility(View.GONE);
+                if(horaRespNano!=null && horaRespSec!=null){
+                    String fechaResp = df.format(new Timestamp(horaRespSec,horaRespNano).toDate());
+                    tvFechaResponse.setText(fechaResp);
+                }
+                tvNombreTI.setText(fUser.getDisplayName());
+                Glide.with(this).load(fUser.getPhotoUrl()).placeholder(R.drawable.avatar_placeholder).into(ivti);
+
+                llRejectInfo.setVisibility(View.VISIBLE);
+                llAcceptInfo.setVisibility(View.GONE);
+                tvEstado.setText("Solicitud rechazada");
+                tvEstado.setTextColor(getResources().getColor(R.color.red));
+                tvMotivoRechazo.setText(motivoRechazo);
+            });
 
     public void backButton(View view){
         onBackPressed();

@@ -51,14 +51,32 @@ public class TIRejectSolicitudActivity extends AppCompatActivity {
         etMotivoRechazo = findViewById(R.id.etTIRejectSolicitudMotivoRechazo);
         btnReject = findViewById(R.id.btnTIRejectSolicitudRechazarSoli);
         btnReject.setOnClickListener(v -> {
+            String motivoRechazo = etMotivoRechazo.getText().toString().trim();
+            if (motivoRechazo.isEmpty()) {
+               etMotivoRechazo.setError("No puede estar vacío");
+               etMotivoRechazo.requestFocus();
+               return;
+            }
+            if (motivoRechazo.length()>500) {
+                etMotivoRechazo.setError("No puede ser mayor a 500 caracteres");
+                etMotivoRechazo.requestFocus();
+                return;
+            }
+
             updates.put("tiUser.avatarUrl",user.getPhotoUrl().toString());
             updates.put("tiUser.nombre",user.getDisplayName());
             updates.put("tiUser.uid",user.getUid());
-            updates.put("estado","Solicitud rechazada");
-            updates.put("horaRespuesta",Timestamp.now());
-            updates.put("motivoRechazo",etMotivoRechazo.getText().toString().trim());
+            updates.put("estado", "Solicitud rechazada");
+            Timestamp horaRespuesta = Timestamp.now();
+            updates.put("horaRespuesta", horaRespuesta);
+            updates.put("motivoRechazo", motivoRechazo);
             FirebaseFirestore.getInstance().collection("reservas").document(reservas.getKey()).update(updates).addOnSuccessListener(unused -> {
                 Toast.makeText(TIRejectSolicitudActivity.this, "Se realizó la act con éxito", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent();
+                intent1.putExtra("horaRespNano", horaRespuesta.getNanoseconds());
+                intent1.putExtra("horaRespSec", horaRespuesta.getSeconds());
+                intent1.putExtra("motivoRechazo", motivoRechazo);
+                setResult(RESULT_OK, intent1);
                 finish();
             }).addOnFailureListener(e->{
                 Log.d("msg",e.getMessage());

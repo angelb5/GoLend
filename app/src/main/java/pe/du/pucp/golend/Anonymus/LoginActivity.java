@@ -252,9 +252,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     int i = 1;
                     for (DocumentChange dc : snapshots.getDocumentChanges()) {
-                        snapshots.getDocuments();
+                        Log.d("msg", dc.toString());
                         if (dc.getType() == DocumentChange.Type.ADDED){
-                            Log.d("msg", dc.getDocument().toString());
                             String modelo = dc.getDocument().getString("device.modelo");
                             String estado = dc.getDocument().getString("estado");
                             if (estado == null || modelo == null) return;

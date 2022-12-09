@@ -137,4 +137,9 @@ public class TIListSolicitudesActivity extends AppCompatActivity {
         onBackPressed();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (tiSolicitudesAdapter!= null) tiSolicitudesAdapter.refresh();
+    }
 }

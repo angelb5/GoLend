@@ -224,8 +224,8 @@ public class ClienteFormActivity extends AppCompatActivity {
         }
 
         if(listProgramas.isEmpty()){
-            etTiempoReserva.setError("El campo programas no puede estar vacío");
-            etTiempoReserva.requestFocus();
+            etProgramas.setError("El campo programas no puede estar vacío");
+            etProgramas.requestFocus();
             isInvalid = true;
         }
 

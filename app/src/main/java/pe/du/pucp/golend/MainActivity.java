@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 int i = 1;
                 for (DocumentChange dc : snapshots.getDocumentChanges()) {
-                    snapshots.getDocuments();
                     if (dc.getType() == DocumentChange.Type.ADDED){
                         Log.d("msg", dc.getDocument().toString());
                         String modelo = dc.getDocument().getString("device.modelo");
@@ -146,12 +145,12 @@ public class MainActivity extends AppCompatActivity {
                         if (estado.equals("Solicitud rechazada")) {
                             titulo = "Tu solicitud ha sido rechazada";
                             msg = "No hemos podido aprobar tu solicitud de préstamo";
-                            typeReservas = "enCurso";
+                            typeReservas = "rechazadas";
                             notificarSolicitud(typeReservas, titulo, msg, i);
                         } else if (estado.equals("Solicitud aceptada")) {
                             titulo = "Tu solicitud ha sido aprobada";
                             msg = "Se aprobó tu solicitud de préstamo para " +modelo;
-                            typeReservas = "rechazadas";
+                            typeReservas = "enCurso";
                             notificarSolicitud(typeReservas, titulo, msg, i);
                         }
                     }
