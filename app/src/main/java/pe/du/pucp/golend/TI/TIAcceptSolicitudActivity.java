@@ -1,6 +1,7 @@
 package pe.du.pucp.golend.TI;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,11 +14,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.Transaction;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -44,6 +51,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import pe.du.pucp.golend.Entity.Device;
 import pe.du.pucp.golend.Entity.Reservas;
 import pe.du.pucp.golend.R;
 
@@ -102,43 +110,54 @@ public class TIAcceptSolicitudActivity extends AppCompatActivity {
             finish();
             return;
         }
-
-        Geocoder geocoder = new Geocoder(TIAcceptSolicitudActivity.this, Locale.getDefault());
-        try {
-            List <Address> addresses = geocoder.getFromLocation(cia.getLatitude(), cia.getLongitude(), 1);
-            String address = addresses.get(0).getSubLocality();
-            String cityName = addresses.get(0).getLocality();
-            String stateName = addresses.get(0).getAdminArea();
-            Log.wtf("msg",address);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
         Reservas reservas = (Reservas) intent.getSerializableExtra("reservas");
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        Map<String, Object> updates = new HashMap<>();
         btnAccept = findViewById(R.id.btnTIAcceptSolicitudAceptarSoli);
         btnAccept.setOnClickListener(v -> {
-            if(!lugarRecojo.isEmpty()){
-                updates.put("tiUser.avatarUrl",user.getPhotoUrl().toString());
-                updates.put("tiUser.nombre",user.getDisplayName());
-                updates.put("tiUser.uid",user.getUid());
-                updates.put("estado","Solicitud aceptada");
-                updates.put("horaRespuesta",Timestamp.now());
-                updates.put("lugarRecojo", new GeoPoint(lugarRecojoLat,lugarRecojoLong));
-                updates.put("nombreLugarRecojo",lugarRecojo);
-                FirebaseFirestore.getInstance().collection("reservas").document(reservas.getKey()).update(updates).addOnSuccessListener(unused -> {
+            if(lugarRecojo.isEmpty()) {
+                Toast.makeText(TIAcceptSolicitudActivity.this, "Debes seleccionar un lugar de recojo", Toast.LENGTH_LONG).show();
+                return;
+            }
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("tiUser.avatarUrl",user.getPhotoUrl().toString());
+            updates.put("tiUser.nombre",user.getDisplayName());
+            updates.put("tiUser.uid",user.getUid());
+            updates.put("estado","Solicitud aceptada");
+            updates.put("horaRespuesta",Timestamp.now());
+            updates.put("lugarRecojo", new GeoPoint(lugarRecojoLat,lugarRecojoLong));
+            updates.put("nombreLugarRecojo",lugarRecojo);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            final DocumentReference reservaRef = db.collection("reservas").document(reservas.getKey());
+            final DocumentReference deviceRef = db.collection("devices").document(reservas.getDevice().getUid());
+            db.runTransaction(new Transaction.Function<Void>() {
+                @Nullable
+                @Override
+                public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                    DocumentSnapshot snapshot = transaction.get(deviceRef);
+                    Device device = snapshot.toObject(Device.class);
+                    if (device.getDisponibles()<=0) {
+                        Toast.makeText(TIAcceptSolicitudActivity.this, "No hay dispositivos disponibles", Toast.LENGTH_SHORT).show();
+                        return null;
+                    }
+                    Map<String, Object> deviceUpdates = new HashMap<>();
+                    deviceUpdates.put("enPrestamo", device.getEnPrestamo()+1);
+                    deviceUpdates.put("totalPrestamo", device.getTotalPrestamo()+1);
+                    deviceUpdates.put("disponibles", device.getDisponibles()-1);
+                    transaction.update(deviceRef, deviceUpdates);
+                    transaction.update(reservaRef, updates);
+                    return null;
+                }
+            }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
                     Toast.makeText(TIAcceptSolicitudActivity.this, "Se realizó la act con éxito", Toast.LENGTH_SHORT).show();
                     finish();
-                }).addOnFailureListener(e->{
-                    Log.d("msg",e.getMessage());
-                    Toast.makeText(TIAcceptSolicitudActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
-                });
-            }else{
-                Toast.makeText(TIAcceptSolicitudActivity.this, "Debes seleccionar un lugar de recojo", Toast.LENGTH_LONG).show();
-            }
+                }
+            }).addOnFailureListener(e -> {
+                Log.d("msg",e.getMessage());
+                Toast.makeText(TIAcceptSolicitudActivity.this, "Ocurrió un error en el servidor", Toast.LENGTH_LONG).show();
+            });
         });
 
         List<LatLng> innerLatLngs = new ArrayList<>();

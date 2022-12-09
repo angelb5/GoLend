@@ -16,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 
+import java.time.LocalTime;
+
 import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.R;
 
@@ -24,6 +26,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     User user;
     BottomNavigationView bottomNavigationView;
     TextView tvNombre;
+    TextView tvSaludo;
     ImageView ivPfp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
 
         setBottomNavigationView();
+        tvSaludo = findViewById(R.id.tvAdminHomeSaludo);
         tvNombre = findViewById(R.id.tvAdminHomeNombre);
         ivPfp = findViewById(R.id.ivAdminHomePfp);
 
@@ -39,6 +43,23 @@ public class AdminHomeActivity extends AppCompatActivity {
         user = gson.fromJson(sharedPreferences.getString("user",""),User.class);
         tvNombre.setText(user.getNombre());
         Glide.with(this).load(user.getAvatarUrl()).into(ivPfp);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mostrarSaludo();
+    }
+
+    public void mostrarSaludo(){
+        String saludo = "Buenas noches,";
+        LocalTime localTime = LocalTime.now();
+        if(localTime.getHour()>=6 && localTime.getHour()<12){
+            saludo = "Buenos días,";
+        } else if(localTime.getHour() >= 12 && localTime.getHour()<19){
+            saludo = "Buenas tardes, ";
+        }
+        tvSaludo.setText(saludo);
     }
 
     public void setBottomNavigationView(){

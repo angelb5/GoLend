@@ -58,17 +58,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingVertical="16dp">
+                android:paddingTop="16dp">
 
                 <ImageView
                     android:id="@+id/ivTIDetalleSolicitudImageCliente"
-                    android:layout_width="96dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:layout_marginEnd="12dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/role_student" />
 
                 <LinearLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -80,16 +81,15 @@
                         android:layout_height="wrap_content"
                         android:textSize="18dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="4dp"
-                        android:text="Oliver Bustamente" />
+                        android:text="De Oliver Bustamente" />
 
                     <TextView
                         android:id="@+id/tvTIDetalleSolicitudRolCliente"
-                        style="@style/WhiteMedium16"
+                        style="@style/GreyMedium16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="14 Oct 2022" />
+                        android:text="Estudiante y JP" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -98,8 +98,7 @@
                 style="@style/WhiteMedium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
                 android:text="Enviada hoy" />
 
             <TextView
@@ -107,7 +106,6 @@
                 style="@style/WhiteMedium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp"
                 android:text="Enviada hoy" />
 
@@ -117,27 +115,30 @@
                 android:orientation="horizontal"
                 android:paddingVertical="16dp"
                 android:layout_gravity="center_vertical">
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
+                    app:shapeAppearanceOverlay="@style/roundedCorners8"
+                    android:background="@color/blue_dark"
                     android:id="@+id/ivTIDetalleSolicitudCardImage"
-                    android:layout_width="96dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="112dp"
+                    android:layout_height="96dp"
                     android:src="@drawable/role_student"
-                    android:scaleType="fitCenter"
-                    android:layout_marginEnd="24dp"/>
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="12dp"/>
                 <LinearLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/tvTIDetalleSolicitudCardMarca"
-                        style="@style/WhiteMedium16"
+                        style="@style/GreySemibold16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:text="MSI"/>
                     <TextView
                         android:id="@+id/tvTIDetalleSolicitudCardModelo"
-                        style="@style/WhiteSemiBoldSubtitle"
+                        style="@style/WhiteBoldSubtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
@@ -150,8 +151,8 @@
 
                         <ImageView
                             android:id="@+id/ivTiDispCategoria"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:src="@drawable/ic_laptop_green" />
 
                         <TextView
@@ -380,17 +381,19 @@
             <Button
                 android:id="@+id/btnTIDetalleSoliDevolver"
                 android:visibility="gone"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/green_main"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="Marcar como equipo devuelto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:drawablePadding="8dp"
                 android:drawableLeft="@drawable/ic_baseline_check_circle_24"
-                android:drawableRight="@drawable/ic_baseline_check_circle_24">
-            </Button>
+                android:drawableRight="@drawable/ic_baseline_check_circle_24"/>
 
             <LinearLayout
                 android:id="@+id/llTIDetalleSolicitudButtons"
@@ -441,25 +444,25 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="24dp"
                     android:paddingVertical="16dp">
 
                     <ImageView
                         android:id="@+id/ivTIDetalleSolicitudImageTI"
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_marginEnd="12dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/role_student" />
 
                     <LinearLayout
+                        android:layout_gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvTIDetalleSolicitudNombreTI"
-                            style="@style/GreenMedium16"
+                            style="@style/GreenSemiBoldSubtitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -468,7 +471,7 @@
 
                         <TextView
                             android:id="@+id/tvTIDetalleSolicitudFechaResponseTI"
-                            style="@style/GreySemibold12"
+                            style="@style/GreySemibold16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4dp"

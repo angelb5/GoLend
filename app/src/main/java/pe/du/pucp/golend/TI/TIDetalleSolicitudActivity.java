@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -64,7 +65,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
     TextView tvModelo;
     TextView tvCategoria;
     ImageView ivCategoriaDisp;
-    ImageView ivFotoEquipo;
+    ShapeableImageView ivFotoEquipo;
     TextView tvMotivoRechazo;
     TextView tvFechaResponse;
     TextView tvRolCliente;
@@ -146,7 +147,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         tvEstado.setText(reservas.getEstado());
         tvMotivo.setText(reservas.getMotivoReserva());
         tvCurso.setText(reservas.getCurso());
-        tvTiempoReserva.setText(reservas.getTiempoReserva().toString());
+        tvTiempoReserva.setText(reservas.getTiempoReserva() + " días");
 
         if(reservas.getOtros().isEmpty()){
             llOtros.setVisibility(View.GONE);
@@ -195,7 +196,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         ivFotoEquipo.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(this).load(reservas.getDevice().getFotoPrincipal()).placeholder(com.denzcoskun.imageslider.R.drawable.placeholder).into(ivFotoEquipo);
 
-        tvNombreCliente.setText(reservas.getClienteUser().getNombre());
+        tvNombreCliente.setText("De "+reservas.getClienteUser().getNombre());
         tvRolCliente.setText(reservas.getClienteUser().getRol());
         Glide.with(this).load(reservas.getClienteUser().getAvatarUrl()).placeholder(R.drawable.avatar_placeholder).into(ivCliente);
 
@@ -239,11 +240,11 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
                         LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
                         Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
                         String fechaFin = df.format(date);
-                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finaliza " + fechaFin);
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finaliza " + fechaFin);
                     }else{
                         btnDevuelto.setVisibility(View.GONE);
                         String fechafin= df.format(new Timestamp(horaFinSec,horaFinNano).toDate());
-                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finalizó " + fechafin);
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finalizó " + fechafin);
                     }
                     tvEstado.setTextColor(getResources().getColor(R.color.green_main));
                     mapView = findViewById(R.id.mvTIDetalleSolicMap);

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.Timestamp;
 
 import java.text.DateFormat;
@@ -43,7 +44,7 @@ public class ClienteReservasAdapter extends FirestorePagingAdapter<Reservas, Cli
 
     @Override
     protected void onBindViewHolder(@NonNull ReservasViewHolder holder, int position, @NonNull Reservas model) {
-        holder.tvModelo.setText(model.getDevice().getModelo());
+        holder.tvModelo.setText(model.getDevice().getMarca()+" "+model.getDevice().getModelo());
         String fechaReserva = df.format(model.getHoraReserva().toDate());
         if(model.getHoraFinReserva()==null){
             holder.tvFechaRealizado.setText(fechaReserva);
@@ -59,7 +60,7 @@ public class ClienteReservasAdapter extends FirestorePagingAdapter<Reservas, Cli
 
     public class ReservasViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView ivPhoto;
+        ShapeableImageView ivPhoto;
         TextView tvModelo;
         TextView tvFechaRealizado;
         Reservas reservas;

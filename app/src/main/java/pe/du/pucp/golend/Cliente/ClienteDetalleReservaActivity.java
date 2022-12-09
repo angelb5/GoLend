@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.Timestamp;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -61,7 +62,7 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
     TextView tvModelo;
     TextView tvCategoria;
     ImageView ivCategoriaDisp;
-    ImageView ivFotoEquipo;
+    ShapeableImageView ivFotoEquipo;
     Integer horaReservaNano;
     Long horaReservaSec;
     Integer horaFinNano;
@@ -206,10 +207,10 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
                         LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
                         Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
                         String fechaFin = df.format(date);
-                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finaliza " + fechaFin);
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finaliza " + fechaFin);
                     }else{
                         String fechafin= df.format(new Timestamp(horaFinSec,horaFinNano).toDate());
-                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + "- Finalizó " + fechafin);
+                        tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finalizó " + fechafin);
                     }
                     LatLng coord = new LatLng(latitude,longitud);
                     if(latitude != null && longitud != null){
@@ -230,7 +231,7 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
             }
 
         }else{
-            tvTiempoReserva.setText(reservas.getTiempoReserva().toString());
+            tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días");
             tvEstado.setTextColor(getResources().getColor(R.color.yellow));
             llResponseInfo.setVisibility(View.GONE);
             llAcceptInfo.setVisibility(View.GONE);

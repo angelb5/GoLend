@@ -60,7 +60,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"
                 android:text="Enviada hoy" />
 
             <TextView
@@ -68,7 +67,6 @@
                 style="@style/WhiteMedium14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp"
                 android:text="Enviada hoy" />
 
@@ -79,22 +77,25 @@
                 android:orientation="horizontal"
                 android:paddingVertical="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
+                    app:shapeAppearanceOverlay="@style/roundedCorners8"
+                    android:background="@color/blue_dark"
                     android:id="@+id/ivClienteDetalleReservasCardImage"
-                    android:layout_width="96dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="24dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/role_student" />
+                    android:layout_width="112dp"
+                    android:layout_height="96dp"
+                    android:layout_marginEnd="12dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_device_placeholder" />
 
                 <LinearLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvClienteDetalleReservasCardMarca"
-                        style="@style/WhiteMedium16"
+                        style="@style/GreySemibold16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -102,7 +103,7 @@
 
                     <TextView
                         android:id="@+id/tvClienteDetalleReservasCardModelo"
-                        style="@style/WhiteSemiBoldSubtitle"
+                        style="@style/WhiteBoldSubtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
@@ -116,8 +117,8 @@
 
                         <ImageView
                             android:id="@+id/ivClienteDetalleReservasDispCategoria"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:src="@drawable/ic_laptop_green" />
 
                         <TextView
@@ -352,34 +353,33 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="24dp"
                     android:paddingVertical="16dp">
 
                     <ImageView
                         android:id="@+id/ivClienteDetalleReservaImageTI"
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_marginEnd="12dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/role_student" />
 
                     <LinearLayout
+                        android:layout_gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvClienteDetalleReservaNombreTI"
-                            style="@style/GreenMedium16"
+                            style="@style/GreenSemiBoldSubtitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
                             android:layout_marginBottom="4dp"
                             android:text="Oliver Bustamente" />
 
                         <TextView
                             android:id="@+id/tvClienteDetalleReservaFechaResponseTI"
-                            style="@style/GreySemibold12"
+                            style="@style/GreyMedium16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4dp"

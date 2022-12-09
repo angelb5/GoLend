@@ -3,6 +3,7 @@ package pe.du.pucp.golend.TI;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +28,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -263,14 +268,40 @@ public class TIUpdateDeviceActivity extends AppCompatActivity {
         device.setDescripcion(descripcion);
         device.setAccesorios(accesorios);
         device.setStock(stock);
-        device.setDisponibles(stock-device.getEnPrestamo());
         device.setSearchKeywords(generateKeywords(marca + " " +modelo));
-        FirebaseFirestore.getInstance().collection("devices").document(device.getKey()).set(device).addOnSuccessListener(unused -> {
-            ocultarCargando();
-            Intent intent = new Intent();
-            intent.putExtra("dispositivo", device);
-            setResult(RESULT_OK, intent);
-            finish();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final DocumentReference deviceRef = db.collection("devices").document(device.getKey());
+        db.runTransaction(new Transaction.Function<Device>() {
+            @NonNull
+            @Override
+            public Device apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(deviceRef);
+                Device devSnap = snapshot.toObject(Device.class);
+                if (device.getStock()<devSnap.getEnPrestamo()) {
+                    throw new FirebaseFirestoreException("Stock menor a equipos en préstamo", FirebaseFirestoreException.Code.ABORTED);
+                }
+                devSnap.setMarca(device.getMarca());
+                devSnap.setSearchMarca(device.getSearchMarca());
+                devSnap.setModelo(device.getModelo());
+                devSnap.setDescripcion(device.getDescripcion());
+                devSnap.setAccesorios(device.getAccesorios());
+                devSnap.setStock(device.getStock());
+                devSnap.setDisponibles(devSnap.getStock()-devSnap.getEnPrestamo());
+                devSnap.setSearchKeywords(device.getSearchKeywords());
+                devSnap.setFotosUrl(device.getFotosUrl());
+                transaction.set(deviceRef, devSnap);
+                return devSnap;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Device>() {
+            @Override
+            public void onSuccess(Device device) {
+                ocultarCargando();
+                Intent intent = new Intent();
+                intent.putExtra("dispositivo", device);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
         }).addOnFailureListener(e -> {
             ocultarCargando();
             Toast.makeText(TIUpdateDeviceActivity.this, "No se pudo actualizar el dispositivo", Toast.LENGTH_SHORT).show();
