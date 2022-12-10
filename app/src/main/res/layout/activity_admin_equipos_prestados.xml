@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
             android:clickable="true"
+            android:onClick="backButton"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
             android:src="@drawable/button_back" />

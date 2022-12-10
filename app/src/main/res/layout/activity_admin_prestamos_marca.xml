@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:background="?actionBarItemBackground"
             android:clickable="true"
+            android:onClick="backButton"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
             android:src="@drawable/button_back" />
@@ -89,6 +90,14 @@
 
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvReportesMarca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                tools:itemCount="0"
+                tools:listitem="@layout/card_statistics_disp_marca" />
 
         </LinearLayout>
 

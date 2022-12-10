@@ -128,7 +128,7 @@
                         style="@style/WhiteSemiBoldSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="100"
+                        android:text="0"
                         android:textSize="70dp" />
 
                     <TextView
@@ -208,6 +208,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvAdminHomeMarca"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="7dp"
@@ -224,7 +225,7 @@
                             android:paddingHorizontal="8dp">
 
                             <ImageView
-                                android:id="@+id/ivCardEquiposPopularesCategoria"
+                                android:id="@+id/ivAdminHomeCategoria"
                                 android:layout_width="14dp"
                                 android:layout_height="14dp"
                                 android:layout_marginEnd="4dp"
@@ -232,7 +233,7 @@
                                 app:tint="@color/green_main" />
 
                             <TextView
-                                android:id="@+id/tvCardEquiposPopularesCategoria"
+                                android:id="@+id/tvAdminHomeCategoria"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/montserrat_medium"
@@ -253,6 +254,7 @@
                         android:textSize="50dp" />
 
                     <TextView
+                        android:id="@+id/tvAdminHomePrestamos"
                         style="@style/WhiteSemiBoldSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -261,10 +263,15 @@
                         android:text="préstamos" />
                 </LinearLayout>
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivAdminHomeFotoDisp"
+                    app:shapeAppearanceOverlay="@style/roundedCorners8"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/image_device_placeholder"></ImageView>
+                    android:layout_height="170dp"
+                    android:src="@drawable/image_device_placeholder">
+                </com.google.android.material.imageview.ShapeableImageView>
             </LinearLayout>
 
         </RelativeLayout>

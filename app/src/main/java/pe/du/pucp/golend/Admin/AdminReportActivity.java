@@ -63,4 +63,12 @@ public class AdminReportActivity extends AppCompatActivity {
     public void goToListClientes(View view) {
         startActivity(new Intent(AdminReportActivity.this, AdminListClientesActivity.class));
     }
+
+    public void goToReports(View view) {
+        startActivity(new Intent(AdminReportActivity.this, AdminPrestamosMarcaActivity.class));
+    }
+
+    public void goToEquiposPopulares(View view) {
+        startActivity(new Intent(AdminReportActivity.this, AdminEquiposPrestadosActivity.class));
+    }
 }

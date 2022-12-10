@@ -23,6 +23,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
@@ -32,15 +38,26 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import pe.du.pucp.golend.Entity.Device;
 import pe.du.pucp.golend.Entity.Reservas;
@@ -345,5 +362,37 @@ public class ClienteFormActivity extends AppCompatActivity {
         btnBack.setClickable(true);
         btnReservar.setClickable(true);
     }
+
+//    public void getRestaurantes(Ima) throws JSONException {
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//
+//        JSONObject jsonBody = new JSONObject();
+//        jsonBody.put("image", "Shozib@gmail.com");
+//        final String mRequestBody = jsonBody.toString();
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Toast.makeText(ClienteFormActivity.this,response,Toast.LENGTH_LONG).show();
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(ClienteFormActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+//                    }
+//                }){
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put(KEY_EMAIL, email);
+//                return params;
+//            }
+//
+//        };
+//
+//        getRequestOtpPage().addToRequestQueue(stringRequest);
+//    }
 
 }
