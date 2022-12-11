@@ -363,36 +363,4 @@ public class ClienteFormActivity extends AppCompatActivity {
         btnReservar.setClickable(true);
     }
 
-//    public void getRestaurantes(Ima) throws JSONException {
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//
-//        JSONObject jsonBody = new JSONObject();
-//        jsonBody.put("image", "Shozib@gmail.com");
-//        final String mRequestBody = jsonBody.toString();
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(ClienteFormActivity.this,response,Toast.LENGTH_LONG).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(ClienteFormActivity.this,error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                }){
-//            @Override
-//            protected Map<String,String> getParams(){
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put(KEY_EMAIL, email);
-//                return params;
-//            }
-//
-//        };
-//
-//        getRequestOtpPage().addToRequestQueue(stringRequest);
-//    }
-
 }
