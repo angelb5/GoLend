@@ -164,7 +164,6 @@ public class LoginActivity extends AppCompatActivity {
                 switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
                     case "Cliente":
                         if(firebaseUser.isEmailVerified()){
-                            Toast.makeText(LoginActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();
                             addListener();
                             intentPermisos  = new Intent(LoginActivity.this, ClienteHomeActivity.class);
                             startActivity(intentPermisos);
@@ -175,13 +174,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         break;
                     case "Admin":
-                        Toast.makeText(LoginActivity.this, "Hola Admin", Toast.LENGTH_SHORT).show();
                         intentPermisos  = new Intent(LoginActivity.this, AdminHomeActivity.class);
                         startActivity(intentPermisos);
                         finish();
                         break;
                     case "TI":
-                        Toast.makeText(LoginActivity.this, "Hola TI", Toast.LENGTH_SHORT).show();
                         intentPermisos  = new Intent(LoginActivity.this, TIHomeActivity.class);
                         startActivity(intentPermisos);
                         finish();

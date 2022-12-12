@@ -3,6 +3,7 @@ package pe.du.pucp.golend.Cliente;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,15 +23,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -38,31 +39,27 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import pe.du.pucp.golend.Entity.Device;
 import pe.du.pucp.golend.Entity.Reservas;
 import pe.du.pucp.golend.Entity.User;
+import pe.du.pucp.golend.Interfaces.BlurApi;
 import pe.du.pucp.golend.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 
 public class ClienteFormActivity extends AppCompatActivity {
 
@@ -83,6 +80,7 @@ public class ClienteFormActivity extends AppCompatActivity {
     private ImageButton btnPhotoCam;
     private Button btnReservar;
     ProgressBar pbPhoto;
+    TextView tvPhoto;
     ProgressBar pbLoading;
     FirebaseUser user;
     boolean isBusy = false;
@@ -95,7 +93,7 @@ public class ClienteFormActivity extends AppCompatActivity {
             result -> {
                 if (result.getResultCode() == RESULT_OK) {
                     Uri uri = result.getData().getData();
-                    compressImageAndUpload(uri,50);
+                    compressImageAndUpload(uri);
                 } else {
                     Toast.makeText(ClienteFormActivity.this, "Debe seleccionar un archivo", Toast.LENGTH_SHORT).show();
                 }
@@ -106,7 +104,7 @@ public class ClienteFormActivity extends AppCompatActivity {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK) {
-                    compressImageAndUpload(cameraUri,25);
+                    compressImageAndUpload(cameraUri);
                 } else {
                     Toast.makeText(ClienteFormActivity.this, "Debe seleccionar un archivo", Toast.LENGTH_SHORT).show();
                 }
@@ -138,18 +136,23 @@ public class ClienteFormActivity extends AppCompatActivity {
         etProgramas = findViewById(R.id.etClienteFormProgramas);
         etOtros = findViewById(R.id.etClienteFormOtros);
         pbPhoto = findViewById(R.id.pbClienteDNIPhoto);
+        tvPhoto = findViewById(R.id.tvClienteDNIPhoto);
         pbLoading = findViewById(R.id.pbClienteFormLoading);
         btnBack = findViewById(R.id.ibClienteFormBack);
         btnPhotoAttach = findViewById(R.id.ibClienteFormPhotoAttach);
         btnPhotoCam = findViewById(R.id.ibClienteFormPhotoCam);
         btnReservar = findViewById(R.id.btnClienteFormEnviarSoli);
         cgProgramas = findViewById(R.id.cgClienteFormProgramas);
+
+        pbPhoto.setIndeterminate(true);
         etProgramas.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
                     Chip chip = new Chip(ClienteFormActivity.this);
                     String programa = etProgramas.getText().toString().trim();
+                    if (programa.isEmpty()) return false;
+
                     if(!listProgramas.contains(programa.toLowerCase(Locale.ROOT))){
                         ChipDrawable drawable = ChipDrawable.createFromAttributes(ClienteFormActivity.this,null,0, com.denzcoskun.imageslider.R.style.Widget_MaterialComponents_Chip_Entry);
                         chip.setChipDrawable(drawable);
@@ -254,6 +257,8 @@ public class ClienteFormActivity extends AppCompatActivity {
 
         if(fotoUrl.isEmpty()){
             isInvalid = true;
+            ivDni.requestFocus();
+            Toast.makeText(this, "No has subido foto de tu dni", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -261,16 +266,21 @@ public class ClienteFormActivity extends AppCompatActivity {
 
         mostrarCargando();
 
-        crearSolicitudFirestore(new Reservas(new Reservas.ClienteUser(userG.getNombre(), user.getUid(), user.getPhotoUrl().toString(), userG.getRol()), new Reservas.TIUser(), new Reservas.Device(device.getModelo(),device.getMarca(), device.getFotosUrl().get(0),device.getCategoria(), device.getKey()), motivo,curso, tiempoReserva, listProgramas, dni, otros,null,"","","Pendiente de aprobación",Timestamp.now(),null,null));
+        crearSolicitudFirestore(new Reservas(new Reservas.ClienteUser(userG.getNombre(), user.getUid(), userG.getAvatarUrl(), userG.getRol()), new Reservas.TIUser(), new Reservas.Device(device.getModelo(),device.getMarca(), device.getFotosUrl().get(0),device.getCategoria(), device.getKey()), motivo,curso, tiempoReserva, listProgramas, dni, otros,null,"","","Pendiente de aprobación",Timestamp.now(),null,null));
     }
 
-    public void compressImageAndUpload(Uri uri, int quality){
+    public void compressImageAndUpload(Uri uri){
+        ivDni.setStrokeWidth(0);
+        Glide.with(this).load(uri).into(ivDni);
+        ivDni.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        cargandoDNI();
         try{
             Bitmap originalImage = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            originalImage.compress(Bitmap.CompressFormat.JPEG,quality,stream);
+            originalImage.compress(Bitmap.CompressFormat.JPEG,20,stream);
             subirImagenAFirebase(stream.toByteArray());
         }catch (Exception e){
+            terminarCargandoDNI();
             Log.d("msg","error",e);
         }
     }
@@ -317,30 +327,99 @@ public class ClienteFormActivity extends AppCompatActivity {
     }
 
     public void subirImagenAFirebase(byte[] imageBytes) {
-        StorageReference photoChild = FirebaseStorage.getInstance().getReference().child("dniphotos/" + user.getUid() +"/"+"photo_" + Timestamp.now().getSeconds() + ".jpg");
-        pbPhoto.setVisibility(View.VISIBLE);
-        photoChild.putBytes(imageBytes).addOnSuccessListener(taskSnapshot -> {
-            pbPhoto.setVisibility(View.GONE);
-            photoChild.getDownloadUrl().addOnSuccessListener(uri -> {
-                fotoUrl = uri.toString();
-                Glide.with(ClienteFormActivity.this).load(fotoUrl).into(ivDni);
-                ivDni.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            }).addOnFailureListener(e ->{
-                Log.d("msg-test", "error",e);
-                Toast.makeText(ClienteFormActivity.this, "Hubo un error al subir la imagen", Toast.LENGTH_SHORT).show();
-            });
-        }).addOnFailureListener(e -> {
-            Log.d("msg-test", "error",e);
-            pbPhoto.setVisibility(View.GONE);
-            Toast.makeText(ClienteFormActivity.this, "Hubo un error al subir la imagen", Toast.LENGTH_SHORT).show();
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+        blurFaces(imageBytes);
+//        StorageReference photoChild = FirebaseStorage.getInstance().getReference().child("dniphotos/" + user.getUid() +"/"+"photo_" + Timestamp.now().getSeconds() + ".jpg");
+//        pbPhoto.setVisibility(View.VISIBLE);
+//        photoChild.putBytes(imageBytes).addOnSuccessListener(taskSnapshot -> {
+//            pbPhoto.setVisibility(View.GONE);
+//            photoChild.getDownloadUrl().addOnSuccessListener(uri -> {
+//                fotoUrl = uri.toString();
+//                Glide.with(ClienteFormActivity.this).load(fotoUrl).into(ivDni);
+//                ivDni.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//            }).addOnFailureListener(e ->{
+//                Log.d("msg-test", "error",e);
+//                Toast.makeText(ClienteFormActivity.this, "Hubo un error al subir la imagen", Toast.LENGTH_SHORT).show();
+//            });
+//        }).addOnFailureListener(e -> {
+//            Log.d("msg-test", "error",e);
+//            pbPhoto.setVisibility(View.GONE);
+//            Toast.makeText(ClienteFormActivity.this, "Hubo un error al subir la imagen", Toast.LENGTH_SHORT).show();
+//        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+//                long bytesTransferred = snapshot.getBytesTransferred();
+//                long totalByteCount = snapshot.getTotalByteCount();
+//                double progreso = (100.0 * bytesTransferred) / totalByteCount;
+//                Long round = Math.round(progreso);
+//                pbPhoto.setProgress(round.intValue());
+//            }
+//        });
+    }
+
+    public void blurFaces(byte[] bytes) {
+        RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), bytes);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.faceblurapi.com/v1/")
+                .build();
+        // create api instance
+        BlurApi api = retrofit.create(BlurApi.class);
+        // create call object
+        Call<ResponseBody> uploadFileCall = api.uploadFile("b67f6d249f4d49769cbb31974b33d858",
+                MultipartBody.Part.createFormData("image", "DNI.jpg", reqFile));
+        // async call
+        uploadFileCall.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                long bytesTransferred = snapshot.getBytesTransferred();
-                long totalByteCount = snapshot.getTotalByteCount();
-                double progreso = (100.0 * bytesTransferred) / totalByteCount;
-                Long round = Math.round(progreso);
-                pbPhoto.setProgress(round.intValue());
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
+                terminarCargandoDNI();
+                if (!response.isSuccessful() || response.body() == null) {
+                    terminarCargandoDNI();
+                    fotoUrl = "";
+                    Toast.makeText(ClienteFormActivity.this, "Ocurrió un error al subir la imagen", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Log.d("msg", response.raw().toString());
+                try {
+                    String body = response.body().string();
+                    Log.d("msg", body);
+                    JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
+                    String imageUrl = jsonObject.get("image").getAsString();
+                    Log.d("msg", imageUrl);
+                    if (imageUrl.isEmpty()) {
+                        terminarCargandoDNI();
+                        fotoUrl = "";
+                        Toast.makeText(ClienteFormActivity.this, "Ocurrió un error al subir la imagen", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    fotoUrl = imageUrl;
+                    Glide.with(ClienteFormActivity.this).load(imageUrl).listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            Log.d("msg", "load error", e);
+                            Glide.with(ClienteFormActivity.this).load(imageUrl).into(ivDni);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(ivDni);
+                } catch (IOException e) {
+                    terminarCargandoDNI();
+                    fotoUrl = "";
+                    Toast.makeText(ClienteFormActivity.this, "Ocurrió un error al subir la imagen", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Log.d("msg", response.code()+"");
+                Log.d("msg", String.valueOf(response.isSuccessful()));
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                terminarCargandoDNI();
+                Log.d("msg", "error", t);
+                Toast.makeText(ClienteFormActivity.this, "Ocurrió un error al subir la imagen", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -361,6 +440,16 @@ public class ClienteFormActivity extends AppCompatActivity {
         btnPhotoCam.setClickable(true);
         btnBack.setClickable(true);
         btnReservar.setClickable(true);
+    }
+
+    public void cargandoDNI() {
+        pbPhoto.setVisibility(View.VISIBLE);
+        tvPhoto.setVisibility(View.VISIBLE);
+    }
+
+    public void terminarCargandoDNI() {
+        pbPhoto.setVisibility(View.GONE);
+        tvPhoto.setVisibility(View.GONE);
     }
 
 //    public void getRestaurantes(Ima) throws JSONException {

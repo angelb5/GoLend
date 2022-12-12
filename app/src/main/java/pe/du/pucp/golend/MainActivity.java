@@ -89,20 +89,17 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 switch (Objects.requireNonNull(documentSnapshot.getString("permisos"))){
                     case "Cliente":
-                        Toast.makeText(MainActivity.this, "Hola Cliente", Toast.LENGTH_SHORT).show();
                         addListener();
                         intentPermisos  = new Intent(MainActivity.this, ClienteHomeActivity.class);
                         startActivity(intentPermisos);
                         finish();
                         break;
                     case "Admin":
-                        Toast.makeText(MainActivity.this, "Hola Admin", Toast.LENGTH_SHORT).show();
                         intentPermisos  = new Intent(MainActivity.this, AdminHomeActivity.class);
                         startActivity(intentPermisos);
                         finish();
                         break;
                     case "TI":
-                        Toast.makeText(MainActivity.this, "Hola TI", Toast.LENGTH_SHORT).show();
                         intentPermisos  = new Intent(MainActivity.this, TIHomeActivity.class);
                         startActivity(intentPermisos);
                         finish();

@@ -148,15 +148,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/cgClienteFormProgramas"/>
 
             <com.google.android.material.imageview.ShapeableImageView
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/unfocused"
                 android:id="@+id/ivClienteFormDNI"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="240dp"
                 android:layout_marginBottom="16dp"
-                android:background="@color/white"
+                android:background="@color/grey3_25"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_image_placeholder_48"
                 app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
-
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvClienteDNIPhoto"
+                android:textAlignment="center"
+                android:text="Aplicando efecto blur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <ProgressBar
                 android:id="@+id/pbClienteDNIPhoto"
                 style="?android:attr/progressBarStyleHorizontal"
