@@ -173,7 +173,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         }
 
         ivDni.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(this).load(reservas.getDni()).placeholder(com.denzcoskun.imageslider.R.drawable.placeholder).into(ivDni);
+        Glide.with(this).load(reservas.getDni()).placeholder(R.drawable.ic_image_placeholder_48).error(R.drawable.not_available).into(ivDni);
         listProgramas = reservas.getProgramas();
 
         for (String programa:listProgramas) {
@@ -210,7 +210,7 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
         }
 
         ivFotoEquipo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(this).load(reservas.getDevice().getFotoPrincipal()).placeholder(com.denzcoskun.imageslider.R.drawable.placeholder).into(ivFotoEquipo);
+        Glide.with(this).load(reservas.getDevice().getFotoPrincipal()).placeholder(R.drawable.image_device_placeholder).into(ivFotoEquipo);
 
         tvNombreCliente.setText("De "+reservas.getClienteUser().getNombre());
         tvRolCliente.setText(reservas.getClienteUser().getRol());

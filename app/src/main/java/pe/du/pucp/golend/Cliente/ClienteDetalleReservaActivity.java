@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -139,7 +141,7 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
         }
 
         ivDni.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(this).load(reservas.getDni()).placeholder(com.denzcoskun.imageslider.R.drawable.placeholder).into(ivDni);
+        Glide.with(this).load(reservas.getDni()).placeholder(R.drawable.ic_image_placeholder_48).error(R.drawable.not_available).into(ivDni);
         listProgramas = reservas.getProgramas();
 
         for (String programa:listProgramas) {
@@ -176,14 +178,15 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
         }
 
         ivFotoEquipo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(this).load(reservas.getDevice().getFotoPrincipal()).placeholder(com.denzcoskun.imageslider.R.drawable.placeholder).into(ivFotoEquipo);
+        Glide.with(this).load(reservas.getDevice().getFotoPrincipal()).placeholder(R.drawable.image_device_placeholder).into(ivFotoEquipo);
 
         if(!reservas.getEstado().equals("Pendiente de aprobación")){
             llResponseInfo.setVisibility(View.VISIBLE);
             horaRespNano = (Integer) intent.getSerializableExtra("horaRespNano");
             horaRespSec = (Long) intent.getSerializableExtra("horaRespSec");
+            reservas.setHoraRespuesta(new Timestamp(horaRespSec,horaRespNano));
             if(horaRespNano!=null && horaRespSec!=null){
-                String fechaResp = df.format(new Timestamp(horaRespSec,horaRespNano).toDate());
+                String fechaResp = df.format(reservas.getHoraRespuesta().toDate());
                 tvFechaResponse.setText(fechaResp);
             }
             tvNombreTI.setText(reservas.getTiUser().getNombre());
@@ -204,9 +207,10 @@ public class ClienteDetalleReservaActivity extends AppCompatActivity {
                     horaFinNano = (Integer) intent.getSerializableExtra("horaFinNano");
                     horaFinSec = (Long) intent.getSerializableExtra("horaFinSec");
                     if(horaFinNano==null && horaFinSec==null){
-                        LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
-                        Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
-                        String fechaFin = df.format(date);
+                        Calendar cal = Calendar.getInstance(Locale.getDefault());
+                        cal.setTime(reservas.getHoraRespuesta().toDate());
+                        cal.add(Calendar.DATE, reservas.getTiempoReserva());
+                        String fechaFin = df.format(cal.getTime());
                         tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finaliza " + fechaFin);
                     }else{
                         String fechafin= df.format(new Timestamp(horaFinSec,horaFinNano).toDate());

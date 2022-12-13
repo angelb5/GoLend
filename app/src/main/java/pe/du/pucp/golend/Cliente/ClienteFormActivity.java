@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -52,11 +53,15 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import pe.du.pucp.golend.Anonymus.ForgotPasswordActivity;
+import pe.du.pucp.golend.Anonymus.LoginActivity;
 import pe.du.pucp.golend.Entity.Device;
 import pe.du.pucp.golend.Entity.Reservas;
 import pe.du.pucp.golend.Entity.User;
 import pe.du.pucp.golend.Interfaces.BlurApi;
 import pe.du.pucp.golend.R;
+import pe.du.pucp.golend.ScreenMessage;
+import pe.du.pucp.golend.ScreenMessageActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -288,7 +293,16 @@ public class ClienteFormActivity extends AppCompatActivity {
     public void crearSolicitudFirestore(Reservas reservas){
         FirebaseFirestore.getInstance().collection("reservas").add(reservas).addOnSuccessListener(unused -> {
             ocultarCargando();
-            Toast.makeText(ClienteFormActivity.this, "Se realizó la solicitud con éxito", Toast.LENGTH_SHORT).show();
+            ScreenMessage screenMessage = new ScreenMessage(R.drawable.circle_tick, R.drawable.screenmessage_fingers_crossed,
+                    "Tu solicitud ha sido enviada",
+                    "Nuestro equipo la está revisando, pronto obtendrás una respuesta",
+                    "Ver mis solicitudes",
+                    false, ClienteSolicitudActivity.class);
+            Intent successIntent = new Intent(ClienteFormActivity.this, ScreenMessageActivity.class);
+            successIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            successIntent.putExtra("screenMessage", screenMessage);
+            startActivity(successIntent);
+            ActivityCompat.finishAffinity(ClienteFormActivity.this);;
             finish();
         }).addOnFailureListener(e->{
             ocultarCargando();
@@ -328,32 +342,6 @@ public class ClienteFormActivity extends AppCompatActivity {
 
     public void subirImagenAFirebase(byte[] imageBytes) {
         blurFaces(imageBytes);
-//        StorageReference photoChild = FirebaseStorage.getInstance().getReference().child("dniphotos/" + user.getUid() +"/"+"photo_" + Timestamp.now().getSeconds() + ".jpg");
-//        pbPhoto.setVisibility(View.VISIBLE);
-//        photoChild.putBytes(imageBytes).addOnSuccessListener(taskSnapshot -> {
-//            pbPhoto.setVisibility(View.GONE);
-//            photoChild.getDownloadUrl().addOnSuccessListener(uri -> {
-//                fotoUrl = uri.toString();
-//                Glide.with(ClienteFormActivity.this).load(fotoUrl).into(ivDni);
-//                ivDni.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//            }).addOnFailureListener(e ->{
-//                Log.d("msg-test", "error",e);
-//                Toast.makeText(ClienteFormActivity.this, "Hubo un error al subir la imagen", Toast.LENGTH_SHORT).show();
-//            });
-//        }).addOnFailureListener(e -> {
-//            Log.d("msg-test", "error",e);
-//            pbPhoto.setVisibility(View.GONE);
-//            Toast.makeText(ClienteFormActivity.this, "Hubo un error al subir la imagen", Toast.LENGTH_SHORT).show();
-//        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-//                long bytesTransferred = snapshot.getBytesTransferred();
-//                long totalByteCount = snapshot.getTotalByteCount();
-//                double progreso = (100.0 * bytesTransferred) / totalByteCount;
-//                Long round = Math.round(progreso);
-//                pbPhoto.setProgress(round.intValue());
-//            }
-//        });
     }
 
     public void blurFaces(byte[] bytes) {
@@ -391,19 +379,7 @@ public class ClienteFormActivity extends AppCompatActivity {
                         return;
                     }
                     fotoUrl = imageUrl;
-                    Glide.with(ClienteFormActivity.this).load(imageUrl).listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            Log.d("msg", "load error", e);
-                            Glide.with(ClienteFormActivity.this).load(imageUrl).into(ivDni);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    }).into(ivDni);
+                    Glide.with(ClienteFormActivity.this).load(imageUrl).timeout(10000).error(R.drawable.not_available).into(ivDni);
                 } catch (IOException e) {
                     terminarCargandoDNI();
                     fotoUrl = "";
@@ -451,37 +427,5 @@ public class ClienteFormActivity extends AppCompatActivity {
         pbPhoto.setVisibility(View.GONE);
         tvPhoto.setVisibility(View.GONE);
     }
-
-//    public void getRestaurantes(Ima) throws JSONException {
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//
-//        JSONObject jsonBody = new JSONObject();
-//        jsonBody.put("image", "Shozib@gmail.com");
-//        final String mRequestBody = jsonBody.toString();
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(ClienteFormActivity.this,response,Toast.LENGTH_LONG).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(ClienteFormActivity.this,error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                }){
-//            @Override
-//            protected Map<String,String> getParams(){
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put(KEY_EMAIL, email);
-//                return params;
-//            }
-//
-//        };
-//
-//        getRequestOtpPage().addToRequestQueue(stringRequest);
-//    }
 
 }
