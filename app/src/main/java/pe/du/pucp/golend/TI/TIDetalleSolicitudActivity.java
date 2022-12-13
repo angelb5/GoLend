@@ -47,6 +47,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -258,8 +259,9 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
             llButtons.setVisibility(View.GONE);
             horaRespNano = (Integer) intent.getSerializableExtra("horaRespNano");
             horaRespSec = (Long) intent.getSerializableExtra("horaRespSec");
+            reservas.setHoraRespuesta(new Timestamp(horaRespSec,horaRespNano));
             if(horaRespNano!=null && horaRespSec!=null){
-                String fechaResp = df.format(new Timestamp(horaRespSec,horaRespNano).toDate());
+                String fechaResp = df.format(reservas.getHoraRespuesta().toDate());
                 tvFechaResponse.setText(fechaResp);
             }
             tvNombreTI.setText(reservas.getTiUser().getNombre());
@@ -278,9 +280,10 @@ public class TIDetalleSolicitudActivity extends AppCompatActivity {
                     horaFinSec = (Long) intent.getSerializableExtra("horaFinSec");
                     if(horaFinNano==null && horaFinSec==null){
                         btnDevuelto.setVisibility(View.VISIBLE);
-                        LocalDateTime localDate = LocalDateTime.now().plusDays(reservas.getTiempoReserva());
-                        Date date = new Date(localDate.atZone(ZoneId.of("America/New_York")).toEpochSecond() * 1000);
-                        String fechaFin = df.format(date);
+                        Calendar cal = Calendar.getInstance(Locale.getDefault());
+                        cal.setTime(reservas.getHoraRespuesta().toDate());
+                        cal.add(Calendar.DATE, reservas.getTiempoReserva());
+                        String fechaFin = df.format(cal.getTime());
                         tvTiempoReserva.setText(reservas.getTiempoReserva().toString() + " días - Finaliza " + fechaFin);
                     }else{
                         btnDevuelto.setVisibility(View.GONE);
