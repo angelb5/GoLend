@@ -57,7 +57,8 @@
         </activity>
         <activity
             android:name=".TI.TIUpdateDeviceActivity"
-            android:exported="false">
+            android:exported="false"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -71,7 +72,8 @@
         </activity>
         <activity
             android:name=".TI.TICreateDeviceActivity"
-            android:exported="false">
+            android:exported="false"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -106,7 +108,8 @@
         </activity>
         <activity
             android:name=".Cliente.ClienteFormActivity"
-            android:exported="false">
+            android:exported="false"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
