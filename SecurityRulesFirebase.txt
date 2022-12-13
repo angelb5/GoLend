@@ -1,0 +1,57 @@
+Reglas Firestore:
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isUserTI(userid){
+			return get(/databases/$(database)/documents/users/$(userid)).data.permisos == "TI";
+    }
+    function isUserAdmin(userid){
+			return get(/databases/$(database)/documents/users/$(userid)).data.permisos == "Admin";
+    }
+    function isUserCliente(userid){
+    	return get(/databases/$(database)/documents/users/$(userid)).data.permisos == "Cliente";
+    }
+    
+  	match /users/{userid} {
+    	allow read : if userid == request.auth.uid || isUserTI(request.auth.uid) || isUserAdmin(request.auth.uid);
+    	allow write: if (userid == request.auth.uid && (request.resource.data.permisos=='Cliente'||request.resource.data.permisos=='TI')) 
+      							|| isUserAdmin(request.auth.uid); 
+    }
+    
+    match /devices/{deviceId} {
+    	allow read, write : if isUserTI(request.auth.uid);
+    	allow read : if request.auth != null; 
+    }
+    
+    match /reservas/{reservaId} {
+    	allow create :  if isUserCliente(request.auth.uid) && request.resource.data.clienteUser.uid == request.auth.uid;
+      allow update : if isUserTI(request.auth.uid);
+    	allow read : if isUserAdmin(request.auth.uid) || isUserTI(request.auth.uid) ||
+      (isUserCliente(request.auth.uid) && resource.data.clienteUser.uid==request.auth.uid); 
+    }
+    
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+Reglas Storage:
+
+service firebase.storage {
+  match /b/{bucket}/o {
+  	
+    function isUserTI(userid){
+			return firestore.get(/databases/(default)/documents/users/$(userid)).data.permisos == "TI";
+    }
+    
+    match /devicephotos/{allpaths=**} {
+    allow write: if isUserTI(request.auth.uid);
+    	allow read : if request.auth != null;
+    }
+  
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
