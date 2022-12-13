@@ -60,7 +60,7 @@ tools:context=".Admin.AdminCreateUserTiActivity">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateUserTiQueRol"
-        tools:srcCompat="@drawable/avatar_placeholder" />
+        app:srcCompat="@drawable/avatar_placeholder" />
 
     <EditText
         android:id="@+id/etCreateUserTiNombre"
